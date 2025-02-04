@@ -20,7 +20,7 @@ struct ProfileView: View {
                             VStack(alignment: .leading) {
                                 ProfileCellView(text: user.name, showDivider: true)
                                 ProfileCellView(text: user.lastName, showDivider: true)
-                                ProfileCellView(text: viewModel.landmarkCount ?? Constants.strings.noLandmarks, showDivider: false)
+                                ProfileCellView(text: viewModel.landmarkCountText ?? Constants.strings.noLandmarks, showDivider: false)
                             }
                         }
                         
@@ -33,6 +33,9 @@ struct ProfileView: View {
                 }
             }
             .navigationTitle(Constants.strings.profile)
+            .onAppear {
+                viewModel.createMockUser()
+            }
         }
     }
 }

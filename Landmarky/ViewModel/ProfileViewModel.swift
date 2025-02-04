@@ -13,9 +13,13 @@ import Combine
 class ProfileViewModel {
     var user: Profile?
     var alertText: String?
-    var landmarkCount: String?
+    var landmarkCount: Int?
+    var landmarkCountText: String? {
+        landmarkCount.map { "\(Constants.strings.landmarkCountString1) \($0) " + Constants.strings.landmarkCountString2 }
+    }
     
     func createMockUser() {
         user = Profile(id: UUID(), name: "John", lastName: "Doe", landmarkCount: 2)
+        landmarkCount = user?.landmarkCount
     }
 }

@@ -109,6 +109,9 @@
         }
       }
     },
+    "landmarks" : {
+      "extractionState" : "manual"
+    },
     "Lookouts" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -252,6 +255,9 @@
       "extractionState" : "manual"
     },
     "So far you have no saved landmarks" : {
+      "extractionState" : "manual"
+    },
+    "You have: " : {
       "extractionState" : "manual"
     }
   },
