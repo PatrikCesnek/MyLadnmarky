@@ -13,20 +13,11 @@ struct MapView: View {
     
     var body: some View {
         ZStack {
-            Map(
-                coordinateRegion: Binding<MKCoordinateRegion>(
-                    get: { viewModel.userRegion },
-                    set: { location in viewModel.updateUserLocation(location.center) }
-                ),
-                annotationItems: viewModel.validLandmarks
-            ) { landmark in
-                MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: landmark.latitude ?? 0, longitude: landmark.longitude ?? 0)) {
-                    Circle()
-                        .fill(Color.blue)
-                        .frame(width: 20, height: 20)
-                }
-            }
-            .ignoresSafeArea(edges: [.top, .horizontal])
+            Map(position: Binding<MapCameraPosition>(
+                get: { viewModel.cameraPosition },
+                set: {  location in viewModel.updateUserLocation(location.region?.center) }
+            ))
+            .ignoresSafeArea()
             
             VStack(alignment: .trailing) {
                 Spacer()

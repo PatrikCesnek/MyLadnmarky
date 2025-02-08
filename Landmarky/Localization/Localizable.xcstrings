@@ -146,9 +146,6 @@
         }
       }
     },
-    "Map View with Annotations" : {
-
-    },
     "My landmarks" : {
       "extractionState" : "manual",
       "localizations" : {
