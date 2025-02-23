@@ -14,6 +14,7 @@ class MapViewModel {
     var landmarks: [Landmark] = []
     var cameraPosition: MapCameraPosition = .automatic
     private let locationManager = CLLocationManager()
+    var mapStyle: MapStyle = .imagery(elevation: .realistic)
     
     init() {
         requestLocation()
@@ -47,6 +48,11 @@ class MapViewModel {
         if let userLocation = locationManager.location?.coordinate {
             updateUserLocation(userLocation)
         }
+    }
+    
+    func changeMapStyle(_ style: MapStyle) -> MapStyle {
+        mapStyle = style
+        return mapStyle
     }
 }
 

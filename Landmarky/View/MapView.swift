@@ -13,11 +13,6 @@ struct MapView: View {
     
     var body: some View {
         ZStack {
-//            Map(position: Binding<MapCameraPosition>(
-//                get: { viewModel.cameraPosition },
-//                set: {  location in viewModel.updateUserLocation(location.region?.center) }
-//            ))
-//            .ignoresSafeArea()
             Map(initialPosition: viewModel.cameraPosition) {
                 UserAnnotation()
             }
@@ -27,7 +22,7 @@ struct MapView: View {
                 MapPitchToggle()
                 MapScaleView()
             }
-            .mapStyle(.hybrid(elevation: .realistic))
+            .mapStyle(viewModel.changeMapStyle(.imagery(elevation: .realistic)))
             
             VStack(alignment: .trailing) {
                 Spacer()
