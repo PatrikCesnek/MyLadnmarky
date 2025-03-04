@@ -34,5 +34,8 @@ public struct Constants {
     
     struct SystemImages {
         static let plus = "plus"
+        static let house = "house"
+        static let map = "map"
+        static let person = "person"
     }
 }
