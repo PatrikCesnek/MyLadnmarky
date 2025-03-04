@@ -31,4 +31,8 @@ public struct Constants {
         let landmarkCountString1 = "You have:".localizedCapitalized
         let landmarkCountString2 = "landmarks".localizedCapitalized
     }
+    
+    struct SystemImages {
+        static let plus = "plus"
+    }
 }

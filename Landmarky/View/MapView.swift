@@ -29,7 +29,7 @@ struct MapView: View {
                 
                 HStack {
                     Spacer()
-                    Button(action: {}, label: { Image(systemName: "plus") })
+                    Button(action: {}, label: { Image(systemName: Constants.SystemImages.plus) })
                         .buttonStyle(.borderedProminent)
                         .clipShape(Circle())
                 }
