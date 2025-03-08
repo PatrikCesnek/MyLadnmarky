@@ -6,6 +6,7 @@
 //
 
 enum LandmarkCategory: CaseIterable {
+    case all
     case lakes
     case hills
     case castles
@@ -19,6 +20,7 @@ enum LandmarkCategory: CaseIterable {
     
     var localizedName: String {
         switch self {
+        case .all: return Constants.strings.allLandmarks
         case .lakes: return Constants.strings.lakes
         case .hills: return Constants.strings.hills
         case .castles: return Constants.strings.castles
@@ -33,6 +35,6 @@ enum LandmarkCategory: CaseIterable {
     }
     
     static var predefinedCategories: [LandmarkCategory] {
-        return [.lakes, .hills, .castles, .lookouts, .restaurants, .shops, .entertainment, .other]
+        return [.all, .lakes, .hills, .castles, .lookouts, .restaurants, .shops, .entertainment, .other]
     }
 }

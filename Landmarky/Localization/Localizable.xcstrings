@@ -18,6 +18,23 @@
         }
       }
     },
+    "All" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Všechno"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Všetko"
+          }
+        }
+      }
+    },
     "Castles" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -103,22 +120,6 @@
         }
       }
     },
-    "Home - Categories & Search" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Domů - Kategorie a hledání"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Domov - Kategórie a hľadanie"
-          }
-        }
-      }
-    },
     "Lakes" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -138,6 +139,9 @@
     },
     "landmarks" : {
       "extractionState" : "manual"
+    },
+    "Landmarks" : {
+
     },
     "Lookouts" : {
       "extractionState" : "manual",

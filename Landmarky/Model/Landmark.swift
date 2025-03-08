@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import UIKit
 
 @Model
 final class Landmark {
@@ -31,6 +32,11 @@ final class Landmark {
         self.latitude = latitude
         self.longitude = longitude
         self.image = image
+    }
+    
+    var landmarkImage: UIImage? {
+        guard let imageData = image else { return nil }
+        return UIImage(data: imageData)
     }
 }
 

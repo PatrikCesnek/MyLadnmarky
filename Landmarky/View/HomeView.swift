@@ -8,13 +8,37 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State private var viewModel = HomeViewModel()
+    @Environment(\.modelContext) private var modelContext
+
     var body: some View {
-        NavigationView {
-            VStack {
-                Text("Home - Categories & Search")
-                    .navigationTitle(Constants.strings.homeTitle)
+        NavigationStack {
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 20) {
+                    ForEach(viewModel.categories, id: \.self) { category in
+                        VStack(alignment: .leading) {
+                            Text(category.localizedName)
+                                .font(.headline)
+                                .padding(.leading, 10)
+
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 15) {
+                                    ForEach(viewModel.landmarks(for: category), id: \.id) { landmark in
+                                        LandmarkCard(landmark: landmark)
+                                    }
+                                }
+                                .padding(.horizontal)
+                            }
+                        }
+                    }
+                }
+                .padding(.vertical)
             }
-            .searchable(text: .constant(Constants.strings.search), prompt: Constants.strings.search)
+            .navigationTitle("Landmarks")
+            .onAppear {
+                viewModel.fetchLandmarks(modelContext: modelContext)
+            }
+            .searchable(text: $viewModel.searchText, prompt: Constants.strings.search)
         }
     }
 }

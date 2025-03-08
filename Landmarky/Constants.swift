@@ -30,6 +30,7 @@ public struct Constants {
         let other = "Other".localizedCapitalized
         let landmarkCountString1 = "You have:".localizedCapitalized
         let landmarkCountString2 = "landmarks".localizedCapitalized
+        let allLandmarks = "All".localizedCapitalized
     }
     
     struct SystemImages {
