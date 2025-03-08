@@ -15,6 +15,20 @@ struct MapView: View {
         ZStack {
             Map(initialPosition: viewModel.cameraPosition) {
                 UserAnnotation()
+                
+                ForEach(viewModel.landmarks, id: \.id) { landmark in
+                    Annotation(
+                        landmark.name,
+                        coordinate: CLLocationCoordinate2D(
+                            latitude: landmark.latitude ?? Constants.DefaultLandmarkLocation.defaultLat,
+                            longitude: landmark.longitude ?? Constants.DefaultLandmarkLocation.defaultLon
+                        )
+                    ) {
+                        Image(systemName: Constants.SystemImages.mappin)
+                            .foregroundColor(.green)
+                            .font(.title)
+                    }
+                }
             }
             .mapControls {
                 MapUserLocationButton()
@@ -29,9 +43,16 @@ struct MapView: View {
                 
                 HStack {
                     Spacer()
-                    Button(action: {}, label: { Image(systemName: Constants.SystemImages.plus) })
-                        .buttonStyle(.borderedProminent)
-                        .clipShape(Circle())
+                    Button(
+                        action: {
+                            viewModel.addLandmark()
+                        },
+                        label: {
+                            Image(systemName: Constants.SystemImages.plus)
+                        }
+                    )
+                    .buttonStyle(.borderedProminent)
+                    .clipShape(Circle())
                 }
             }
             .padding()

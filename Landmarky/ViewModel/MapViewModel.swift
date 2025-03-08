@@ -54,10 +54,21 @@ class MapViewModel {
         mapStyle = style
         return mapStyle
     }
-}
-
-extension CLLocationCoordinate2D {
-    var isValid: Bool {
-        return CLLocationCoordinate2DIsValid(self) && latitude != 0.0 && longitude != 0.0
+    
+    func addLandmark() {
+        guard let userLocation = locationManager.location?.coordinate else {
+            print("❌ User location unavailable")
+            return
+        }
+        
+        let newLandmark = Landmark(
+            name: "New Place",
+            category: "",
+            latitude: userLocation.latitude,
+            longitude: userLocation.longitude
+        )
+        
+        landmarks.append(newLandmark)
+        print(landmarks)
     }
 }

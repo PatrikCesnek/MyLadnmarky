@@ -37,5 +37,12 @@ public struct Constants {
         static let house = "house"
         static let map = "map"
         static let person = "person"
+        static let mappin = "mappin.circle.fill"
+    }
+    
+    struct DefaultLandmarkLocation {
+        static let defaultLat = 50.0755
+        static let defaultLon = 14.4378
+
     }
 }
