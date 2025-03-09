@@ -13,16 +13,16 @@ struct HomeView: View {
 
     var body: some View {
         NavigationStack {
-            if viewModel.landmarks.isEmpty {
-                EmptyView(title: Constants.Strings.noLandmarks, subtitle: nil)
-            }
-            
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 20) {
-                    HomeCategoryScrollView(
-                        categories: viewModel.categories,
-                        landmarks: viewModel.landmarks
-                    )
+                    if viewModel.landmarks.isEmpty {
+                        EmptyView(title: Constants.Strings.noLandmarks, subtitle: nil)
+                    } else {
+                        HomeCategoryScrollView(
+                            categories: viewModel.categories,
+                            landmarks: viewModel.landmarks
+                        )
+                    }
                 }
                 .padding(.vertical)
             }
