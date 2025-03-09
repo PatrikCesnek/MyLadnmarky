@@ -16,21 +16,21 @@ struct ContentView: View {
             HomeView()
                 .tabItem {
                     Label(
-                        Constants.strings.home,
+                        Constants.Strings.home,
                         systemImage: Constants.SystemImages.house
                     )
                 }
             MapView()
                 .tabItem {
                     Label(
-                        Constants.strings.map,
+                        Constants.Strings.map,
                         systemImage: Constants.SystemImages.map
                     )
                 }
             ProfileView()
                 .tabItem {
                     Label(
-                        Constants.strings.profile,
+                        Constants.Strings.profile,
                         systemImage: Constants.SystemImages.person
                     )
                 }

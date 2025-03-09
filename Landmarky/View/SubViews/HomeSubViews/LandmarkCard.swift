@@ -16,13 +16,13 @@ struct LandmarkCard: View {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 120, height: 80)
+                    .frame(width: 140, height: 120)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
             } else {
                 Image(systemName: "photo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 120, height: 80)
+                    .frame(width: 140, height: 120)
                     .foregroundColor(.gray)
             }
             

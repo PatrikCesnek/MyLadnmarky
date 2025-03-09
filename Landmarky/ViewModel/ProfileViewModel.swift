@@ -15,7 +15,7 @@ class ProfileViewModel {
     var alertText: String?
     var landmarkCount: Int?
     var landmarkCountText: String? {
-        landmarkCount.map { "\(Constants.strings.landmarkCountString1) \($0) " + Constants.strings.landmarkCountString2 }
+        landmarkCount.map { "\(Constants.Strings.landmarkCountString1) \($0) " + Constants.Strings.landmarkCountString2 }
     }
     
     func createMockUser() {

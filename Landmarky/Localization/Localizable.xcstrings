@@ -69,6 +69,23 @@
         }
       }
     },
+    "Edit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editovat"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editovať"
+          }
+        }
+      }
+    },
     "Entertainment" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -139,9 +156,6 @@
     },
     "landmarks" : {
       "extractionState" : "manual"
-    },
-    "Landmarks" : {
-
     },
     "Lookouts" : {
       "extractionState" : "manual",

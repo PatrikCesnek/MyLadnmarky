@@ -16,23 +16,31 @@ struct ProfileView: View {
             VStack(alignment: .leading) {
                 if let user = viewModel.user {
                     Form {
-                        Section(Constants.strings.profile) {
+                        Section(Constants.Strings.profile) {
                             VStack(alignment: .leading) {
                                 ProfileCellView(text: user.name, showDivider: true)
                                 ProfileCellView(text: user.lastName, showDivider: true)
-                                ProfileCellView(text: viewModel.landmarkCountText ?? Constants.strings.noLandmarks, showDivider: false)
+                                ProfileCellView(text: viewModel.landmarkCountText ?? Constants.Strings.noLandmarks, showDivider: false)
                             }
                         }
                         
-                        Section(Constants.strings.achievementsTitle) {
+                        Section(Constants.Strings.achievementsTitle) {
                             VStack {
-                                ProfileCellView(text: Constants.strings.noAchievements, showDivider: false)
+                                ProfileCellView(text: Constants.Strings.noAchievements, showDivider: false)
                             }
                         }
                     }
                 }
             }
-            .navigationTitle(Constants.strings.profile)
+            .navigationTitle(Constants.Strings.profile)
+            .toolbar {
+                Button(
+                    action: {},
+                    label: {
+                        Text(Constants.Strings.edit)
+                    }
+                )
+            }
             .onAppear {
                 viewModel.createMockUser()
             }

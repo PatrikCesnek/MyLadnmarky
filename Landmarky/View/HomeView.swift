@@ -34,11 +34,11 @@ struct HomeView: View {
                 }
                 .padding(.vertical)
             }
-            .navigationTitle("Landmarks")
+            .navigationTitle(Constants.Strings.homeTitle)
             .onAppear {
                 viewModel.fetchLandmarks(modelContext: modelContext)
             }
-            .searchable(text: $viewModel.searchText, prompt: Constants.strings.search)
+            .searchable(text: $viewModel.searchText, prompt: Constants.Strings.search)
         }
     }
 }

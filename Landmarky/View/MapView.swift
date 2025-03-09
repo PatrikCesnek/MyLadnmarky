@@ -38,24 +38,7 @@ struct MapView: View {
             }
             .mapStyle(viewModel.changeMapStyle(.imagery(elevation: .realistic)))
             
-            VStack(alignment: .trailing) {
-                Spacer()
-                
-                HStack {
-                    Spacer()
-                    Button(
-                        action: {
-                            viewModel.addLandmark()
-                        },
-                        label: {
-                            Image(systemName: Constants.SystemImages.plus)
-                        }
-                    )
-                    .buttonStyle(.borderedProminent)
-                    .clipShape(Circle())
-                }
-            }
-            .padding()
+            BottomPlusButton(action: viewModel.addLandmark)
         }
     }
 }

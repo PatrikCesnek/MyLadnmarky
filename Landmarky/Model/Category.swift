@@ -20,17 +20,17 @@ enum LandmarkCategory: CaseIterable {
     
     var localizedName: String {
         switch self {
-        case .all: return Constants.strings.allLandmarks
-        case .lakes: return Constants.strings.lakes
-        case .hills: return Constants.strings.hills
-        case .castles: return Constants.strings.castles
-        case .lookouts: return Constants.strings.lookouts
-        case .restaurants: return Constants.strings.restaurants
-        case .bars: return Constants.strings.bars
-        case .shops: return Constants.strings.shops
-        case .entertainment: return Constants.strings.entertainment
-        case .custom: return Constants.strings.custom
-        case .other: return Constants.strings.other
+        case .all: return Constants.Strings.allLandmarks
+        case .lakes: return Constants.Strings.lakes
+        case .hills: return Constants.Strings.hills
+        case .castles: return Constants.Strings.castles
+        case .lookouts: return Constants.Strings.lookouts
+        case .restaurants: return Constants.Strings.restaurants
+        case .bars: return Constants.Strings.bars
+        case .shops: return Constants.Strings.shops
+        case .entertainment: return Constants.Strings.entertainment
+        case .custom: return Constants.Strings.custom
+        case .other: return Constants.Strings.other
         }
     }
     
