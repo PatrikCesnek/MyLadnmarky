@@ -13,24 +13,16 @@ struct HomeView: View {
 
     var body: some View {
         NavigationStack {
+            if viewModel.landmarks.isEmpty {
+                EmptyView(title: Constants.Strings.noLandmarks, subtitle: nil)
+            }
+            
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 20) {
-                    ForEach(viewModel.categories, id: \.self) { category in
-                        VStack(alignment: .leading) {
-                            Text(category.localizedName)
-                                .font(.headline)
-                                .padding(.leading, 10)
-
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 15) {
-                                    ForEach(viewModel.landmarks(for: category), id: \.id) { landmark in
-                                        LandmarkCard(landmark: landmark)
-                                    }
-                                }
-                                .padding(.horizontal)
-                            }
-                        }
-                    }
+                    HomeCategoryScrollView(
+                        categories: viewModel.categories,
+                        landmarks: viewModel.landmarks
+                    )
                 }
                 .padding(.vertical)
             }

@@ -23,7 +23,10 @@ class HomeViewModel {
         do {
             let allLandmarks = try modelContext.fetch(descriptor)
             DispatchQueue.main.async {
-                self.landmarks = allLandmarks
+                //TODO: - uncomment following line
+//                self.landmarks = allLandmarks
+                //TODO: - delete the following line after we don't need it
+                self.landmarks = Mock.MockLandmarks.data // Let's leave it here for now for tesing purposes
             }
         } catch {
             print("Error fetching landmarks: \(error.localizedDescription)")
