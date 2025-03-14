@@ -5,8 +5,8 @@
 //  Created by Patrik Cesnek on 09/03/2025.
 //
 
-
 import Foundation
+import SwiftUI
 
 struct Mock {
     struct MockLandmarks {
@@ -22,5 +22,7 @@ struct Mock {
             Landmark(name: "Mystic Point", category: LandmarkCategory.custom.localizedName, latitude: 49.6, longitude: 15.7),
             Landmark(name: "Hidden Gem", category: LandmarkCategory.other.localizedName, latitude: 48.5, longitude: 16.3)
         ]
+        
+        static let mockImage = Image(systemName: "photo.circle.fill")
     }
 }

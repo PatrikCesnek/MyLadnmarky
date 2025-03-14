@@ -26,7 +26,10 @@ struct ProfileView: View {
                         
                         Section(Constants.Strings.achievementsTitle) {
                             VStack {
-                                ProfileCellView(text: Constants.Strings.noAchievements, showDivider: false)
+                                ProfileCellView(
+                                    text: Constants.Strings.noAchievements,
+                                    showDivider: false
+                                )
                             }
                         }
                     }

@@ -31,6 +31,7 @@ public struct Constants {
         static let landmarkCountString2 = "landmarks".localizedCapitalized
         static let allLandmarks = "All".localizedCapitalized
         static let edit = "Edit".localizedCapitalized
+        static let navigate = "Navigate".localizedCapitalized
     }
     
     struct SystemImages {
