@@ -29,8 +29,13 @@ struct HomeCategoryScrollView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 15) {
                             ForEach(categoryLandmarks, id: \.id) { landmark in
-                                LandmarkCard(landmark: landmark)
-                                    .padding(.vertical, 8)
+                                NavigationLink(
+                                    destination: LandmarkDetailView(landmark: landmark),
+                                    label: {
+                                        LandmarkCard(landmark: landmark)
+                                            .padding(.vertical, 8)
+                                    }
+                                )
                             }
                         }
                         .padding(.horizontal)

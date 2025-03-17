@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LandmarkDetailView: View {
+    @Environment(\.dismiss) private var dismiss
+    
     private let landmark: Landmark
     
     init(landmark: Landmark) {
@@ -16,13 +18,19 @@ struct LandmarkDetailView: View {
     
     var body: some View {
         VStack {
-            DetailMapView(
-                latitude: landmark.latitude ?? Constants.DefaultLandmarkLocation.defaultLat,
-                longitude: landmark.longitude ?? Constants.DefaultLandmarkLocation.defaultLon,
-                name: landmark.name
-            )
-            .frame(height: 300)
-            .background(ignoresSafeAreaEdges: [.top, .horizontal])
+            ZStack {
+                DetailMapView(
+                    latitude: landmark.latitude ?? Constants.DefaultLandmarkLocation.defaultLat,
+                    longitude: landmark.longitude ?? Constants.DefaultLandmarkLocation.defaultLon,
+                    name: landmark.name
+                )
+                .frame(height: 300)
+                .background(ignoresSafeAreaEdges: [.top, .horizontal])
+                
+                BackButtonView(action: { dismiss() })
+                    .offset(y: -150)
+                    .padding(8)
+            }
             
             //TODO: - Use correct landmark Image
 //            CircleImage(image: landmark.image)
@@ -64,9 +72,11 @@ struct LandmarkDetailView: View {
                 }
             )
             .buttonStyle(.borderedProminent)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .clipShape(RoundedRectangle(cornerRadius: 24))
             .tint(.green)
+            .padding(8)
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
 

@@ -40,6 +40,7 @@ public struct Constants {
         static let map = "map"
         static let person = "person"
         static let mappin = "mappin.circle.fill"
+        static let backButton = "chevron.left"
     }
     
     struct DefaultLandmarkLocation {

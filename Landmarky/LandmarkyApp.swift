@@ -19,6 +19,7 @@ struct LandmarkyApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+//                .tint(.green)
         }
         .modelContainer(sharedModelContainer)
     }

@@ -22,6 +22,7 @@ struct HomeView: View {
                             categories: viewModel.categories,
                             landmarks: viewModel.landmarks
                         )
+                        .foregroundStyle(.primary)
                     }
                 }
                 .padding(.vertical)
