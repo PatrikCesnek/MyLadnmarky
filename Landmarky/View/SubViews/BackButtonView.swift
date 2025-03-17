@@ -21,15 +21,14 @@ struct BackButtonView: View {
                 label: {
                     Image(systemName: Constants.SystemImages.backButton)
                         .foregroundStyle(.green)
-                        .font(.caption)
-                        .bold()
+                        .font(.title2)
                         .shadow(radius: 2)
-                        .padding(8)
+                        .padding()
                 }
             )
             .clipShape(Circle())
             .overlay {
-                Circle().stroke(.green, lineWidth: 3)
+                Circle().stroke(.green, lineWidth: 4)
             }
             .shadow(radius: 5)
             
