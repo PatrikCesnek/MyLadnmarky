@@ -11,7 +11,7 @@ import SwiftUI
 struct Mock {
     struct MockLandmarks {
         static let data: [Landmark] = [
-            Landmark(name: "Crystal Lake", category: LandmarkCategory.lakes.localizedName, latitude: 49.2, longitude: 16.6),
+            Landmark(name: "Crystal Lake", category: LandmarkCategory.lakes.localizedName, latitude: 49.2, longitude: 16.6, landmarkDescription: mockDescription),
             Landmark(name: "Eagle Peak", category: LandmarkCategory.hills.localizedName, latitude: 50.1, longitude: 14.4),
             Landmark(name: "King's Castle", category: LandmarkCategory.castles.localizedName, latitude: 48.7, longitude: 17.2),
             Landmark(name: "Sky Tower", category: LandmarkCategory.lookouts.localizedName, latitude: 49.5, longitude: 15.9),
@@ -24,5 +24,7 @@ struct Mock {
         ]
         
         static let mockImage = Image(systemName: "photo.circle.fill")
+        
+        static let mockDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     }
 }

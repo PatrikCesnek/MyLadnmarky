@@ -32,7 +32,7 @@ struct LandmarkDetailView: View {
                 .frame(width: 300, height: 100)
             
             HStack {
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 8) {
                     Text(landmark.name)
                         .font(.title)
                         .fontWeight(.bold)
@@ -40,6 +40,12 @@ struct LandmarkDetailView: View {
                     Text(landmark.category)
                         .foregroundColor(.secondary)
                         .font(.caption)
+                    
+                    if let description = landmark.landmarkDescription {
+                        Text(description)
+                            .font(.caption)
+                            .multilineTextAlignment(.leading)
+                    }
                 }
                 
                 Spacer()
@@ -59,6 +65,7 @@ struct LandmarkDetailView: View {
             )
             .buttonStyle(.borderedProminent)
             .clipShape(RoundedRectangle(cornerRadius: 20))
+            .tint(.green)
         }
     }
 }
