@@ -15,7 +15,18 @@ struct HomeView: View {
         NavigationStack {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 20) {
-                    if viewModel.landmarks.isEmpty {
+                    if viewModel.isLoading {
+                        HStack {
+                            Spacer()
+                            
+                            LoadingView(lineWidth: 16)
+                                .frame(width: 200)
+                            
+                            Spacer()
+                        }
+                        .padding(16)
+                        
+                    } else if viewModel.landmarks.isEmpty {
                         EmptyView(title: Constants.Strings.noLandmarks, subtitle: nil)
                     } else {
                         HomeCategoryScrollView(
