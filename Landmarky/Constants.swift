@@ -32,6 +32,13 @@ public struct Constants {
         static let allLandmarks = "All".localizedCapitalized
         static let edit = "Edit".localizedCapitalized
         static let navigate = "Navigate".localizedCapitalized
+        static let title = "Title".localizedCapitalized
+        static let description = "Description".localizedCapitalized
+        static let location = "Location".localizedCapitalized
+        static let latitude = "Latitude".localizedCapitalized
+        static let longitude = "Longitude".localizedCapitalized
+        static let save = "Save".localizedCapitalized
+        static let addLandmarkTitle = "Add landmark".localizedCapitalized
     }
     
     struct SystemImages {
@@ -41,6 +48,7 @@ public struct Constants {
         static let person = "person"
         static let mappin = "mappin.circle.fill"
         static let backButton = "chevron.left"
+        static let emptyPhoto = "photo.circle.fill"
     }
     
     struct DefaultLandmarkLocation {

@@ -69,6 +69,23 @@
         }
       }
     },
+    "Description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Popis"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Popis"
+          }
+        }
+      }
+    },
     "Edit" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -155,6 +172,29 @@
       }
     },
     "landmarks" : {
+      "extractionState" : "manual"
+    },
+    "Latitude" : {
+      "extractionState" : "manual"
+    },
+    "Location" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poloha"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poloha"
+          }
+        }
+      }
+    },
+    "Longitude" : {
       "extractionState" : "manual"
     },
     "Lookouts" : {
@@ -276,6 +316,23 @@
         }
       }
     },
+    "Save" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uložit"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uložiť"
+          }
+        }
+      }
+    },
     "Search" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -329,6 +386,23 @@
     },
     "So far you have no saved landmarks" : {
       "extractionState" : "manual"
+    },
+    "Title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Název"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Názov"
+          }
+        }
+      }
     },
     "You have: " : {
       "extractionState" : "manual",

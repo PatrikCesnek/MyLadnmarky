@@ -27,7 +27,8 @@ class HomeViewModel {
             let allLandmarks = try modelContext.fetch(descriptor)
             //TODO: - uncomment following line
             //                self.landmarks = allLandmarks
-            //TODO: - delete the following line after we don't need it
+            //TODO: - delete the following lines after we don't need it
+            print(allLandmarks)
             self.landmarks = Mock.MockLandmarks.data // Let's leave it here for now for tesing purposes
             isLoading = false
         } catch {

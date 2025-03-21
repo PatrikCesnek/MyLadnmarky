@@ -62,19 +62,7 @@ struct LandmarkDetailView: View {
             
             Spacer()
             
-            Button(
-                action: {},
-                label: {
-                    Text(Constants.Strings.navigate)
-                        .font(.headline)
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 8)
-                }
-            )
-            .buttonStyle(.borderedProminent)
-            .clipShape(RoundedRectangle(cornerRadius: 24))
-            .tint(.green)
-            .padding(8)
+            PrimaryButton(action: {}, text: Constants.Strings.navigate)
         }
         .toolbar(.hidden, for: .navigationBar)
     }
