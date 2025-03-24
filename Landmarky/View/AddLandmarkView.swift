@@ -8,45 +8,35 @@
 import SwiftUI
 
 struct AddLandmarkView: View {
-    @State private var title: String
-    @State private var latitude: String
-    @State private var longitude: String
-    @State private var description: String
-    private let saveAction: () -> Void
-    
-    init(
-        title: String,
-        latitude: String,
-        longitude: String,
-        description: String,
-        saveAction: @escaping () -> Void
-    ) {
-        self.title = title
-        self.latitude = latitude
-        self.longitude = longitude
-        self.description = description
-        self.saveAction = saveAction
-    }
+    @State var viewModel = AddLandmarkViewModel()
     
     var body: some View {
         VStack {
             VStack {
                 Form {
                     Section(
-                        content: { TextField(Constants.Strings.title, text: $title) },
+                        content: {
+                            TextField(
+                                Constants.Strings.title,
+                                text: $viewModel.title
+                            )
+                        },
                         header: { Text(Constants.Strings.title) }
                     )
                     
                     Section(
                         content: {
-                            VStack {
+                            VStack(alignment: .leading) {
                                 HStack {
                                     Text(Constants.Strings.latitude + ":")
-                                    TextField(Constants.Strings.location, text: $latitude)
+                                    TextField("", text: $viewModel.latText)
+                                        .keyboardType(.decimalPad)
                                 }
+                                
                                 HStack {
                                     Text(Constants.Strings.longitude + ":")
-                                    TextField(Constants.Strings.location, text: $longitude)
+                                    TextField("", text: $viewModel.lonText)
+                                        .keyboardType(.decimalPad)
                                 }
                             }
                         },
@@ -56,10 +46,7 @@ struct AddLandmarkView: View {
                     Section(
                         content: {
                             TextEditor(
-                                text: Binding(
-                                    get: { description },
-                                    set: { description = $0 }
-                                )
+                                text: $viewModel.description
                             )
                             .frame(minHeight: 100)
                         },
@@ -70,7 +57,7 @@ struct AddLandmarkView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     Button(
-                        action: saveAction,
+                        action: { viewModel.addLandmark() },
                         label: {
                             Text(Constants.Strings.save)
                         }
@@ -84,12 +71,6 @@ struct AddLandmarkView: View {
 
 #Preview {
     NavigationView {
-        AddLandmarkView(
-            title: Mock.MockLandmarks.data[0].name,
-            latitude: String(Constants.DefaultLandmarkLocation.defaultLat),
-            longitude: String(Constants.DefaultLandmarkLocation.defaultLon),
-            description: Mock.MockLandmarks.mockDescription,
-            saveAction: {}
-        )
+        AddLandmarkView()
     }
 }

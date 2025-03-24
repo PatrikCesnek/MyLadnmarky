@@ -9,31 +9,39 @@ import MapKit
 import SwiftUI
 
 struct ContentView: View {
-   var viewModel = LandmarksViewModel()
+    var viewModel = LandmarksViewModel()
     
     var body: some View {
         TabView {
-            HomeView()
-                .tabItem {
-                    Label(
-                        Constants.Strings.home,
-                        systemImage: Constants.SystemImages.house
-                    )
-                }
-            MapView()
-                .tabItem {
-                    Label(
-                        Constants.Strings.map,
-                        systemImage: Constants.SystemImages.map
-                    )
-                }
-            ProfileView()
-                .tabItem {
-                    Label(
-                        Constants.Strings.profile,
-                        systemImage: Constants.SystemImages.person
-                    )
-                }
+            NavigationStack {
+                HomeView()
+            }
+            .tabItem {
+                Label(
+                    Constants.Strings.home,
+                    systemImage: Constants.SystemImages.house
+                )
+            }
+            
+            NavigationStack {
+                MapView()
+            }
+            .tabItem {
+                Label(
+                    Constants.Strings.map,
+                    systemImage: Constants.SystemImages.map
+                )
+            }
+            
+            NavigationStack {
+                ProfileView()
+            }
+            .tabItem {
+                Label(
+                    Constants.Strings.profile,
+                    systemImage: Constants.SystemImages.person
+                )
+            }
         }
     }
 }

@@ -55,20 +55,29 @@ class MapViewModel {
         return mapStyle
     }
     
-    func addLandmark() {
-        guard let userLocation = locationManager.location?.coordinate else {
+    func getLandmarkLocation() -> CLLocationCoordinate2D {
+        guard let ladnmarkLocation = locationManager.location?.coordinate else {
             print("❌ User location unavailable")
-            return
+            return CLLocationCoordinate2D(
+                latitude: Constants.DefaultLandmarkLocation.defaultLat,
+                longitude: Constants.DefaultLandmarkLocation.defaultLon
+            )
         }
         
-        let newLandmark = Landmark(
-            name: "New Place",
-            category: "",
-            latitude: userLocation.latitude,
-            longitude: userLocation.longitude
-        )
-        
-        landmarks.append(newLandmark)
-        print(landmarks)
+        return ladnmarkLocation
     }
+    
+//    func addLandmark(name: String, category: String) {
+//        let location = getLandmarkLocation()
+//        
+//        let newLandmark = Landmark(
+//            name: name,
+//            category: category,
+//            latitude: location.latitude,
+//            longitude: location.longitude
+//        )
+//        
+//        landmarks.append(newLandmark)
+//        print(landmarks)
+//    }
 }

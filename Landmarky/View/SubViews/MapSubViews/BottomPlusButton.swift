@@ -7,35 +7,39 @@
 
 import SwiftUI
 
-struct BottomPlusButton: View {
-    private let action: () -> Void
+struct BottomPlusButton<Content: View>: View {
+    private let destination: Content
     
-    init(action: @escaping () -> Void) {
-        self.action = action
+    init(destination: Content) {
+        self.destination = destination
     }
     
     public var body: some View {
         VStack(alignment: .trailing) {
             Spacer()
             
-            HStack {
+            HStack(alignment: .bottom) {
                 Spacer()
-                Button(
-                    action: {
-                        action()
-                    },
+                
+                NavigationLink(
+                    destination: { destination },
                     label: {
                         Image(systemName: Constants.SystemImages.plus)
+                            .foregroundColor(.white)
+                            .font(.title)
+                            .bold()
+                            .padding(8)
+                            .background {
+                                Circle()
+                                    .fill(Color.green)
+                            }
                     }
                 )
-                .buttonStyle(.borderedProminent)
-                .clipShape(Circle())
             }
         }
-        .padding()
     }
 }
 
 #Preview {
-    BottomPlusButton(action: {})
+    BottomPlusButton(destination: Text(""))
 }

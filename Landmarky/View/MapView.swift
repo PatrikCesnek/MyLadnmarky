@@ -38,8 +38,13 @@ struct MapView: View {
             }
             .mapStyle(viewModel.changeMapStyle(.imagery(elevation: .realistic)))
             
-            BottomPlusButton(action: viewModel.addLandmark)
+            BottomPlusButton(
+                destination: AddLandmarkView()
+            )
+            .padding(.horizontal, 8)
+            .padding(.bottom, 24)
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
 
