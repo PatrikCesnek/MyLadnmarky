@@ -12,7 +12,7 @@ import SwiftData
 class AddLandmarkViewModel {
     var landmarks: Landmark?
     var title: String = ""
-    var category: String = ""
+    var categoryString: String = ""
     var description: String = ""
     
     var latitude: Double
@@ -20,6 +20,11 @@ class AddLandmarkViewModel {
     
     var latText: String
     var lonText: String
+    
+    var category: String = Constants.Strings.other
+    var isCustomCategory: Bool {
+        category == Constants.Strings.custom
+    }
     
     init(latitude: Double, longitude: Double) {
         self.latitude = latitude
@@ -30,6 +35,10 @@ class AddLandmarkViewModel {
     
     @MainActor
     func addLandmark() {
+        if !categoryString.isEmpty {
+            category = categoryString
+        }
+        
         let newLandmark = Landmark(
             name: title,
             category: category,

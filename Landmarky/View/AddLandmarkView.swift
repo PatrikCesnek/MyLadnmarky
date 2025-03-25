@@ -28,10 +28,24 @@ struct AddLandmarkView: View {
                 Form {
                     Section(
                         content: {
-                            TextField(
-                                Constants.Strings.title,
-                                text: $viewModel.title
-                            )
+                            VStack {
+                                TextField(
+                                    Constants.Strings.title,
+                                    text: $viewModel.title
+                                )
+                                
+                                Picker(Constants.Strings.category, selection: $viewModel.category) {
+                                    ForEach(LandmarkCategory.predefinedCategories, id: \.self) { category in
+                                        Text(category.localizedName).tag(category.localizedName)
+                                    }
+                                    Text(Constants.Strings.custom).tag(Constants.Strings.custom)
+                                }
+                                .pickerStyle(.menu)
+                                
+                                if viewModel.isCustomCategory {
+                                    TextField(Constants.Strings.customCategory, text: $viewModel.categoryString)
+                                }
+                            }
                         },
                         header: { Text(Constants.Strings.title) }
                     )

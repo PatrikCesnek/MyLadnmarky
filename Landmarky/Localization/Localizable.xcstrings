@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+      "shouldTranslate" : false
+    },
     "Achievements" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -52,6 +55,22 @@
         }
       }
     },
+    "Category" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kategorie"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kategória"
+          }
+        }
+      }
+    },
     "Custom" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -68,6 +87,9 @@
           }
         }
       }
+    },
+    "custom category" : {
+
     },
     "Description" : {
       "extractionState" : "manual",

@@ -35,6 +35,6 @@ enum LandmarkCategory: CaseIterable {
     }
     
     static var predefinedCategories: [LandmarkCategory] {
-        return [.all, .lakes, .hills, .castles, .lookouts, .restaurants, .shops, .entertainment, .other]
+        return [.lakes, .hills, .castles, .lookouts, .restaurants, .bars, .shops, .entertainment, .other]
     }
 }

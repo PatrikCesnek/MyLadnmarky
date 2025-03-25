@@ -39,6 +39,8 @@ public struct Constants {
         static let longitude = "Longitude".localizedCapitalized
         static let save = "Save".localizedCapitalized
         static let addLandmarkTitle = "Add landmark".localizedCapitalized
+        static let category = "Category".localizedCapitalized
+        static let customCategory = custom + " " + category.lowercased()
     }
     
     struct SystemImages {
