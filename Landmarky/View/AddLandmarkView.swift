@@ -8,7 +8,19 @@
 import SwiftUI
 
 struct AddLandmarkView: View {
-    @State var viewModel = AddLandmarkViewModel()
+    @State var viewModel: AddLandmarkViewModel
+    
+    init(
+        latitude: Double,
+        longitude: Double
+    ) {
+        _viewModel = State(
+            initialValue: AddLandmarkViewModel(
+                latitude: latitude,
+                longitude: longitude
+            )
+        )
+    }
     
     var body: some View {
         VStack {
@@ -71,6 +83,9 @@ struct AddLandmarkView: View {
 
 #Preview {
     NavigationView {
-        AddLandmarkView()
+        AddLandmarkView(
+            latitude: Constants.DefaultLandmarkLocation.defaultLat,
+            longitude: Constants.DefaultLandmarkLocation.defaultLon
+        )
     }
 }

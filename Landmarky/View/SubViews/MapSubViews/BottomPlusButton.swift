@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct BottomPlusButton<Content: View>: View {
-    private let destination: Content
+    private let destination: () -> Content
     
-    init(destination: Content) {
+    init(@ViewBuilder destination: @escaping () -> Content) {
         self.destination = destination
     }
     
@@ -22,7 +22,7 @@ struct BottomPlusButton<Content: View>: View {
                 Spacer()
                 
                 NavigationLink(
-                    destination: { destination },
+                    destination: destination,
                     label: {
                         Image(systemName: Constants.SystemImages.plus)
                             .foregroundColor(.white)
@@ -41,5 +41,5 @@ struct BottomPlusButton<Content: View>: View {
 }
 
 #Preview {
-    BottomPlusButton(destination: Text(""))
+    BottomPlusButton(destination: { Text("New view") })
 }

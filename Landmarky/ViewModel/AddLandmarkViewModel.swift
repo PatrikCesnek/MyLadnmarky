@@ -15,17 +15,18 @@ class AddLandmarkViewModel {
     var category: String = ""
     var description: String = ""
     
-    var latitude: Double = Constants.DefaultLandmarkLocation.defaultLat
-    var longitude: Double = Constants.DefaultLandmarkLocation.defaultLon
+    var latitude: Double
+    var longitude: Double
     
-    var latText: String = ""
-    var lonText: String = ""
-//
-//    TODO: - Find a way to pass latitude and longitude from MapView
-//    init(latitude: Double, longitude: Double) {
-//        self.latitude = latitude
-//        self.longitude = longitude
-//    }
+    var latText: String
+    var lonText: String
+    
+    init(latitude: Double, longitude: Double) {
+        self.latitude = latitude
+        self.longitude = longitude
+        self.latText = String(latitude)
+        self.lonText = String(longitude)
+    }
     
     @MainActor
     func addLandmark() {
@@ -38,6 +39,5 @@ class AddLandmarkViewModel {
         )
         
         print("Added New Landmark: \(newLandmark)")
-        print(newLandmark.name)
     }
 }

@@ -38,9 +38,12 @@ struct MapView: View {
             }
             .mapStyle(viewModel.changeMapStyle(.imagery(elevation: .realistic)))
             
-            BottomPlusButton(
-                destination: AddLandmarkView()
-            )
+            BottomPlusButton {
+                AddLandmarkView(
+                    latitude: viewModel.getLandmarkLocation().latitude,
+                    longitude: viewModel.getLandmarkLocation().longitude
+                )
+            }
             .padding(.horizontal, 8)
             .padding(.bottom, 24)
         }
