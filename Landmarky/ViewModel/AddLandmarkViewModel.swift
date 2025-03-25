@@ -34,19 +34,27 @@ class AddLandmarkViewModel {
     }
     
     @MainActor
-    func addLandmark() {
-        if !categoryString.isEmpty {
-            category = categoryString
+    func addLandmark(using context: ModelContext) {
+        if categoryString.isEmpty {
+            categoryString = category
         }
+//        let imageData = image?.jpegData(compressionQuality: 0.8)
         
         let newLandmark = Landmark(
             name: title,
-            category: category,
+            category: categoryString,
             latitude: HelperFunctions.convertToDouble(latText),
             longitude: HelperFunctions.convertToDouble(lonText),
             landmarkDescription: description
         )
         
-        print("Added New Landmark: \(newLandmark)")
+        context.insert(newLandmark)
+        
+        do {
+            try context.save()
+            print("Landmark saved successfully!")
+        } catch {
+            print("Failed to save landmark: \(error)")
+        }
     }
 }
