@@ -13,21 +13,11 @@ struct MapView: View {
     
     var body: some View {
         ZStack {
-            Map(initialPosition: viewModel.cameraPosition) {
+            Map() {
                 UserAnnotation()
                 
                 ForEach(viewModel.landmarks, id: \.id) { landmark in
-                    Annotation(
-                        landmark.name,
-                        coordinate: CLLocationCoordinate2D(
-                            latitude: landmark.latitude ?? Constants.DefaultLandmarkLocation.defaultLat,
-                            longitude: landmark.longitude ?? Constants.DefaultLandmarkLocation.defaultLon
-                        )
-                    ) {
-                        Image(systemName: Constants.SystemImages.mappin)
-                            .foregroundColor(.green)
-                            .font(.title)
-                    }
+                    LandmarkAnnotation(landmark: landmark)
                 }
             }
             .mapControls {

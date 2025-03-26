@@ -5,7 +5,7 @@
 //  Created by Patrik Cesnek on 03/02/2025.
 //
 
-enum LandmarkCategory: CaseIterable {
+enum LandmarkCategory: CaseIterable, Codable {
     case all
     case lakes
     case hills
@@ -36,5 +36,9 @@ enum LandmarkCategory: CaseIterable {
     
     static var predefinedCategories: [LandmarkCategory] {
         return [.lakes, .hills, .castles, .lookouts, .restaurants, .bars, .shops, .entertainment, .other]
+    }
+    
+    init(from string: String) {
+        self = LandmarkCategory.allCases.first { $0.localizedName == string } ?? .other
     }
 }

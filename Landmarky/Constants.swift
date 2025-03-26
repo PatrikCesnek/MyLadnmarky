@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 public struct Constants {
     struct Strings {
@@ -51,11 +52,19 @@ public struct Constants {
         static let mappin = "mappin.circle.fill"
         static let backButton = "chevron.left"
         static let emptyPhoto = "photo.circle.fill"
+        static let lakeAnnotation = "water.waves"
+        static let hillAnnotation = "mountain.2.fill"
+        static let castleAnnotation = "building.columns.fill"
+        static let lookoutAnnotation = "binoculars.fill"
+        static let restaurantAnnotation = "fork.knife.circle.fill"
+        static let barAnnotation = "wineglass.fill"
+        static let shopsAnnotation = "bag.fill"
+        static let entertainmentAnnotation = "music.note.house.fill"
     }
     
     struct DefaultLandmarkLocation {
         static let defaultLat = 50.0755
         static let defaultLon = 14.4378
-
+        static let defaultLocation = CLLocationCoordinate2D(latitude: 50.0755, longitude: 14.4378)
     }
 }

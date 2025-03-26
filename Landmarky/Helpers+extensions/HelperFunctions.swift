@@ -13,4 +13,19 @@ struct HelperFunctions {
         
         return convertedText
     }
+    
+    static func getCategoryString(categoryName: String) -> String {
+        let category = LandmarkCategory(from: categoryName)
+        switch category {
+        case .lakes: return Constants.SystemImages.lakeAnnotation
+        case .hills: return Constants.SystemImages.hillAnnotation
+        case .castles: return Constants.SystemImages.castleAnnotation
+        case .lookouts: return Constants.SystemImages.lookoutAnnotation
+        case .restaurants: return Constants.SystemImages.restaurantAnnotation
+        case .bars: return Constants.SystemImages.barAnnotation
+        case .shops: return Constants.SystemImages.shopsAnnotation
+        case .entertainment: return Constants.SystemImages.entertainmentAnnotation
+        case .all, .custom, .other: return Constants.SystemImages.mappin
+        }
+    }
 }

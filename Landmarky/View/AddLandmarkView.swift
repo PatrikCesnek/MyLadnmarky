@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddLandmarkView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
     @State var viewModel: AddLandmarkViewModel
     
     init(
@@ -84,7 +85,10 @@ struct AddLandmarkView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     Button(
-                        action: { viewModel.addLandmark(using: modelContext) },
+                        action: {
+                            viewModel.addLandmark(using: modelContext)
+                            dismiss()
+                        },
                         label: {
                             Text(Constants.Strings.save)
                         }
