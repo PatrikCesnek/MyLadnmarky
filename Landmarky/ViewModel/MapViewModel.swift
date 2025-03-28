@@ -18,7 +18,11 @@ class MapViewModel {
     var mapStyle: MapStyle = .imagery(elevation: .realistic)
     
     init() {
-        requestLocation()
+        if locationManager.authorizationStatus == .authorizedWhenInUse || locationManager.authorizationStatus == .authorizedAlways {
+            updateUserLocation(locationManager.location?.coordinate)
+        } else {
+            requestLocation()
+        }
         displayLandmarks()
     }
 

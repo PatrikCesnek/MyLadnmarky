@@ -18,6 +18,9 @@ class ProfileViewModel {
         landmarkCount.map { "\(Constants.Strings.landmarkCountString1) \($0) " + Constants.Strings.landmarkCountString2 }
     }
     
+    init() {
+        createMockUser()
+    }
     func createMockUser() {
         user = Profile(id: UUID(), name: "John", lastName: "Doe", landmarkCount: 2)
         landmarkCount = user?.landmarkCount

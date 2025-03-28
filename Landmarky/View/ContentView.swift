@@ -9,7 +9,6 @@ import MapKit
 import SwiftUI
 
 struct ContentView: View {
-    var viewModel = LandmarksViewModel()
     
     var body: some View {
         TabView {
