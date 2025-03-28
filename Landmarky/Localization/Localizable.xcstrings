@@ -56,6 +56,7 @@
       }
     },
     "Category" : {
+      "extractionState" : "manual",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -87,9 +88,6 @@
           }
         }
       }
-    },
-    "custom category" : {
-
     },
     "Description" : {
       "extractionState" : "manual",
