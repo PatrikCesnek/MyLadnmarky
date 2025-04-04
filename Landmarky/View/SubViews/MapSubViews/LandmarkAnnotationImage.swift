@@ -8,7 +8,16 @@
 import SwiftUI
 
 struct LandmarkAnnotationImage: View {
-    let categoryName: String
+    private let categoryName: String
+    private let annotationColor: Color
+    
+    init(
+        categoryName: String,
+        annotationColor: Color = .green
+    ) {
+        self.categoryName = categoryName
+        self.annotationColor = annotationColor
+    }
 
     var body: some View {
         // Change color based on category
@@ -18,13 +27,13 @@ struct LandmarkAnnotationImage: View {
             )
         )
         .resizable()
-        .foregroundColor(.green)
+        .foregroundColor(annotationColor)
         .shadow(color: .gray, radius: 1, x: 1, y: 1)
         .frame(width: 24, height: 24)
         .padding(6)
         .background {
             Circle()
-                .stroke(.green, lineWidth: 4)
+                .stroke(annotationColor, lineWidth: 4)
                 .stroke(.white, lineWidth: 0.5)
         }
     }
