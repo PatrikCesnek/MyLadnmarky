@@ -20,7 +20,6 @@ struct LandmarkAnnotationImage: View {
     }
 
     var body: some View {
-        // Change color based on category
         Image(
             systemName: HelperFunctions.getCategoryString(categoryName)
         )

@@ -192,7 +192,21 @@
       }
     },
     "landmarks" : {
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "místa"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "miesta"
+          }
+        }
+      }
     },
     "Latitude" : {
       "extractionState" : "manual",
@@ -433,7 +447,21 @@
       }
     },
     "So far you have no saved landmarks" : {
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zatím nemáte žádné uložené místa"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zatiaľ nemáte žiadne uložené miesta"
+          }
+        }
+      }
     },
     "Title" : {
       "extractionState" : "manual",
