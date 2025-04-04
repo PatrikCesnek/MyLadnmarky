@@ -49,6 +49,7 @@ struct MapView: View {
             }
         )
         .toolbar(.hidden, for: .navigationBar)
+        .tint(.green)
     }
 }
 

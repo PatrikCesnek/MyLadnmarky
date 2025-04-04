@@ -5,10 +5,12 @@
 //  Created by Patrik Cesnek on 14/03/2025.
 //
 
+import MapKit
 import SwiftUI
 
 struct LandmarkDetailView: View {
     @Environment(\.dismiss) private var dismiss
+    @State private var showNavigation = false
     
     private let landmark: Landmark
     
@@ -63,7 +65,17 @@ struct LandmarkDetailView: View {
             
             Spacer()
             
-            PrimaryButton(action: {}, text: Constants.Strings.navigate)
+            PrimaryButton(
+                action: {
+                    NavigationHelper.startNavigation(
+                        to: CLLocationCoordinate2D(
+                            latitude: landmark.latitude ?? Constants.DefaultLandmarkLocation.defaultLat,
+                            longitude: landmark.longitude ?? Constants.DefaultLandmarkLocation.defaultLon
+                        ),
+                        name: landmark.name
+                    )
+                },
+                text: Constants.Strings.navigate)
         }
         .toolbar(.hidden, for: .navigationBar)
     }

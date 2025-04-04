@@ -52,6 +52,7 @@ public struct Constants {
         static let mappin = "mappin.circle.fill"
         static let backButton = "chevron.left"
         static let emptyPhoto = "photo.circle.fill"
+        static let empyPhotoCard = "photo"
         static let lakeAnnotation = "water.waves"
         static let hillAnnotation = "mountain.2.fill"
         static let castleAnnotation = "building.columns.fill"
@@ -65,6 +66,6 @@ public struct Constants {
     struct DefaultLandmarkLocation {
         static let defaultLat = 50.0755
         static let defaultLon = 14.4378
-        static let defaultLocation = CLLocationCoordinate2D(latitude: 50.0755, longitude: 14.4378)
+        static let defaultLocation = CLLocationCoordinate2D(latitude: 51.0755, longitude: 15.4378)
     }
 }

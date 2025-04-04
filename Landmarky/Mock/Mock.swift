@@ -20,7 +20,15 @@ struct Mock {
             Landmark(name: "Central Mall", category: LandmarkCategory.shops.localizedName, latitude: 48.9, longitude: 16.5),
             Landmark(name: "Dreamland Park", category: LandmarkCategory.entertainment.localizedName, latitude: 50.0, longitude: 17.1),
             Landmark(name: "Mystic Point", category: LandmarkCategory.custom.localizedName, latitude: 49.6, longitude: 15.7),
-            Landmark(name: "Hidden Gem", category: LandmarkCategory.other.localizedName, latitude: 48.5, longitude: 16.3, landmarkDescription: mockDescription)
+            Landmark(name: "Hidden Gem", category: LandmarkCategory.other.localizedName, latitude: 48.5, longitude: 16.3, landmarkDescription: mockDescription),
+            Landmark(name: "Veľká Homola", category: LandmarkCategory.lookouts.localizedName, latitude: 48.3446, longitude: 17.2495),
+            Landmark(
+                name: "Kučišdorfská priehrada",
+                category: LandmarkCategory.lakes.localizedName,
+                latitude: 48.326527,
+                longitude: 17.262833,
+                landmarkDescription: mockDescription
+            )
         ]
         
         static let mockImage = Image(systemName: Constants.SystemImages.emptyPhoto)
