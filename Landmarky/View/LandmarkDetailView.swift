@@ -22,7 +22,8 @@ struct LandmarkDetailView: View {
                 DetailMapView(
                     latitude: landmark.latitude ?? Constants.DefaultLandmarkLocation.defaultLat,
                     longitude: landmark.longitude ?? Constants.DefaultLandmarkLocation.defaultLon,
-                    name: landmark.name
+                    name: landmark.name,
+                    category: landmark.category
                 )
                 .frame(height: 300)
                 .background(ignoresSafeAreaEdges: [.top, .horizontal])
