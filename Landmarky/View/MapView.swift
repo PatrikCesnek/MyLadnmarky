@@ -25,13 +25,12 @@ struct MapView: View {
             .mapControls {
                 MapUserLocationButton()
                 MapCompass()
-                MapPitchToggle()
+//                MapPitchToggle() unfortunately only works with elevation for mapStyle and that breaks loading, so for now it has to be commented out
+//                MapPitchToggle()
                 MapScaleView()
             }
             .mapStyle(
-                viewModel.changeMapStyle(
-                    .imagery(elevation: .realistic)
-                )
+                viewModel.changeMapStyle(.imagery)
             )
             
             BottomPlusButton {

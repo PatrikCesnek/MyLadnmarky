@@ -15,7 +15,7 @@ class MapViewModel {
     var landmarks: [Landmark] = []
     var cameraPosition: MapCameraPosition = .automatic
     private let locationManager = CLLocationManager()
-    var mapStyle: MapStyle = .imagery(elevation: .realistic)
+    var mapStyle: MapStyle = .imagery
     var selectedLandmark: Landmark?
     
     init() {
