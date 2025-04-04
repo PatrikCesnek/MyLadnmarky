@@ -195,7 +195,21 @@
       "extractionState" : "manual"
     },
     "Latitude" : {
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Výška"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Výška"
+          }
+        }
+      }
     },
     "Location" : {
       "extractionState" : "manual",
@@ -215,7 +229,21 @@
       }
     },
     "Longitude" : {
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Šířka"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Šírka"
+          }
+        }
+      }
     },
     "Lookouts" : {
       "extractionState" : "manual",

@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct MapView: View {
-    var viewModel = MapViewModel()
+    @State var viewModel = MapViewModel()
     
     var body: some View {
         ZStack {
@@ -17,7 +17,9 @@ struct MapView: View {
                 UserAnnotation()
                 
                 ForEach(viewModel.landmarks, id: \.id) { landmark in
-                    LandmarkAnnotation(landmark: landmark)
+                    LandmarkAnnotation(landmark: landmark) {
+                        viewModel.selectedLandmark = landmark
+                    }
                 }
             }
             .mapControls {
@@ -26,7 +28,11 @@ struct MapView: View {
                 MapPitchToggle()
                 MapScaleView()
             }
-            .mapStyle(viewModel.changeMapStyle(.imagery(elevation: .realistic)))
+            .mapStyle(
+                viewModel.changeMapStyle(
+                    .imagery(elevation: .realistic)
+                )
+            )
             
             BottomPlusButton {
                 AddLandmarkView(
@@ -37,6 +43,12 @@ struct MapView: View {
             .padding(.horizontal, 8)
             .padding(.bottom, 24)
         }
+        .navigationDestination(
+            item: $viewModel.selectedLandmark,
+            destination: { landmark in
+                LandmarkDetailView(landmark: landmark)
+            }
+        )
         .toolbar(.hidden, for: .navigationBar)
     }
 }

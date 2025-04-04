@@ -11,9 +11,22 @@ struct LandmarkAnnotationImage: View {
     let categoryName: String
 
     var body: some View {
-        Image(systemName: HelperFunctions.getCategoryString(categoryName: categoryName))
-            .foregroundColor(.green)
-            .font(.title)
+        // Change color based on category
+        Image(
+            systemName: HelperFunctions.getCategoryString(
+                categoryName: categoryName
+            )
+        )
+        .resizable()
+        .foregroundColor(.green)
+        .shadow(color: .gray, radius: 1, x: 1, y: 1)
+        .frame(width: 24, height: 24)
+        .padding(6)
+        .background {
+            Circle()
+                .stroke(.green, lineWidth: 4)
+                .stroke(.white, lineWidth: 0.5)
+        }
     }
 }
 

@@ -16,6 +16,7 @@ class MapViewModel {
     var cameraPosition: MapCameraPosition = .automatic
     private let locationManager = CLLocationManager()
     var mapStyle: MapStyle = .imagery(elevation: .realistic)
+    var selectedLandmark: Landmark?
     
     init() {
         if locationManager.authorizationStatus == .authorizedWhenInUse || locationManager.authorizationStatus == .authorizedAlways {

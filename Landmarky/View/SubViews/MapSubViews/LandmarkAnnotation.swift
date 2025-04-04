@@ -10,9 +10,14 @@ import SwiftUI
 
 struct LandmarkAnnotation: MapContent {
     private let landmark: Landmark
+    private let onTap: () -> Void
     
-    init(landmark: Landmark) {
+    init(
+        landmark: Landmark,
+        ontap: @escaping () -> Void
+    ) {
         self.landmark = landmark
+        self.onTap = ontap
     }
     
     var body: some MapContent {
@@ -25,6 +30,9 @@ struct LandmarkAnnotation: MapContent {
         ) {
             LandmarkAnnotationImage(categoryName: landmark.category)
                 .shadow(radius: 5)
+                .onTapGesture {
+                    onTap()
+                }
         }
     }
 }

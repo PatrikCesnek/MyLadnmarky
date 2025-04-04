@@ -22,7 +22,7 @@ class ProfileViewModel {
         createMockUser()
     }
     func createMockUser() {
-        user = Profile(id: UUID(), name: "John", lastName: "Doe", landmarkCount: 2)
+        user = Profile(id: UUID(), name: "John", lastName: "Doe", landmarkCount: Mock.MockLandmarks.data.count)
         landmarkCount = user?.landmarkCount
     }
 }
