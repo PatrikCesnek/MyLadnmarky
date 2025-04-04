@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LandmarkAnnotationImage: View {
     private let categoryName: String
-    private let annotationColor: Color
+    @State private var annotationColor: Color
     
     init(
         categoryName: String,
@@ -22,9 +22,7 @@ struct LandmarkAnnotationImage: View {
     var body: some View {
         // Change color based on category
         Image(
-            systemName: HelperFunctions.getCategoryString(
-                categoryName: categoryName
-            )
+            systemName: HelperFunctions.getCategoryString(categoryName)
         )
         .resizable()
         .foregroundColor(annotationColor)
@@ -35,6 +33,9 @@ struct LandmarkAnnotationImage: View {
             Circle()
                 .stroke(annotationColor, lineWidth: 4)
                 .stroke(.white, lineWidth: 0.5)
+        }
+        .onAppear{
+            annotationColor = HelperFunctions.changeAnnotationColor(categoryName: categoryName)
         }
     }
 }
