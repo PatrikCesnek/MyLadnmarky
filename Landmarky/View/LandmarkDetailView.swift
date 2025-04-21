@@ -30,17 +30,27 @@ struct LandmarkDetailView: View {
                 .frame(height: 300)
                 .background(ignoresSafeAreaEdges: [.top, .horizontal])
                 
-                BackButtonView(action: { dismiss() })
-                    .offset(y: -150)
-                    .padding(8)
+                HStack {
+                    BackButtonView(action: { dismiss() })
+                                            
+                    Spacer()
+                    
+                    EditButtonView(editAction: {}, showImage: true)
+                }
+                .offset(y: -140)
+                .padding(8)
+                
             }
             
-            //TODO: - Use correct landmark Image
-//            CircleImage(image: landmark.image)
-            CircleImage(image: Mock.MockLandmarks.mockImage)
-                .offset(y: -130)
-                .padding(.bottom, -130)
-                .frame(width: 300, height: 100)
+            LandmarkImageView(
+                imageData: landmark.image,
+                cornerRadius: 0,
+                isCircular: true
+            )
+            .offset(y: -130)
+            .padding(.bottom, -130)
+            .frame(width: 300, height: 100)
+            .shadow(radius: 8)
             
             HStack {
                 VStack(alignment: .leading, spacing: 8) {

@@ -11,23 +11,17 @@ struct LandmarkCard: View {
     var landmark: Landmark
     
     var body: some View {
-        VStack {
-            if let image = landmark.landmarkImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 140, height: 120)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-            } else {
-                Image(systemName: Constants.SystemImages.empyPhotoCard)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 140, height: 120)
-                    .foregroundColor(.gray)
-            }
+        VStack(spacing: 16) {
+            LandmarkImageView(
+                imageData: landmark.image,
+                cornerRadius: 10,
+                isCircular: false
+            )
+            .foregroundStyle(Color.gray)
             
             Text(landmark.name)
-                .font(.subheadline)
+                .font(.caption)
+                .fontWeight(.semibold)
                 .lineLimit(1)
         }
         .frame(width: 140)

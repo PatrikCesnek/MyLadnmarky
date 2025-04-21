@@ -61,6 +61,7 @@ public struct Constants {
         static let barAnnotation = "wineglass.fill"
         static let shopsAnnotation = "bag.fill"
         static let entertainmentAnnotation = "music.note.house.fill"
+        static let editButtonImage = "pencil.circle"
     }
     
     struct DefaultLandmarkLocation {
