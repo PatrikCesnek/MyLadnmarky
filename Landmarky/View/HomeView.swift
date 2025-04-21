@@ -31,7 +31,7 @@ struct HomeView: View {
                     } else {
                         HomeCategoryScrollView(
                             categories: viewModel.categories,
-                            landmarks: viewModel.landmarks
+                            landmarks: viewModel.filteredLandmarks()
                         )
                         .foregroundStyle(.primary)
                     }

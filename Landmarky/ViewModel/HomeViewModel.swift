@@ -44,4 +44,12 @@ class HomeViewModel {
         }
         return filteredLandmarks
     }
+    
+    func filteredLandmarks() -> [Landmark] {
+        landmarks.filter { landmark in
+            searchText.isEmpty ||
+            landmark.name.localizedCaseInsensitiveContains(searchText) ||
+            landmark.category.localizedCaseInsensitiveContains(searchText)
+        }
+    }
 }

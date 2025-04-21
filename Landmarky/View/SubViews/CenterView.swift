@@ -32,5 +32,5 @@ struct CenterView<Content: View>: View {
 }
 
 #Preview {
-    CenterView(centeredView: { Text("Hello") })
+    CenterView(centeredView: { Text(Constants.Strings.home) })
 }
