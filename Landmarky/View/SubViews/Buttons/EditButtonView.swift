@@ -23,14 +23,19 @@ struct EditButtonView: View {
         Button(
             action: { editAction () },
             label: {
-                Image(systemName: Constants.SystemImages.editButtonImage)
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundStyle(Color.green)
-                    .shadow(radius: 5)
+                if showImage {
+                    Image(systemName: Constants.SystemImages.editButtonImage)
+                        .resizable()
+                        .scaledToFit()
+                        .shadow(radius: 5)
+                } else {
+                    Text(Constants.Strings.edit)
+                        .font(.headline)
+                }
             }
         )
         .frame(width: 50, height: 50)
+        .foregroundStyle(Color.green)
     }
 }
 

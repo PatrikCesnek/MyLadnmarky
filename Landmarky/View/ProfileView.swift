@@ -14,6 +14,16 @@ struct ProfileView: View {
         VStack(alignment: .leading) {
             if let user = viewModel.user {
                 Form {
+                    CenterView {
+                        LandmarkImageView(
+                            imageData: nil, // only for now
+                            cornerRadius: 0,
+                            isCircular: true
+                        )
+                        .frame(height: 150)
+                    }
+                    .listRowBackground(Color.clear)
+                    
                     Section(Constants.Strings.profile) {
                         VStack(alignment: .leading) {
                             ProfileCellView(text: user.name, showDivider: true)
@@ -36,11 +46,9 @@ struct ProfileView: View {
         .navigationTitle(Constants.Strings.profile)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            Button(
-                action: {},
-                label: {
-                    Text(Constants.Strings.edit)
-                }
+            EditButtonView(
+                editAction: {},
+                showImage: true
             )
         }
     }
