@@ -10,7 +10,7 @@ import SwiftData
 
 @Observable
 class AddLandmarkViewModel {
-    var landmarks: Landmark?
+    var landmark: Landmark?
     var title: String = ""
     var categoryString: String = ""
     var description: String = ""
@@ -26,7 +26,12 @@ class AddLandmarkViewModel {
         category == Constants.Strings.custom
     }
     
-    init(latitude: Double, longitude: Double) {
+    init(
+        landmark: Landmark? = nil,
+        latitude: Double,
+        longitude: Double
+    ) {
+        self.landmark = landmark
         self.latitude = latitude
         self.longitude = longitude
         self.latText = String(latitude)

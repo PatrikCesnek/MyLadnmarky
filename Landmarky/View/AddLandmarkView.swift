@@ -29,55 +29,40 @@ struct AddLandmarkView: View {
             Form {
                 Section {
                     HorizontalCenterView {
-                        LandmarkImageView(
-                            imageData: nil, // only for now
-                            cornerRadius: 0,
-                            isCircular: true
+                        Button(
+                            action: {},
+                            label: {
+                                LandmarkImageView(
+                                    imageData: nil, // only for now
+                                    cornerRadius: 0,
+                                    isCircular: true
+                                )
+                                .frame(height: 150)
+                                .foregroundStyle(Color.primary.opacity(0.8))
+                            }
                         )
-                        .frame(height: 150)
                     }
                     .listRowBackground(Color.clear)
                 }
                 
                 Section(
                     content: {
-                        VStack {
-                            TextField(
-                                Constants.Strings.title,
-                                text: $viewModel.title
-                            )
-                            
-                            Picker(Constants.Strings.category, selection: $viewModel.category) {
-                                ForEach(LandmarkCategory.predefinedCategories, id: \.self) { category in
-                                    Text(category.localizedName).tag(category.localizedName)
-                                }
-                                Text(Constants.Strings.custom).tag(Constants.Strings.custom)
-                            }
-                            .pickerStyle(.menu)
-                            
-                            if viewModel.isCustomCategory {
-                                TextField(Constants.Strings.customCategory, text: $viewModel.categoryString)
-                            }
-                        }
+                        TitleSectionView(
+                            title: $viewModel.title,
+                            category: $viewModel.category,
+                            categoryString: $viewModel.categoryString,
+                            isCustomCategory: viewModel.isCustomCategory
+                        )
                     },
                     header: { Text(Constants.Strings.title) }
                 )
                 
                 Section(
                     content: {
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Text(Constants.Strings.latitude + ":")
-                                TextField("", text: $viewModel.latText)
-                                    .keyboardType(.decimalPad)
-                            }
-                            
-                            HStack {
-                                Text(Constants.Strings.longitude + ":")
-                                TextField("", text: $viewModel.lonText)
-                                    .keyboardType(.decimalPad)
-                            }
-                        }
+                        AddCoordinateSectionView(
+                            latitude: $viewModel.latText,
+                            longitude: $viewModel.lonText
+                        )
                     },
                     header: { Text(Constants.Strings.location) }
                 )
@@ -102,6 +87,7 @@ struct AddLandmarkView: View {
                     },
                     label: {
                         Text(Constants.Strings.save)
+                            .font(.headline)
                     }
                 )
             }
