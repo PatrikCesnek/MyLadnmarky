@@ -1,13 +1,13 @@
 //
-//  CenterView.swift
+//  VerticalCenterView.swift
 //  Landmarky
 //
-//  Created by Patrik Cesnek on 18/03/2025.
+//  Created by Patrik Cesnek on 21/04/2025.
 //
 
 import SwiftUI
 
-struct CenterView<Content: View>: View {
+struct VerticalCenterView<Content: View>: View {
     private let centeredView: () -> Content
     
     init(centeredView: @escaping () -> Content) {
@@ -18,13 +18,7 @@ struct CenterView<Content: View>: View {
         VStack {
             Spacer()
             
-            HStack {
-                Spacer()
-                
-                centeredView()
-                
-                Spacer()
-            }
+            centeredView()
             
             Spacer()
         }
@@ -32,5 +26,5 @@ struct CenterView<Content: View>: View {
 }
 
 #Preview {
-    CenterView(centeredView: { Text(Constants.Strings.home) })
+    VerticalCenterView(centeredView: { Color.red })
 }

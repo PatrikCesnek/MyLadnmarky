@@ -26,76 +26,86 @@ struct AddLandmarkView: View {
     
     var body: some View {
         VStack {
-            VStack {
-                Form {
-                    Section(
-                        content: {
-                            VStack {
-                                TextField(
-                                    Constants.Strings.title,
-                                    text: $viewModel.title
-                                )
-                                
-                                Picker(Constants.Strings.category, selection: $viewModel.category) {
-                                    ForEach(LandmarkCategory.predefinedCategories, id: \.self) { category in
-                                        Text(category.localizedName).tag(category.localizedName)
-                                    }
-                                    Text(Constants.Strings.custom).tag(Constants.Strings.custom)
-                                }
-                                .pickerStyle(.menu)
-                                
-                                if viewModel.isCustomCategory {
-                                    TextField(Constants.Strings.customCategory, text: $viewModel.categoryString)
-                                }
-                            }
-                        },
-                        header: { Text(Constants.Strings.title) }
-                    )
-                    
-                    Section(
-                        content: {
-                            VStack(alignment: .leading) {
-                                HStack {
-                                    Text(Constants.Strings.latitude + ":")
-                                    TextField("", text: $viewModel.latText)
-                                        .keyboardType(.decimalPad)
-                                }
-                                
-                                HStack {
-                                    Text(Constants.Strings.longitude + ":")
-                                    TextField("", text: $viewModel.lonText)
-                                        .keyboardType(.decimalPad)
-                                }
-                            }
-                        },
-                        header: { Text(Constants.Strings.location) }
-                    )
-                    
-                    Section(
-                        content: {
-                            TextEditor(
-                                text: $viewModel.description
+            Form {
+                Section {
+                    HorizontalCenterView {
+                        LandmarkImageView(
+                            imageData: nil, // only for now
+                            cornerRadius: 0,
+                            isCircular: true
+                        )
+                        .frame(height: 150)
+                    }
+                    .listRowBackground(Color.clear)
+                }
+                
+                Section(
+                    content: {
+                        VStack {
+                            TextField(
+                                Constants.Strings.title,
+                                text: $viewModel.title
                             )
-                            .frame(minHeight: 100)
-                        },
-                        header: { Text(Constants.Strings.description) }
-                    )
-                }
-                .navigationTitle(Text(Constants.Strings.addLandmarkTitle))
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    Button(
-                        action: {
-                            viewModel.addLandmark(using: modelContext)
-                            dismiss()
-                        },
-                        label: {
-                            Text(Constants.Strings.save)
+                            
+                            Picker(Constants.Strings.category, selection: $viewModel.category) {
+                                ForEach(LandmarkCategory.predefinedCategories, id: \.self) { category in
+                                    Text(category.localizedName).tag(category.localizedName)
+                                }
+                                Text(Constants.Strings.custom).tag(Constants.Strings.custom)
+                            }
+                            .pickerStyle(.menu)
+                            
+                            if viewModel.isCustomCategory {
+                                TextField(Constants.Strings.customCategory, text: $viewModel.categoryString)
+                            }
                         }
-                    )
-                }
-                .tint(.green)
+                    },
+                    header: { Text(Constants.Strings.title) }
+                )
+                
+                Section(
+                    content: {
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text(Constants.Strings.latitude + ":")
+                                TextField("", text: $viewModel.latText)
+                                    .keyboardType(.decimalPad)
+                            }
+                            
+                            HStack {
+                                Text(Constants.Strings.longitude + ":")
+                                TextField("", text: $viewModel.lonText)
+                                    .keyboardType(.decimalPad)
+                            }
+                        }
+                    },
+                    header: { Text(Constants.Strings.location) }
+                )
+                
+                Section(
+                    content: {
+                        TextEditor(
+                            text: $viewModel.description
+                        )
+                        .frame(minHeight: 100)
+                    },
+                    header: { Text(Constants.Strings.description) }
+                )
             }
+            .navigationTitle(Text(Constants.Strings.addLandmarkTitle))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                Button(
+                    action: {
+                        viewModel.addLandmark(using: modelContext)
+                        dismiss()
+                    },
+                    label: {
+                        Text(Constants.Strings.save)
+                    }
+                )
+            }
+            .tint(.green)
         }
     }
 }
