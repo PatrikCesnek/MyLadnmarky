@@ -10,7 +10,6 @@ import SwiftUI
 
 struct LandmarkDetailView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var showNavigation = false
     
     private let landmark: Landmark
     
@@ -85,7 +84,8 @@ struct LandmarkDetailView: View {
                         name: landmark.name
                     )
                 },
-                text: Constants.Strings.navigate)
+                text: Constants.Strings.navigate
+            )
         }
         .toolbar(.hidden, for: .navigationBar)
     }

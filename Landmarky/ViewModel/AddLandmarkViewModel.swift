@@ -52,8 +52,10 @@ class AddLandmarkViewModel {
         
         do {
             try context.save()
+            //TODO: - show success alert
             print("Landmark saved successfully!")
         } catch {
+            //TODO: - use proper error handling
             print("Failed to save landmark: \(error)")
         }
     }

@@ -33,7 +33,11 @@ struct LoadingView: View {
                         )
                     )
                     .rotationEffect(Angle(degrees: isLoading ? 360 : 0))
-                    .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false), value: self.isLoading)
+                    .animation(
+                        Animation.linear(duration: 1)
+                            .repeatForever(autoreverses: false),
+                        value: self.isLoading
+                    )
                     .onAppear() {
                         self.isLoading = true
                     }

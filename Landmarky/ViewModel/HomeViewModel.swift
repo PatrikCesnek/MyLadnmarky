@@ -31,6 +31,7 @@ class HomeViewModel {
             self.landmarks = Mock.MockLandmarks.data // Let's leave it here for now for tesing purposes
             isLoading = false
         } catch {
+            //TODO: - Use proper error handling
             print("Error fetching landmarks: \(error.localizedDescription)")
             isLoading = false
         }

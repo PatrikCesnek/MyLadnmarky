@@ -68,6 +68,7 @@ class MapViewModel {
     
     func getLandmarkLocation() -> CLLocationCoordinate2D {
         guard let landmarkLocation = locationManager.location?.coordinate else {
+            //TODO: - Use proper error handling
             print("❌ User location unavailable")
             return CLLocationCoordinate2D(
                 latitude: Constants.DefaultLandmarkLocation.defaultLat,
