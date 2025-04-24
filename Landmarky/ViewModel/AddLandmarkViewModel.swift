@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 @Observable
 class AddLandmarkViewModel {
@@ -26,6 +27,11 @@ class AddLandmarkViewModel {
         category == Constants.Strings.custom
     }
     
+    var selectedImageData: Data?
+    var showPhotoSourceSheet = false
+    var showCamera = false
+    var showPhotoPicker = false
+    
     init(
         landmark: Landmark? = nil,
         latitude: Double,
@@ -38,18 +44,32 @@ class AddLandmarkViewModel {
         self.lonText = String(longitude)
     }
     
+    func handlePickedImage(_ image: UIImage?) {
+        guard let image else { return }
+        self.selectedImageData = image.jpegData(compressionQuality: 0.8)
+    }
+    
+    @MainActor
+    func loadPhoto(from item: PhotosPickerItem?) async {
+        guard let item else { return }
+        if let data = try? await item.loadTransferable(type: Data.self),
+           let image = UIImage(data: data) {
+            handlePickedImage(image)
+        }
+    }
+    
     @MainActor
     func addLandmark(using context: ModelContext) {
         if categoryString.isEmpty {
             categoryString = category
         }
-//        let imageData = image?.jpegData(compressionQuality: 0.8)
         
         let newLandmark = Landmark(
             name: title,
             category: categoryString,
             latitude: HelperFunctions.convertToDouble(latText),
             longitude: HelperFunctions.convertToDouble(lonText),
+            image: selectedImageData,
             landmarkDescription: description
         )
         

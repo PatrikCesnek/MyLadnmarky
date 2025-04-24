@@ -42,6 +42,10 @@ public struct Constants {
         static let addLandmarkTitle = "Add landmark".localizedCapitalized
         static let category = "Category".localizedCapitalized
         static let customCategory = custom + " " + category.lowercased()
+        static let cancel = "Cancel".localizedCapitalized
+        static let takePhoto = "Take a photo".localizedCapitalized
+        static let chooseFromGallery = "Choose from Gallery".localizedCapitalized
+        static let choosePhotoSource = "Select Photo Source".localizedCapitalized
     }
     
     struct SystemImages {
@@ -49,6 +53,7 @@ public struct Constants {
         static let house = "house"
         static let map = "map"
         static let person = "person"
+        static let personCircle = "person.circle"
         static let mappin = "mappin.circle.fill"
         static let backButton = "chevron.left"
         static let emptyPhoto = "photo.circle.fill"

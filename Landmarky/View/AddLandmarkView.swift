@@ -5,23 +5,21 @@
 //  Created by Patrik Cesnek on 18/03/2025.
 //
 
+import PhotosUI
 import SwiftUI
 
 struct AddLandmarkView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @State var viewModel: AddLandmarkViewModel
-    
-    init(
-        latitude: Double,
-        longitude: Double
-    ) {
-        _viewModel = State(
-            initialValue: AddLandmarkViewModel(
-                latitude: latitude,
-                longitude: longitude
-            )
-        )
+
+    @State private var selectedUIImage: UIImage?
+    @State private var showCameraView = false
+    @State private var showImagePicker = false
+    @State private var selectedPhotoItem: PhotosPickerItem?
+
+    init(latitude: Double, longitude: Double) {
+        _viewModel = State(initialValue: AddLandmarkViewModel(latitude: latitude, longitude: longitude))
     }
     
     var body: some View {
@@ -29,18 +27,17 @@ struct AddLandmarkView: View {
             Form {
                 Section {
                     HorizontalCenterView {
-                        Button(
-                            action: {},
-                            label: {
-                                LandmarkImageView(
-                                    imageData: nil, // only for now
-                                    cornerRadius: 0,
-                                    isCircular: true
-                                )
-                                .frame(height: 150)
-                                .foregroundStyle(Color.primary.opacity(0.8))
-                            }
-                        )
+                        Button {
+                            viewModel.showPhotoSourceSheet = true
+                        } label: {
+                            LandmarkImageView(
+                                imageData: viewModel.selectedImageData,
+                                cornerRadius: 0,
+                                isCircular: true
+                            )
+                            .frame(height: 150)
+                            .foregroundStyle(Color.primary.opacity(0.8))
+                        }
                     }
                     .listRowBackground(Color.clear)
                 }
@@ -80,18 +77,37 @@ struct AddLandmarkView: View {
             .navigationTitle(Text(Constants.Strings.addLandmarkTitle))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                Button(
-                    action: {
-                        viewModel.addLandmark(using: modelContext)
-                        dismiss()
-                    },
-                    label: {
-                        Text(Constants.Strings.save)
-                            .font(.headline)
-                    }
-                )
+                Button(action: {
+                    viewModel.addLandmark(using: modelContext)
+                    dismiss()
+                }) {
+                    Text(Constants.Strings.save)
+                        .font(.headline)
+                }
             }
             .tint(.green)
+        }
+        .confirmationDialog(Constants.Strings.choosePhotoSource, isPresented: $viewModel.showPhotoSourceSheet) {
+            Button(Constants.Strings.chooseFromGallery) {
+                viewModel.showPhotoPicker = true
+            }
+            Button(Constants.Strings.takePhoto) {
+                viewModel.showCamera = true
+            }
+            Button(Constants.Strings.cancel, role: .cancel) {}
+        }
+        .photosPicker(
+            isPresented: $viewModel.showPhotoPicker,
+            selection: $selectedPhotoItem,
+            matching: .images
+        )
+        .onChange(of: selectedPhotoItem) { _, newItem in
+            Task { await viewModel.loadPhoto(from: newItem) }
+        }
+        .sheet(isPresented: $viewModel.showCamera) {
+            ImagePickerView(sourceType: .camera) { image in
+                viewModel.handlePickedImage(image)
+            }
         }
     }
 }

@@ -18,7 +18,8 @@ struct ProfileView: View {
                         LandmarkImageView(
                             imageData: nil, // only for now
                             cornerRadius: 0,
-                            isCircular: true
+                            isCircular: true,
+                            isProfile: true
                         )
                         .frame(height: 150)
                     }

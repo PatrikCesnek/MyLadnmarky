@@ -19,17 +19,18 @@ struct BackButtonView: View {
             action: action,
             label: {
                 Image(systemName: Constants.SystemImages.backButton)
+                    .resizable()
                     .foregroundStyle(.green)
-                    .font(.title2)
                     .shadow(radius: 2)
+                    .frame(width: 20, height: 40)
+                    .clipShape(Circle())
+                    .overlay {
+                        Circle().stroke(.green, lineWidth: 4)
+                            .frame(width: 50, height: 50)
+                    }
+                    .shadow(radius: 5)
             }
         )
-        .clipShape(Circle())
-        .overlay {
-            Circle().stroke(.green, lineWidth: 4)
-                .frame(width: 50, height: 50)
-        }
-        .shadow(radius: 5)
         .frame(width: 50, height: 50)
     }
 }

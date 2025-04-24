@@ -11,15 +11,18 @@ struct LandmarkImageView: View {
     private let imageData: Data?
     private let cornerRadius: CGFloat
     private let isCircular: Bool
+    private let isProfile: Bool
     
     init(
         imageData: Data?,
         cornerRadius: CGFloat,
-        isCircular: Bool
+        isCircular: Bool,
+        isProfile: Bool = false
     ) {
         self.imageData = imageData
         self.cornerRadius = cornerRadius
         self.isCircular = isCircular
+        self.isProfile = isProfile
     }
     
     var body: some View {
@@ -30,17 +33,23 @@ struct LandmarkImageView: View {
                     .resizable()
                     .scaledToFit()
             } else {
-                Image(
-                    systemName:
-                    isCircular
-                    ? Constants.SystemImages.emptyPhoto
-                    : Constants.SystemImages.empyPhotoCard
-                )
-                .resizable()
-                .scaledToFit()
-                .overlay {
-                    if isCircular {
-                        Circle().stroke(.white, lineWidth: 4)
+                if isProfile {
+                    Image(systemName: Constants.SystemImages.personCircle)
+                        .resizable()
+                        .scaledToFit()
+                } else {
+                    Image(
+                        systemName:
+                        isCircular
+                        ? Constants.SystemImages.emptyPhoto
+                        : Constants.SystemImages.empyPhotoCard
+                    )
+                    .resizable()
+                    .scaledToFit()
+                    .overlay {
+                        if isCircular {
+                            Circle().stroke(.white, lineWidth: 4)
+                        }
                     }
                 }
             }
