@@ -14,8 +14,6 @@ struct AddLandmarkView: View {
     @State var viewModel: AddLandmarkViewModel
 
     @State private var selectedUIImage: UIImage?
-    @State private var showCameraView = false
-    @State private var showImagePicker = false
     @State private var selectedPhotoItem: PhotosPickerItem?
 
     init(latitude: Double, longitude: Double) {
