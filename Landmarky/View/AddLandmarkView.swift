@@ -32,10 +32,10 @@ struct AddLandmarkView: View {
                         } label: {
                             LandmarkImageView(
                                 imageData: viewModel.selectedImageData,
-                                cornerRadius: 0,
-                                isCircular: true
+                                cornerRadius: 16,
+                                isCircular: false
                             )
-                            .frame(height: 150)
+                            .frame(width: 150, height: 150)
                             .foregroundStyle(Color.primary.opacity(0.8))
                         }
                     }

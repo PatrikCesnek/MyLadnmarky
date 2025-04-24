@@ -31,7 +31,7 @@ struct LandmarkImageView: View {
                let uiImage = UIImage(data: data) {
                 Image(uiImage: uiImage)
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
             } else {
                 if isProfile {
                     Image(systemName: Constants.SystemImages.personCircle)
