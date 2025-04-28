@@ -24,7 +24,7 @@ struct LandmarkCard: View {
                 .fontWeight(.semibold)
                 .lineLimit(1)
         }
-        .frame(width: 140)
+        .frame(width: 140, height: 140)
         .padding(16)
         .background{
             RoundedRectangle(cornerRadius: 15)

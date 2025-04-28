@@ -54,6 +54,7 @@ struct LandmarkImageView: View {
                 }
             }
         }
+        .frame(width: 130, height: 100)
         .clipShape(
             isCircular
             ? AnyShape(Circle())

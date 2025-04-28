@@ -85,7 +85,10 @@ struct AddLandmarkView: View {
             }
             .tint(.green)
         }
-        .confirmationDialog(Constants.Strings.choosePhotoSource, isPresented: $viewModel.showPhotoSourceSheet) {
+        .confirmationDialog(
+            Constants.Strings.choosePhotoSource,
+            isPresented: $viewModel.showPhotoSourceSheet
+        ) {
             Button(Constants.Strings.chooseFromGallery) {
                 viewModel.showPhotoPicker = true
             }
