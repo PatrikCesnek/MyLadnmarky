@@ -24,7 +24,7 @@ class MapViewModel {
         } else {
             requestLocation()
         }
-        displayLandmarks()
+//        displayLandmarks()
     }
 
     func updateUserLocation(_ location: CLLocationCoordinate2D?) {
@@ -78,7 +78,18 @@ class MapViewModel {
         return landmarkLocation
     }
     
-    func displayLandmarks() {
-        landmarks = Mock.MockLandmarks.data
+    @MainActor
+    func displayLandmarks(modelContext: ModelContext) {
+        let descriptor = FetchDescriptor<Landmark>(sortBy: [SortDescriptor(\.name)])
+        do {
+            let allLandmarks = try modelContext.fetch(descriptor)
+            //TODO: - uncomment following line
+            self.landmarks = allLandmarks
+            //TODO: - delete the following line after we don't need it
+            /*self.landmarks = Mock.MockLandmarks.data*/ // Let's leave it here for now for tesing purposes
+        } catch {
+            //TODO: - Use proper error handling
+            print("Error fetching landmarks: \(error.localizedDescription)")
+        }
     }
 }

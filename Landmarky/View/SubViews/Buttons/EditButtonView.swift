@@ -7,21 +7,21 @@
 
 import SwiftUI
 
-struct EditButtonView: View {
-    private let editAction: () -> Void
+struct EditButtonView<Content: View>: View {
+    private let destination: () -> Content
     private let showImage: Bool
     
     init(
-        editAction: @escaping () -> Void,
+        @ViewBuilder destination: @escaping () -> Content,
         showImage: Bool
     ) {
-        self.editAction = editAction
+        self.destination = destination
         self.showImage = showImage
     }
     
     var body: some View {
-        Button(
-            action: { editAction () },
+        NavigationLink(
+            destination: destination,
             label: {
                 if showImage {
                     Image(systemName: Constants.SystemImages.editButtonImage)
@@ -40,8 +40,5 @@ struct EditButtonView: View {
 }
 
 #Preview {
-    EditButtonView(
-        editAction: {},
-        showImage: true
-    )
+    EditButtonView(destination: { Text("A")}, showImage: true)
 }

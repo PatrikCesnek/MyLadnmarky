@@ -10,6 +10,7 @@ import MapKit
 
 struct MapView: View {
     @State var viewModel = MapViewModel()
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
         ZStack {
@@ -41,6 +42,9 @@ struct MapView: View {
             }
             .padding(.horizontal, 8)
             .padding(.bottom, 24)
+        }
+        .onAppear{
+            viewModel.displayLandmarks(modelContext: modelContext)
         }
         .navigationDestination(
             item: $viewModel.selectedLandmark,

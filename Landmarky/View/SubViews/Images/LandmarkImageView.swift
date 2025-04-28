@@ -31,7 +31,13 @@ struct LandmarkImageView: View {
                let uiImage = UIImage(data: data) {
                 Image(uiImage: uiImage)
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
+                    .clipped()
+                    .overlay {
+                        if isCircular {
+                            Circle().stroke(.white, lineWidth: 6)
+                        }
+                    }
             } else {
                 if isProfile {
                     Image(systemName: Constants.SystemImages.personCircle)
@@ -48,13 +54,12 @@ struct LandmarkImageView: View {
                     .scaledToFit()
                     .overlay {
                         if isCircular {
-                            Circle().stroke(.white, lineWidth: 4)
+                            Circle().stroke(.white, lineWidth: 6)
                         }
                     }
                 }
             }
         }
-        .frame(width: 130, height: 100)
         .clipShape(
             isCircular
             ? AnyShape(Circle())

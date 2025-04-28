@@ -18,6 +18,7 @@ struct LandmarkCard: View {
                 isCircular: false
             )
             .foregroundStyle(Color.gray)
+            .frame(width: 120, height: 100)
             
             Text(landmark.name)
                 .font(.caption)

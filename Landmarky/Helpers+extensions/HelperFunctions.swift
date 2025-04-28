@@ -5,6 +5,7 @@
 //  Created by Patrik Cesnek on 24/03/2025.
 //
 
+import SwiftData
 import SwiftUI
 
 struct HelperFunctions {
@@ -44,6 +45,21 @@ struct HelperFunctions {
             Constants.Strings.custom,
             Constants.Strings.other: return .green
         default: return .green
+        }
+    }
+    
+    static func deleteLandmark(using context: ModelContext, landmark: Landmark?) {
+        guard let landmark else { return }
+        
+        context.delete(landmark)
+        
+        do {
+            try context.save()
+            // TODO: - show success alert
+            print("Landmark deleted successfully!")
+        } catch {
+            // TODO: - use proper error handling
+            print("Failed to delete landmark: \(error)")
         }
     }
 }

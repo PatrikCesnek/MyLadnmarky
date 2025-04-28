@@ -46,6 +46,7 @@ public struct Constants {
         static let takePhoto = "Take a photo".localizedCapitalized
         static let chooseFromGallery = "Choose from Gallery".localizedCapitalized
         static let choosePhotoSource = "Select Photo Source".localizedCapitalized
+        static let createLadnmarks = "Go into the map tab and create your landmarks".localizedCapitalized
     }
     
     struct SystemImages {

@@ -16,8 +16,18 @@ struct AddLandmarkView: View {
     @State private var selectedUIImage: UIImage?
     @State private var selectedPhotoItem: PhotosPickerItem?
 
-    init(latitude: Double, longitude: Double) {
-        _viewModel = State(initialValue: AddLandmarkViewModel(latitude: latitude, longitude: longitude))
+    init(
+        latitude: Double,
+        longitude: Double,
+        landmark: Landmark? = nil
+    ) {
+        _viewModel = State(
+            initialValue: AddLandmarkViewModel(
+                landmark: landmark,
+                latitude: latitude,
+                longitude: longitude
+            )
+        )
     }
     
     var body: some View {
@@ -71,12 +81,24 @@ struct AddLandmarkView: View {
                     },
                     header: { Text(Constants.Strings.description) }
                 )
+                
+                Section(
+                    content: {
+                        CenterView{
+                            Button("Delete"){}
+                        }
+                    }
+                )
             }
             .navigationTitle(Text(Constants.Strings.addLandmarkTitle))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 Button(action: {
-                    viewModel.addLandmark(using: modelContext)
+                    if viewModel.isEdit {
+                        viewModel.editLandmark(using: modelContext)
+                    } else {
+                        viewModel.addLandmark(using: modelContext)
+                    }
                     dismiss()
                 }) {
                     Text(Constants.Strings.save)
@@ -92,6 +114,7 @@ struct AddLandmarkView: View {
             Button(Constants.Strings.chooseFromGallery) {
                 viewModel.showPhotoPicker = true
             }
+            //TODO: - Fix taking photos
             Button(Constants.Strings.takePhoto) {
                 viewModel.showCamera = true
             }

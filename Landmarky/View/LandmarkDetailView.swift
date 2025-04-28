@@ -34,7 +34,16 @@ struct LandmarkDetailView: View {
                                             
                     Spacer()
                     
-                    EditButtonView(editAction: {}, showImage: true)
+                    EditButtonView(
+                        destination: {
+                            AddLandmarkView(
+                                latitude: landmark.latitude ?? Constants.DefaultLandmarkLocation.defaultLat,
+                                longitude: landmark.longitude ?? Constants.DefaultLandmarkLocation.defaultLon,
+                                landmark: landmark
+                            )
+                        },
+                        showImage: true
+                    )
                 }
                 .offset(y: -140)
                 .padding(8)

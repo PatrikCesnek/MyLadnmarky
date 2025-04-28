@@ -27,13 +27,17 @@ class AddLandmarkViewModel {
         category == Constants.Strings.custom
     }
     
+    var isEdit: Bool {
+        landmark != nil
+    }
+    
     var selectedImageData: Data?
     var showPhotoSourceSheet = false
     var showCamera = false
     var showPhotoPicker = false
     
     init(
-        landmark: Landmark? = nil,
+        landmark: Landmark?,
         latitude: Double,
         longitude: Double
     ) {
@@ -42,6 +46,8 @@ class AddLandmarkViewModel {
         self.longitude = longitude
         self.latText = String(latitude)
         self.lonText = String(longitude)
+        
+        handleEdit(landmark: landmark)
     }
     
     func handlePickedImage(_ image: UIImage?) {
@@ -55,6 +61,40 @@ class AddLandmarkViewModel {
         if let data = try? await item.loadTransferable(type: Data.self),
            let image = UIImage(data: data) {
             handlePickedImage(image)
+        }
+    }
+    
+    func handleEdit(landmark: Landmark?) {
+        guard let landmark = landmark else { return }
+        title = landmark.name
+        categoryString = landmark.category
+        description = landmark.landmarkDescription ?? ""
+        category = landmark.category
+        selectedImageData = landmark.image
+    }
+    
+    @MainActor
+    func editLandmark(using context: ModelContext) {
+        guard let landmark else { return }
+        
+        if categoryString.isEmpty {
+            categoryString = category
+        }
+        
+        landmark.name = title
+        landmark.category = categoryString
+        landmark.latitude = HelperFunctions.convertToDouble(latText)
+        landmark.longitude = HelperFunctions.convertToDouble(lonText)
+        landmark.image = selectedImageData
+        landmark.landmarkDescription = description
+                
+        do {
+            try context.save()
+            //TODO: - show success alert
+            print("Landmark saved successfully!")
+        } catch {
+            //TODO: - use proper error handling
+            print("Failed to save landmark: \(error)")
         }
     }
     
@@ -83,5 +123,9 @@ class AddLandmarkViewModel {
             //TODO: - use proper error handling
             print("Failed to save landmark: \(error)")
         }
+    }
+    
+    func deleteLandmark(using context: ModelContext, landmark: Landmark?) {
+        HelperFunctions.deleteLandmark(using: context, landmark: landmark)
     }
 }

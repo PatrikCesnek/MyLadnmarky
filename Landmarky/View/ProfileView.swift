@@ -47,10 +47,11 @@ struct ProfileView: View {
         .navigationTitle(Constants.Strings.profile)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            EditButtonView(
-                editAction: {},
-                showImage: true
-            )
+            //TODO: - Fix this
+//            EditButtonView(
+//                editAction: {},
+//                showImage: true
+//            )
         }
     }
 }

@@ -27,7 +27,10 @@ struct HomeView: View {
                         .padding(16)
                         
                     } else if viewModel.landmarks.isEmpty {
-                        EmptyView(title: Constants.Strings.noLandmarks, subtitle: nil)
+                        EmptyView(
+                            title: Constants.Strings.noLandmarks,
+                            subtitle: Constants.Strings.createLadnmarks
+                        )
                     } else {
                         HomeCategoryScrollView(
                             categories: viewModel.categories,
