@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LandmarkDetailView: View {
     @Environment(\.dismiss) private var dismiss
+    @State private var isDeleted = false
     
     private let landmark: Landmark
     
@@ -39,8 +40,14 @@ struct LandmarkDetailView: View {
                             AddLandmarkView(
                                 latitude: landmark.latitude ?? Constants.DefaultLandmarkLocation.defaultLat,
                                 longitude: landmark.longitude ?? Constants.DefaultLandmarkLocation.defaultLon,
-                                landmark: landmark
+                                landmark: landmark,
+                                isDeleted: $isDeleted
                             )
+                            .onDisappear {
+                                if isDeleted {
+                                    dismiss()
+                                }
+                            }
                         },
                         showImage: true
                     )

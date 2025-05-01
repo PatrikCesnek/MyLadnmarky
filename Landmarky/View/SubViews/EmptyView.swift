@@ -17,7 +17,7 @@ struct EmptyView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Text(title)
                 .font(.headline)
                 .padding()

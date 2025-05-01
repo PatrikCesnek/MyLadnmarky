@@ -37,7 +37,9 @@ struct MapView: View {
             BottomPlusButton {
                 AddLandmarkView(
                     latitude: viewModel.getLandmarkLocation().latitude,
-                    longitude: viewModel.getLandmarkLocation().longitude
+                    longitude: viewModel.getLandmarkLocation().longitude,
+                    isDeleted: $viewModel.isDeleted
+                    //TODO: - Get rid of isDeleted when I don't need it
                 )
             }
             .padding(.horizontal, 8)

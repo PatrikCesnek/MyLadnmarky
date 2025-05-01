@@ -17,6 +17,7 @@ class MapViewModel {
     private let locationManager = CLLocationManager()
     var mapStyle: MapStyle = .imagery
     var selectedLandmark: Landmark?
+    var isDeleted = false
     
     init() {
         if locationManager.authorizationStatus == .authorizedWhenInUse || locationManager.authorizationStatus == .authorizedAlways {

@@ -15,11 +15,14 @@ struct AddLandmarkView: View {
 
     @State private var selectedUIImage: UIImage?
     @State private var selectedPhotoItem: PhotosPickerItem?
+    
+    @Binding private var isDeleted: Bool
 
     init(
         latitude: Double,
         longitude: Double,
-        landmark: Landmark? = nil
+        landmark: Landmark? = nil,
+        isDeleted: Binding<Bool>
     ) {
         _viewModel = State(
             initialValue: AddLandmarkViewModel(
@@ -28,6 +31,7 @@ struct AddLandmarkView: View {
                 longitude: longitude
             )
         )
+        self._isDeleted = isDeleted
     }
     
     var body: some View {
@@ -82,13 +86,23 @@ struct AddLandmarkView: View {
                     header: { Text(Constants.Strings.description) }
                 )
                 
-                Section(
-                    content: {
-                        CenterView{
-                            Button("Delete"){}
+                if viewModel.isEdit {
+                    Section(
+                        content: {
+                            CenterView{
+                                Button(Constants.Strings.delete){
+                                    viewModel.deleteLandmark(
+                                        using: modelContext,
+                                        landmark: viewModel.landmark
+                                    )
+                                    isDeleted = true
+                                    dismiss()
+                                }
+                                .foregroundStyle(Color.red)
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
             .navigationTitle(Text(Constants.Strings.addLandmarkTitle))
             .navigationBarTitleDisplayMode(.inline)
@@ -137,10 +151,12 @@ struct AddLandmarkView: View {
 }
 
 #Preview {
+    @Previewable @State var isDeleted = false
     NavigationView {
         AddLandmarkView(
             latitude: Constants.DefaultLandmarkLocation.defaultLat,
-            longitude: Constants.DefaultLandmarkLocation.defaultLon
+            longitude: Constants.DefaultLandmarkLocation.defaultLon,
+            isDeleted: $isDeleted
         )
     }
 }
