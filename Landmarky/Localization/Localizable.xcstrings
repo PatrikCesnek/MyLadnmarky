@@ -480,6 +480,23 @@
         }
       }
     },
+    "Unknown place" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neznámé místo"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neznáme miesto"
+          }
+        }
+      }
+    },
     "You have: " : {
       "extractionState" : "manual",
       "localizations" : {

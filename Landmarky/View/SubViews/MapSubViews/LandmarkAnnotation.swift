@@ -24,8 +24,8 @@ struct LandmarkAnnotation: MapContent {
         Annotation(
             landmark.name,
             coordinate: CLLocationCoordinate2D(
-                latitude: landmark.latitude ?? Constants.DefaultLandmarkLocation.defaultLat,
-                longitude: landmark.longitude ?? Constants.DefaultLandmarkLocation.defaultLon
+                latitude: HelperFunctions.getCoordinate(.lat, landmark.latitude),
+                longitude: HelperFunctions.getCoordinate(.lon, landmark.longitude)
             )
         ) {
             LandmarkAnnotationImage(categoryName: landmark.category)

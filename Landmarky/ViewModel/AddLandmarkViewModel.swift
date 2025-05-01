@@ -104,6 +104,8 @@ class AddLandmarkViewModel {
             categoryString = category
         }
         
+        checkHasTitle()
+        
         let newLandmark = Landmark(
             name: title,
             category: categoryString,
@@ -127,5 +129,12 @@ class AddLandmarkViewModel {
     
     func deleteLandmark(using context: ModelContext, landmark: Landmark?) {
         HelperFunctions.deleteLandmark(using: context, landmark: landmark)
+    }
+    
+    private func checkHasTitle() {
+        if title.isEmpty {
+            //TODO: - error handling empty title
+            title = Constants.Strings.unknownPlace
+        }
     }
 }

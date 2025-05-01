@@ -30,9 +30,9 @@ struct LandmarkImageView: View {
             if let data = imageData,
                let uiImage = UIImage(data: data) {
                 Image(uiImage: uiImage)
+                    .renderingMode(.original)
                     .resizable()
-                    .scaledToFit()
-                    .clipped()
+                    .cornerRadius(cornerRadius)
                     .overlay {
                         if isCircular {
                             Circle().stroke(.white, lineWidth: 6)
@@ -50,8 +50,9 @@ struct LandmarkImageView: View {
                         ? Constants.SystemImages.emptyPhoto
                         : Constants.SystemImages.empyPhotoCard
                     )
+                    .renderingMode(.original)
                     .resizable()
-                    .scaledToFit()
+                    .cornerRadius(cornerRadius)
                     .overlay {
                         if isCircular {
                             Circle().stroke(.white, lineWidth: 6)

@@ -38,7 +38,7 @@ struct HomeCategoryScrollView: View {
                                 )
                             }
                         }
-                        .padding(.horizontal)
+                        .padding(.horizontal, 16)
                     }
                 }
             }

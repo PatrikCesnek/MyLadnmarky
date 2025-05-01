@@ -28,6 +28,7 @@ public struct Constants {
         static let entertainment = "Entertainment".localizedCapitalized
         static let custom = "Custom".localizedCapitalized
         static let other = "Other".localizedCapitalized
+        static let unknownPlace = "Unknown place".localizedCapitalized
         static let landmarkCountString1 = "You have:".localizedCapitalized
         static let landmarkCountString2 = "landmarks".localizedCapitalized
         static let allLandmarks = "All".localizedCapitalized
