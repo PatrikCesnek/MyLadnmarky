@@ -22,8 +22,8 @@ struct LandmarkDetailView: View {
         VStack {
             ZStack {
                 DetailMapView(
-                    latitude: landmark.latitude ?? Constants.DefaultLandmarkLocation.defaultLat,
-                    longitude: landmark.longitude ?? Constants.DefaultLandmarkLocation.defaultLon,
+                    latitude: HelperFunctions.getCoordinate(.lat, landmark.latitude),
+                    longitude: HelperFunctions.getCoordinate(.lon, landmark.longitude),
                     name: landmark.name,
                     category: landmark.category
                 )
@@ -38,8 +38,8 @@ struct LandmarkDetailView: View {
                     EditButtonView(
                         destination: {
                             AddLandmarkView(
-                                latitude: landmark.latitude ?? Constants.DefaultLandmarkLocation.defaultLat,
-                                longitude: landmark.longitude ?? Constants.DefaultLandmarkLocation.defaultLon,
+                                latitude: HelperFunctions.getCoordinate(.lat, landmark.latitude),
+                                longitude: HelperFunctions.getCoordinate(.lon, landmark.longitude),
                                 landmark: landmark,
                                 isDeleted: $isDeleted
                             )
@@ -67,25 +67,11 @@ struct LandmarkDetailView: View {
             .frame(width: 300, height: 100)
             .shadow(radius: 8)
             
-            HStack {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(landmark.name)
-                        .font(.title)
-                        .fontWeight(.bold)
-                    
-                    Text(landmark.category)
-                        .foregroundColor(.secondary)
-                        .font(.caption)
-                    
-                    if let description = landmark.landmarkDescription {
-                        Text(description)
-                            .font(.caption)
-                            .multilineTextAlignment(.leading)
-                    }
-                }
-                
-                Spacer()
-            }
+            LandmarkDetailInfoView(
+                title: landmark.name,
+                category: landmark.category,
+                description: landmark.landmarkDescription
+            )
             .padding(16)
             
             Spacer()
@@ -93,10 +79,7 @@ struct LandmarkDetailView: View {
             PrimaryButton(
                 action: {
                     NavigationHelper.startNavigation(
-                        to: CLLocationCoordinate2D(
-                            latitude: landmark.latitude ?? Constants.DefaultLandmarkLocation.defaultLat,
-                            longitude: landmark.longitude ?? Constants.DefaultLandmarkLocation.defaultLon
-                        ),
+                        to: HelperFunctions.getLocation(landmark: landmark),
                         name: landmark.name
                     )
                 },

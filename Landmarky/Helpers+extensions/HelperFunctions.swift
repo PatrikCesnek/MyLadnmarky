@@ -5,8 +5,13 @@
 //  Created by Patrik Cesnek on 24/03/2025.
 //
 
+import MapKit
 import SwiftData
 import SwiftUI
+
+enum CoordinateType {
+    case lat, lon
+}
 
 struct HelperFunctions {
     static func convertToDouble(_ input: String) -> Double {
@@ -61,5 +66,24 @@ struct HelperFunctions {
             // TODO: - use proper error handling
             print("Failed to delete landmark: \(error)")
         }
+    }
+    
+    static func getCoordinate(_ coordinateType: CoordinateType, _ coordinate: Double?) -> Double {
+        if let coordinate = coordinate {
+            return coordinate
+        } else {
+            if coordinateType == .lat {
+                return Constants.DefaultLandmarkLocation.defaultLat
+            } else {
+                return Constants.DefaultLandmarkLocation.defaultLon
+            }
+        }
+    }
+    
+    static func getLocation(landmark: Landmark) -> CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(
+            latitude: getCoordinate(.lat, landmark.latitude),
+            longitude: getCoordinate(.lon, landmark.longitude)
+        )
     }
 }
