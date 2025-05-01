@@ -24,5 +24,5 @@ struct CenterView<Content: View>: View {
 }
 
 #Preview {
-    CenterView(centeredView: { Text(Constants.Strings.home) })
+    CenterView(centeredView: { Text(Constants.Buttons.home) })
 }

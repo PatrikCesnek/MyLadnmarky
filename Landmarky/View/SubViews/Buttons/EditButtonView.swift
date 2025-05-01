@@ -29,7 +29,7 @@ struct EditButtonView<Content: View>: View {
                         .scaledToFit()
                         .shadow(radius: 5)
                 } else {
-                    Text(Constants.Strings.edit)
+                    Text(Constants.Buttons.edit)
                         .font(.headline)
                 }
             }

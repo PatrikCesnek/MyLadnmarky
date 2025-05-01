@@ -34,9 +34,11 @@ struct TitleSectionView: View {
             
             Picker(Constants.Strings.category, selection: $category) {
                 ForEach(LandmarkCategory.predefinedCategories, id: \.self) { category in
-                    Text(category.localizedName).tag(category.localizedName)
+                    Text(category.localizedName)
+                        .tag(category.localizedName)
                 }
-                Text(Constants.Strings.custom).tag(Constants.Strings.custom)
+                Text(Constants.Categories.custom)
+                    .tag(Constants.Categories.custom)
             }
             .pickerStyle(.menu)
             

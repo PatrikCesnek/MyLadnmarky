@@ -22,9 +22,9 @@ class AddLandmarkViewModel {
     var latText: String
     var lonText: String
     
-    var category: String = Constants.Strings.other
+    var category: String = Constants.Categories.other
     var isCustomCategory: Bool {
-        category == Constants.Strings.custom
+        category == Constants.Categories.custom
     }
     
     var isEdit: Bool {

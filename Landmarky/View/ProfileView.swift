@@ -25,7 +25,7 @@ struct ProfileView: View {
                     }
                     .listRowBackground(Color.clear)
                     
-                    Section(Constants.Strings.profile) {
+                    Section(Constants.Buttons.profile) {
                         VStack(alignment: .leading) {
                             ProfileCellView(text: user.name, showDivider: true)
                             ProfileCellView(text: user.lastName, showDivider: true)
@@ -44,7 +44,7 @@ struct ProfileView: View {
                 }
             }
         }
-        .navigationTitle(Constants.Strings.profile)
+        .navigationTitle(Constants.Buttons.profile)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             //TODO: - Fix this

@@ -47,7 +47,7 @@ struct AddLandmarkView: View {
                                 cornerRadius: 16,
                                 isCircular: false
                             )
-                            .frame(width: 150, height: 150)
+                            .frame(width: 180, height: 150)
                             .foregroundStyle(Color.primary.opacity(0.8))
                         }
                     }
@@ -90,7 +90,7 @@ struct AddLandmarkView: View {
                     Section(
                         content: {
                             CenterView{
-                                Button(Constants.Strings.delete){
+                                Button(Constants.Buttons.delete){
                                     viewModel.deleteLandmark(
                                         using: modelContext,
                                         landmark: viewModel.landmark
@@ -115,7 +115,7 @@ struct AddLandmarkView: View {
                     }
                     dismiss()
                 }) {
-                    Text(Constants.Strings.save)
+                    Text(Constants.Buttons.save)
                         .font(.headline)
                 }
             }
@@ -125,14 +125,13 @@ struct AddLandmarkView: View {
             Constants.Strings.choosePhotoSource,
             isPresented: $viewModel.showPhotoSourceSheet
         ) {
-            Button(Constants.Strings.chooseFromGallery) {
+            Button(Constants.Buttons.chooseFromGallery) {
                 viewModel.showPhotoPicker = true
             }
-            //TODO: - Fix taking photos
-            Button(Constants.Strings.takePhoto) {
+            Button(Constants.Buttons.takePhoto) {
                 viewModel.showCamera = true
             }
-            Button(Constants.Strings.cancel, role: .cancel) {}
+            Button(Constants.Buttons.cancel, role: .cancel) {}
         }
         .photosPicker(
             isPresented: $viewModel.showPhotoPicker,

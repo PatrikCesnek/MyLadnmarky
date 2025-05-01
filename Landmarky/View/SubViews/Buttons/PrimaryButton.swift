@@ -37,5 +37,5 @@ struct PrimaryButton: View {
 }
 
 #Preview {
-    PrimaryButton(action: {}, text: Constants.Strings.navigate)
+    PrimaryButton(action: {}, text: Constants.Buttons.navigate)
 }

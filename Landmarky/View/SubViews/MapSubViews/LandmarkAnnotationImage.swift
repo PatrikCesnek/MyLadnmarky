@@ -40,6 +40,6 @@ struct LandmarkAnnotationImage: View {
 }
 
 #Preview {
-    LandmarkAnnotationImage(categoryName: Constants.Strings.hills)
+    LandmarkAnnotationImage(categoryName: Constants.Categories.hills)
 }
 

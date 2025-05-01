@@ -39,16 +39,16 @@ struct HelperFunctions {
     
     static func changeAnnotationColor(categoryName: String) -> Color {
         switch categoryName {
-        case Constants.Strings.lakes: return .blue
-        case Constants.Strings.castles: return .gray
-        case Constants.Strings.restaurants: return .orange
-        case Constants.Strings.bars: return .pink
-        case Constants.Strings.shops: return .purple
-        case Constants.Strings.entertainment: return .yellow
-        case Constants.Strings.hills,
-            Constants.Strings.lookouts,
-            Constants.Strings.custom,
-            Constants.Strings.other: return .green
+        case Constants.Categories.lakes: return .blue
+        case Constants.Categories.castles: return .gray
+        case Constants.Categories.restaurants: return .orange
+        case Constants.Categories.bars: return .pink
+        case Constants.Categories.shops: return .purple
+        case Constants.Categories.entertainment: return .yellow
+        case Constants.Categories.hills,
+            Constants.Categories.lookouts,
+            Constants.Categories.custom,
+            Constants.Categories.other: return .green
         default: return .green
         }
     }

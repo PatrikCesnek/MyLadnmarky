@@ -83,7 +83,7 @@ struct LandmarkDetailView: View {
                         name: landmark.name
                     )
                 },
-                text: Constants.Strings.navigate
+                text: Constants.Buttons.navigate
             )
         }
         .toolbar(.hidden, for: .navigationBar)

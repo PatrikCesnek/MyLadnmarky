@@ -17,7 +17,7 @@ struct ContentView: View {
             }
             .tabItem {
                 Label(
-                    Constants.Strings.home,
+                    Constants.Buttons.home,
                     systemImage: Constants.SystemImages.house
                 )
             }
@@ -27,7 +27,7 @@ struct ContentView: View {
             }
             .tabItem {
                 Label(
-                    Constants.Strings.map,
+                    Constants.Buttons.map,
                     systemImage: Constants.SystemImages.map
                 )
             }
@@ -37,7 +37,7 @@ struct ContentView: View {
             }
             .tabItem {
                 Label(
-                    Constants.Strings.profile,
+                    Constants.Buttons.profile,
                     systemImage: Constants.SystemImages.person
                 )
             }

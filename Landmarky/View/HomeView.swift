@@ -45,7 +45,7 @@ struct HomeView: View {
             .onAppear {
                 viewModel.fetchLandmarks(modelContext: modelContext)
             }
-            .searchable(text: $viewModel.searchText, prompt: Constants.Strings.search)
+            .searchable(text: $viewModel.searchText, prompt: Constants.Buttons.search)
         }
     }
 }
