@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct HomeCategoryScrollView: View {
-    private let categories: [LandmarkCategory]
+    private let categories: [String]
     private let landmarks: [Landmark]
     
-    init(categories: [LandmarkCategory], landmarks: [Landmark]) {
+    init(categories: [String], landmarks: [Landmark]) {
         self.categories = categories
         self.landmarks = landmarks
     }
@@ -22,7 +22,7 @@ struct HomeCategoryScrollView: View {
             
             if !categoryLandmarks.isEmpty {
                 VStack(alignment: .leading) {
-                    Text(category.localizedName)
+                    Text(category)
                         .font(.headline)
                         .padding(.leading, 10)
                     
@@ -45,17 +45,17 @@ struct HomeCategoryScrollView: View {
         }
     }
     
-    func landmarks(for category: LandmarkCategory) -> [Landmark] {
-        if category == .all {
+    private func landmarks(for category: String) -> [Landmark] {
+        if category == Constants.Strings.allLandmarks {
             return landmarks
         }
-        return landmarks.filter { $0.category == category.localizedName }
+        return landmarks.filter { $0.category == category }
     }
 }
 
 #Preview {
     HomeCategoryScrollView(
-        categories: [.all, .bars, .castles],
+        categories: Mock.MockLandmarks.mockCategories,
         landmarks: Mock.MockLandmarks.data
     )
 }

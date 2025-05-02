@@ -10,9 +10,6 @@ import MapKit
 
 public struct Constants {
     struct Strings {
-//        static let home = "Home".localizedCapitalized
-//        static let map = "Map".localizedCapitalized
-//        static let profile = "Profile".localizedCapitalized
         static let search = "Search".localizedCapitalized
         static let homeTitle = "My landmarks".localizedCapitalized
         static let achievementsTitle = "Achievements".localizedCapitalized

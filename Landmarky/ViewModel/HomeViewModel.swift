@@ -15,8 +15,10 @@ class HomeViewModel {
     var isLoading: Bool = false
     
     private(set) var landmarks: [Landmark] = []
-    var categories: [LandmarkCategory] {
-        LandmarkCategory.allCases
+    var categories: [String] {
+        let predefined = LandmarkCategory.allCases.map { $0.localizedName }
+        let custom = Set(landmarks.map { $0.category }).subtracting(predefined)
+        return predefined + custom.sorted()
     }
 
     @MainActor
@@ -25,10 +27,7 @@ class HomeViewModel {
         isLoading = true
         do {
             let allLandmarks = try modelContext.fetch(descriptor)
-            //TODO: - uncomment following line
             self.landmarks = allLandmarks
-            //TODO: - delete the following line after we don't need it
-            /*self.landmarks = Mock.MockLandmarks.data*/ // Let's leave it here for now for tesing purposes
             isLoading = false
         } catch {
             //TODO: - Use proper error handling

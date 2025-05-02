@@ -10,7 +10,7 @@ import SwiftData
 import PhotosUI
 
 @Observable
-class AddLandmarkViewModel {
+class AddLandmarkViewModel: ObservableObject {
     var landmark: Landmark?
     var title: String = ""
     var categoryString: String = ""
@@ -22,9 +22,13 @@ class AddLandmarkViewModel {
     var latText: String
     var lonText: String
     
-    var category: String = Constants.Categories.other
+    var selectedCategory: String = Constants.Categories.other
     var isCustomCategory: Bool {
-        category == Constants.Categories.custom
+        selectedCategory == Constants.Categories.custom
+    }
+    
+    var category: String {
+        selectedCategory == Constants.Categories.custom ? categoryString : selectedCategory
     }
     
     var isEdit: Bool {
@@ -67,9 +71,9 @@ class AddLandmarkViewModel {
     func handleEdit(landmark: Landmark?) {
         guard let landmark = landmark else { return }
         title = landmark.name
-        categoryString = landmark.category
+        selectedCategory = landmark.category
         description = landmark.landmarkDescription ?? ""
-        category = landmark.category
+        selectedCategory = landmark.category
         selectedImageData = landmark.image
     }
     
@@ -77,12 +81,8 @@ class AddLandmarkViewModel {
     func editLandmark(using context: ModelContext) {
         guard let landmark else { return }
         
-        if categoryString.isEmpty {
-            categoryString = category
-        }
-        
         landmark.name = title
-        landmark.category = categoryString
+        landmark.category = category
         landmark.latitude = HelperFunctions.convertToDouble(latText)
         landmark.longitude = HelperFunctions.convertToDouble(lonText)
         landmark.image = selectedImageData
@@ -100,15 +100,12 @@ class AddLandmarkViewModel {
     
     @MainActor
     func addLandmark(using context: ModelContext) {
-        if categoryString.isEmpty {
-            categoryString = category
-        }
         
         checkHasTitle()
         
         let newLandmark = Landmark(
             name: title,
-            category: categoryString,
+            category: category,
             latitude: HelperFunctions.convertToDouble(latText),
             longitude: HelperFunctions.convertToDouble(lonText),
             image: selectedImageData,

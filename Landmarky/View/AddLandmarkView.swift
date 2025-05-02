@@ -11,7 +11,7 @@ import SwiftUI
 struct AddLandmarkView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @State var viewModel: AddLandmarkViewModel
+    @StateObject var viewModel: AddLandmarkViewModel
 
     @State private var selectedUIImage: UIImage?
     @State private var selectedPhotoItem: PhotosPickerItem?
@@ -24,8 +24,8 @@ struct AddLandmarkView: View {
         landmark: Landmark? = nil,
         isDeleted: Binding<Bool>
     ) {
-        _viewModel = State(
-            initialValue: AddLandmarkViewModel(
+        _viewModel = StateObject(
+            wrappedValue: AddLandmarkViewModel(
                 landmark: landmark,
                 latitude: latitude,
                 longitude: longitude
@@ -58,7 +58,7 @@ struct AddLandmarkView: View {
                     content: {
                         TitleSectionView(
                             title: $viewModel.title,
-                            category: $viewModel.category,
+                            category: $viewModel.selectedCategory,
                             categoryString: $viewModel.categoryString,
                             isCustomCategory: viewModel.isCustomCategory
                         )
