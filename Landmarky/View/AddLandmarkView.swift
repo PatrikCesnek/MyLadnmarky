@@ -39,8 +39,15 @@ struct AddLandmarkView: View {
             if let error = viewModel.error {
                 ErrorView(
                     errorString: error,
-                    retryAction: { dismiss() }
+                    retryAction: {
+                        if viewModel.isEdit {
+                            viewModel.editLandmark(using: modelContext)
+                        } else {
+                            viewModel.addLandmark(using: modelContext)
+                        }
+                    }
                 )
+                .padding(.horizontal, 16)
             } else {
                 Form {
                     Section {

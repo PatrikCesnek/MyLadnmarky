@@ -21,6 +21,7 @@ struct MapView: View {
                         viewModel.displayLandmarks(modelContext: modelContext)
                     }
                 )
+                .padding(.horizontal, 16)
             } else {
                 ZStack {
                     Map() {
