@@ -29,7 +29,7 @@ public struct Constants {
         static let customCategory = Categories.custom + " " + category.lowercased()
         static let choosePhotoSource = "Select Photo Source".localizedCapitalized
         static let createLadnmarks = "Go into the map tab and create your landmarks".localizedCapitalized
-        static let errorTitle = "Ooops, somwthing went wrong...".localizedCapitalized
+        static let errorTitle = "Ooops, something went wrong...".localizedCapitalized
     }
     
     struct Buttons {
