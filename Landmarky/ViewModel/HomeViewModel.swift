@@ -13,6 +13,7 @@ import SwiftUI
 class HomeViewModel {
     var searchText: String = ""
     var isLoading: Bool = false
+    var error: String?
     
     private(set) var landmarks: [Landmark] = []
     var categories: [String] {
@@ -24,6 +25,7 @@ class HomeViewModel {
     @MainActor
     func fetchLandmarks(modelContext: ModelContext) {
         let descriptor = FetchDescriptor<Landmark>(sortBy: [SortDescriptor(\.name)])
+        error = nil
         isLoading = true
         do {
             let allLandmarks = try modelContext.fetch(descriptor)
@@ -32,6 +34,7 @@ class HomeViewModel {
         } catch {
             //TODO: - Use proper error handling
             print("Error fetching landmarks: \(error.localizedDescription)")
+            self.error = error.localizedDescription
             isLoading = false
         }
     }

@@ -36,90 +36,97 @@ struct AddLandmarkView: View {
     
     var body: some View {
         VStack {
-            Form {
-                Section {
-                    HorizontalCenterView {
-                        Button {
-                            viewModel.showPhotoSourceSheet = true
-                        } label: {
-                            LandmarkImageView(
-                                imageData: viewModel.selectedImageData,
-                                cornerRadius: 16,
-                                isCircular: false
-                            )
-                            .frame(width: 180, height: 150)
-                            .foregroundStyle(Color.primary.opacity(0.8))
-                        }
-                    }
-                    .listRowBackground(Color.clear)
-                }
-                
-                Section(
-                    content: {
-                        TitleSectionView(
-                            title: $viewModel.title,
-                            category: $viewModel.selectedCategory,
-                            categoryString: $viewModel.categoryString,
-                            isCustomCategory: viewModel.isCustomCategory
-                        )
-                    },
-                    header: { Text(Constants.Strings.title) }
+            if let error = viewModel.error {
+                ErrorView(
+                    errorString: error,
+                    retryAction: { dismiss() }
                 )
-                
-                Section(
-                    content: {
-                        AddCoordinateSectionView(
-                            latitude: $viewModel.latText,
-                            longitude: $viewModel.lonText
-                        )
-                    },
-                    header: { Text(Constants.Strings.location) }
-                )
-                
-                Section(
-                    content: {
-                        TextEditor(
-                            text: $viewModel.description
-                        )
-                        .frame(minHeight: 100)
-                    },
-                    header: { Text(Constants.Strings.description) }
-                )
-                
-                if viewModel.isEdit {
-                    Section(
-                        content: {
-                            CenterView{
-                                Button(Constants.Buttons.delete){
-                                    viewModel.deleteLandmark(
-                                        using: modelContext,
-                                        landmark: viewModel.landmark
-                                    )
-                                    isDeleted = true
-                                    dismiss()
-                                }
-                                .foregroundStyle(Color.red)
+            } else {
+                Form {
+                    Section {
+                        HorizontalCenterView {
+                            Button {
+                                viewModel.showPhotoSourceSheet = true
+                            } label: {
+                                LandmarkImageView(
+                                    imageData: viewModel.selectedImageData,
+                                    cornerRadius: 16,
+                                    isCircular: false
+                                )
+                                .frame(width: 180, height: 150)
+                                .foregroundStyle(Color.primary.opacity(0.8))
                             }
                         }
-                    )
-                }
-            }
-            .navigationTitle(Text(Constants.Strings.addLandmarkTitle))
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                Button(action: {
-                    if viewModel.isEdit {
-                        viewModel.editLandmark(using: modelContext)
-                    } else {
-                        viewModel.addLandmark(using: modelContext)
+                        .listRowBackground(Color.clear)
                     }
-                    dismiss()
-                }) {
-                    Text(Constants.Buttons.save)
-                        .font(.headline)
+                    
+                    Section(
+                        content: {
+                            TitleSectionView(
+                                title: $viewModel.title,
+                                category: $viewModel.selectedCategory,
+                                categoryString: $viewModel.categoryString,
+                                isCustomCategory: viewModel.isCustomCategory
+                            )
+                        },
+                        header: { Text(Constants.Strings.title) }
+                    )
+                    
+                    Section(
+                        content: {
+                            AddCoordinateSectionView(
+                                latitude: $viewModel.latText,
+                                longitude: $viewModel.lonText
+                            )
+                        },
+                        header: { Text(Constants.Strings.location) }
+                    )
+                    
+                    Section(
+                        content: {
+                            TextEditor(
+                                text: $viewModel.description
+                            )
+                            .frame(minHeight: 100)
+                        },
+                        header: { Text(Constants.Strings.description) }
+                    )
+                    
+                    if viewModel.isEdit {
+                        Section(
+                            content: {
+                                CenterView{
+                                    Button(Constants.Buttons.delete){
+                                        viewModel.deleteLandmark(
+                                            using: modelContext,
+                                            landmark: viewModel.landmark
+                                        )
+                                        isDeleted = true
+                                        dismiss()
+                                    }
+                                    .foregroundStyle(Color.red)
+                                }
+                            }
+                        )
+                    }
                 }
+                .navigationTitle(Text(Constants.Strings.addLandmarkTitle))
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    Button(action: {
+                        if viewModel.isEdit {
+                            viewModel.editLandmark(using: modelContext)
+                        } else {
+                            viewModel.addLandmark(using: modelContext)
+                        }
+                        dismiss()
+                    }) {
+                        Text(Constants.Buttons.save)
+                            .font(.headline)
+                    }
+                }
+                .tint(.green)
             }
-            .tint(.green)
         }
         .confirmationDialog(
             Constants.Strings.choosePhotoSource,

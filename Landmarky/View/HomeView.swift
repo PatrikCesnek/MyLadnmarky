@@ -12,8 +12,15 @@ struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
+        ScrollView {
+            if let error = viewModel.error {
+                ErrorView(
+                    errorString: error,
+                    retryAction: {
+                        viewModel.fetchLandmarks(modelContext: modelContext)
+                    }
+                )
+            } else {
                 LazyVStack(alignment: .leading, spacing: 20) {
                     if viewModel.isLoading {
                         HStack {
@@ -41,15 +48,17 @@ struct HomeView: View {
                 }
                 .padding(.vertical)
             }
-            .navigationTitle(Constants.Strings.homeTitle)
-            .onAppear {
-                viewModel.fetchLandmarks(modelContext: modelContext)
-            }
-            .searchable(text: $viewModel.searchText, prompt: Constants.Buttons.search)
         }
+        .navigationTitle(Constants.Strings.homeTitle)
+        .onAppear {
+            viewModel.fetchLandmarks(modelContext: modelContext)
+        }
+        .searchable(text: $viewModel.searchText, prompt: Constants.Buttons.search)
     }
 }
 
 #Preview {
-    HomeView()
+    NavigationStack {
+        HomeView()
+    }
 }
