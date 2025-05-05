@@ -41,5 +41,7 @@ struct Mock {
             LandmarkCategory.lookouts.localizedName,
             LandmarkCategory.lakes.localizedName
         ]
+        
+        static let mockError = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
     }
 }

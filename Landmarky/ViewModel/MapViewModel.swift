@@ -18,6 +18,7 @@ class MapViewModel {
     var mapStyle: MapStyle = .imagery
     var selectedLandmark: Landmark?
     var isDeleted = false
+    var error: String?
     
     init() {
         if locationManager.authorizationStatus == .authorizedWhenInUse || locationManager.authorizationStatus == .authorizedAlways {
@@ -82,15 +83,14 @@ class MapViewModel {
     @MainActor
     func displayLandmarks(modelContext: ModelContext) {
         let descriptor = FetchDescriptor<Landmark>(sortBy: [SortDescriptor(\.name)])
+        error = nil
         do {
             let allLandmarks = try modelContext.fetch(descriptor)
-            //TODO: - uncomment following line
             self.landmarks = allLandmarks
-            //TODO: - delete the following line after we don't need it
-            /*self.landmarks = Mock.MockLandmarks.data*/ // Let's leave it here for now for tesing purposes
         } catch {
             //TODO: - Use proper error handling
             print("Error fetching landmarks: \(error.localizedDescription)")
+            self.error = error.localizedDescription
         }
     }
 }

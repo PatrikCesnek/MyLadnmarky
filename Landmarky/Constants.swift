@@ -29,6 +29,7 @@ public struct Constants {
         static let customCategory = Categories.custom + " " + category.lowercased()
         static let choosePhotoSource = "Select Photo Source".localizedCapitalized
         static let createLadnmarks = "Go into the map tab and create your landmarks".localizedCapitalized
+        static let errorTitle = "Ooops, something went wrong...".localizedCapitalized
     }
     
     struct Buttons {
@@ -43,6 +44,7 @@ public struct Constants {
         static let cancel = "Cancel".localizedCapitalized
         static let takePhoto = "Take a photo".localizedCapitalized
         static let chooseFromGallery = "Choose from Gallery".localizedCapitalized
+        static let errorRetryButton = "Try Again"
     }
     
     struct Categories {
@@ -77,6 +79,7 @@ public struct Constants {
         static let shopsAnnotation = "bag.fill"
         static let entertainmentAnnotation = "music.note.house.fill"
         static let editButtonImage = "pencil.circle"
+        static let gearXmark = "gear.badge.xmark"
     }
     
     struct DefaultLandmarkLocation {

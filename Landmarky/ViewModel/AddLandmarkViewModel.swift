@@ -39,6 +39,7 @@ class AddLandmarkViewModel: ObservableObject {
     var showPhotoSourceSheet = false
     var showCamera = false
     var showPhotoPicker = false
+    var error: String?
     
     init(
         landmark: Landmark?,
@@ -80,6 +81,7 @@ class AddLandmarkViewModel: ObservableObject {
     @MainActor
     func editLandmark(using context: ModelContext) {
         guard let landmark else { return }
+        error = nil
         
         landmark.name = title
         landmark.category = category
@@ -95,11 +97,13 @@ class AddLandmarkViewModel: ObservableObject {
         } catch {
             //TODO: - use proper error handling
             print("Failed to save landmark: \(error)")
+            self.error = error.localizedDescription
         }
     }
     
     @MainActor
     func addLandmark(using context: ModelContext) {
+        error = nil
         
         checkHasTitle()
         
@@ -121,6 +125,7 @@ class AddLandmarkViewModel: ObservableObject {
         } catch {
             //TODO: - use proper error handling
             print("Failed to save landmark: \(error)")
+            self.error = error.localizedDescription
         }
     }
     

@@ -10,13 +10,16 @@ import SwiftUI
 struct PrimaryButton: View {
     private let action: () -> Void
     private let text: String
+    private let isError: Bool
     
     init(
         action: @escaping () -> Void,
-        text: String
+        text: String,
+        isError: Bool = false
     ) {
         self.action = action
         self.text = text
+        self.isError = isError
     }
     
     var body: some View {
@@ -31,7 +34,7 @@ struct PrimaryButton: View {
         )
         .buttonStyle(.borderedProminent)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .tint(.green)
+        .tint(isError ? .red : .green)
         .padding(8)
     }
 }
