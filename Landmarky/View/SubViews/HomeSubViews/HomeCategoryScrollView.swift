@@ -30,7 +30,11 @@ struct HomeCategoryScrollView: View {
                         HStack(spacing: 15) {
                             ForEach(categoryLandmarks, id: \.id) { landmark in
                                 NavigationLink(
-                                    destination: LandmarkDetailView(landmark: landmark),
+                                    destination: {
+                                        withAnimation {
+                                            LandmarkDetailView(landmark: landmark)
+                                        }
+                                    },
                                     label: {
                                         LandmarkCard(landmark: landmark)
                                             .padding(.vertical, 8)

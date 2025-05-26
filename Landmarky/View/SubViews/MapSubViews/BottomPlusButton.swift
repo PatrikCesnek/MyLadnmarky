@@ -22,7 +22,11 @@ struct BottomPlusButton<Content: View>: View {
                 Spacer()
                 
                 NavigationLink(
-                    destination: destination,
+                    destination: {
+                        withAnimation {
+                            destination()
+                        }
+                    },
                     label: {
                         Image(systemName: Constants.SystemImages.plus)
                             .foregroundColor(.white)

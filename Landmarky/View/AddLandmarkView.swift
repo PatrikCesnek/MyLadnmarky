@@ -81,16 +81,6 @@ struct AddLandmarkView: View {
                     
                     Section(
                         content: {
-                            AddCoordinateSectionView(
-                                latitude: $viewModel.latText,
-                                longitude: $viewModel.lonText
-                            )
-                        },
-                        header: { Text(Constants.Strings.location) }
-                    )
-                    
-                    Section(
-                        content: {
                             TextEditor(
                                 text: $viewModel.description
                             )

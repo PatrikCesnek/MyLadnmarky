@@ -16,7 +16,11 @@ struct BackButtonView: View {
     
     var body: some View {
         Button(
-            action: action,
+            action: {
+                withAnimation {
+                    action()
+                }
+            },
             label: {
                 Image(systemName: Constants.SystemImages.backButton)
                     .resizable()

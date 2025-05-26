@@ -63,7 +63,9 @@ struct MapView: View {
         .navigationDestination(
             item: $viewModel.selectedLandmark,
             destination: { landmark in
-                LandmarkDetailView(landmark: landmark)
+                withAnimation {
+                    LandmarkDetailView(landmark: landmark)
+                }
             }
         )
         .toolbar(.hidden, for: .navigationBar)

@@ -31,7 +31,9 @@ struct LandmarkAnnotation: MapContent {
             LandmarkAnnotationImage(categoryName: landmark.category)
                 .shadow(radius: 5)
                 .onTapGesture {
-                    onTap()
+                    withAnimation {
+                        onTap()
+                    }
                 }
         }
     }

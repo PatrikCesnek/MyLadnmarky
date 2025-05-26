@@ -24,7 +24,11 @@ struct PrimaryButton: View {
     
     var body: some View {
         Button(
-            action: action,
+            action: {
+                withAnimation {
+                    action()
+                }
+            },
             label: {
                 Text(text)
                     .font(.headline)
