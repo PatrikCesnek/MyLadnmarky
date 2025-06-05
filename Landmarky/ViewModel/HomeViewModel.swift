@@ -32,8 +32,6 @@ class HomeViewModel {
             self.landmarks = allLandmarks
             isLoading = false
         } catch {
-            //TODO: - Use proper error handling
-            print("Error fetching landmarks: \(error.localizedDescription)")
             self.error = error.localizedDescription
             isLoading = false
         }

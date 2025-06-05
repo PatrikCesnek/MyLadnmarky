@@ -11,7 +11,10 @@ struct ProfileCellView: View {
     private let text: String?
     private let showDivider: Bool
     
-    init(text: String?, showDivider: Bool) {
+    init(
+        text: String?,
+        showDivider: Bool = true
+    ) {
         self.text = text
         self.showDivider = showDivider
     }

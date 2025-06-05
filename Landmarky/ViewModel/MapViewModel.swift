@@ -26,7 +26,6 @@ class MapViewModel {
         } else {
             requestLocation()
         }
-//        displayLandmarks()
     }
 
     func updateUserLocation(_ location: CLLocationCoordinate2D?) {
@@ -70,8 +69,7 @@ class MapViewModel {
     
     func getLandmarkLocation() -> CLLocationCoordinate2D {
         guard let landmarkLocation = locationManager.location?.coordinate else {
-            //TODO: - Use proper error handling
-            print("❌ User location unavailable")
+            self.error = Constants.Strings.locationError
             return CLLocationCoordinate2D(
                 latitude: Constants.DefaultLandmarkLocation.defaultLat,
                 longitude: Constants.DefaultLandmarkLocation.defaultLon
@@ -88,8 +86,6 @@ class MapViewModel {
             let allLandmarks = try modelContext.fetch(descriptor)
             self.landmarks = allLandmarks
         } catch {
-            //TODO: - Use proper error handling
-            print("Error fetching landmarks: \(error.localizedDescription)")
             self.error = error.localizedDescription
         }
     }
