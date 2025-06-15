@@ -30,7 +30,8 @@ public struct Constants {
         static let choosePhotoSource = "Select Photo Source".localizedCapitalized
         static let createLadnmarks = "Go into the map tab and create your landmarks".localizedCapitalized
         static let errorTitle = "Ooops, something went wrong...".localizedCapitalized
-        static let locationError = "Cannot get your location..."
+        static let locationError = "Cannot get your location...".localizedCapitalized
+        static let enterName = "Please enter your name".localizedCapitalized
     }
     
     struct Buttons {

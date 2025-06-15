@@ -21,7 +21,7 @@ struct ProfileCellView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(text ?? "")
+            Text(text ?? Constants.Strings.enterName)
             if showDivider {
                 Divider()
             }

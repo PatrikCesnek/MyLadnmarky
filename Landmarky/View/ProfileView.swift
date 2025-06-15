@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ProfileView: View {
-    var viewModel = ProfileViewModel()
+    @Environment(\.modelContext) private var modelContext
+    @State private var viewModel = ProfileViewModel()
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -26,10 +27,17 @@ struct ProfileView: View {
                     .listRowBackground(Color.clear)
                     
                     Section(Constants.Buttons.profile) {
-                        VStack(alignment: .leading) {
-                            ProfileCellView(text: user.name, showDivider: true)
-                            ProfileCellView(text: user.lastName, showDivider: true)
-                            ProfileCellView(text: viewModel.landmarkCountText ?? Constants.Strings.noLandmarks, showDivider: false)
+                        if !viewModel.isEditing {
+                            ProfileContextView(
+                                name: user.name,
+                                lastName: user.lastName,
+                                landmarkCount: viewModel.landmarkCountText ?? Constants.Strings.noLandmarks
+                            )
+                        } else {
+                            ProfileEditContextView(
+                                firstName: $viewModel.firstName,
+                                lastName: $viewModel.lastName
+                            )
                         }
                     }
                     
@@ -47,15 +55,16 @@ struct ProfileView: View {
         .navigationTitle(Constants.Buttons.profile)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            //TODO: - Fix this
-//            EditButtonView(
-//                editAction: {},
-//                showImage: true
-//            )
+            ProfileEditButtonView(
+                isEditing: viewModel.isEditing,
+                editAction: { viewModel.editProfile(using: modelContext) }
+            )
         }
     }
 }
 
 #Preview {
-    ProfileView()
+    NavigationStack {
+        ProfileView()
+    }
 }
