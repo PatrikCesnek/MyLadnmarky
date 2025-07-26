@@ -110,19 +110,23 @@ struct AddLandmarkView: View {
                 .navigationTitle(Text(Constants.Strings.addLandmarkTitle))
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    Button(action: {
-                        if viewModel.isEdit {
-                            viewModel.editLandmark(using: modelContext)
-                        } else {
-                            viewModel.addLandmark(using: modelContext)
+                    Button(
+                        action: {
+                            if viewModel.isEdit {
+                                viewModel.editLandmark(using: modelContext)
+                            } else {
+                                viewModel.addLandmark(using: modelContext)
+                            }
+                            dismiss()
+                        },
+                        label: {
+                            Image(systemName: Constants.SystemImages.editSaveButtonImage)
+                                .font(.headline)
                         }
-                        dismiss()
-                    }) {
-                        Text(Constants.Buttons.save)
-                            .font(.headline)
-                    }
+                    )
+                    .buttonStyle(.glassProminent)
+                    .tint(.green)
                 }
-                .tint(.green)
             }
         }
         .confirmationDialog(

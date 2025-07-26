@@ -29,32 +29,6 @@ struct LandmarkDetailView: View {
                 )
                 .frame(height: 300)
                 .background(ignoresSafeAreaEdges: [.top, .horizontal])
-                
-//                HStack {
-//                    BackButtonView(action: { dismiss() })
-//                                            
-//                    Spacer()
-//                    
-//                    EditButtonView(
-//                        destination: {
-//                            AddLandmarkView(
-//                                latitude: HelperFunctions.getCoordinate(.lat, landmark.latitude),
-//                                longitude: HelperFunctions.getCoordinate(.lon, landmark.longitude),
-//                                landmark: landmark,
-//                                isDeleted: $isDeleted
-//                            )
-//                            .onDisappear {
-//                                if isDeleted {
-//                                    dismiss()
-//                                }
-//                            }
-//                        },
-//                        showImage: true
-//                    )
-//                }
-//                .offset(y: -140)
-//                .padding(8)
-                
             }
             
             LandmarkImageView(

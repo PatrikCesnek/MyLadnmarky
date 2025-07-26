@@ -13,43 +13,21 @@ struct ProfileView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            if let user = viewModel.user {
-                Form {
-                    CenterView {
-                        LandmarkImageView(
-                            imageData: nil, // only for now
-                            cornerRadius: 0,
-                            isCircular: true,
-                            isProfile: true
-                        )
-                        .frame(height: 150)
-                    }
-                    .listRowBackground(Color.clear)
-                    
-                    Section(Constants.Buttons.profile) {
-                        if !viewModel.isEditing {
-                            ProfileContextView(
-                                name: user.name,
-                                lastName: user.lastName,
-                                landmarkCount: viewModel.landmarkCountText ?? Constants.Strings.noLandmarks
-                            )
-                        } else {
-                            ProfileEditContextView(
-                                firstName: $viewModel.firstName,
-                                lastName: $viewModel.lastName
-                            )
-                        }
-                    }
-                    
-                    Section(Constants.Strings.achievementsTitle) {
-                        VStack {
-                            ProfileCellView(
-                                text: Constants.Strings.noAchievements,
-                                showDivider: false
-                            )
-                        }
-                    }
-                }
+            if viewModel.user != nil {
+                ProfileContentView(
+                    isEditing: viewModel.isEditing,
+                    landmarkCount: viewModel.landmarkCountText,
+                    shouldShowAchievements: true,
+                    firstName: $viewModel.firstName,
+                    lastName: $viewModel.lastName
+                )
+            } else {
+                ProfileContentView(
+                    isEditing: viewModel.isEditing,
+                    landmarkCount: viewModel.landmarkCountText,
+                    firstName: $viewModel.firstName,
+                    lastName: $viewModel.lastName
+                )
             }
         }
         .navigationTitle(Constants.Buttons.profile)

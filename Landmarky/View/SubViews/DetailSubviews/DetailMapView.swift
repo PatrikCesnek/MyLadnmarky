@@ -55,5 +55,10 @@ struct DetailMapView: View {
 }
 
 #Preview {
-    DetailMapView(latitude: 50.0755, longitude: 14.4378, name: "Lorem", category: LandmarkCategory.lakes.localizedName)
+    DetailMapView(
+        latitude: 50.0755,
+        longitude: 14.4378,
+        name: "Lorem",
+        category: LandmarkCategory.lakes.localizedName
+    )
 }

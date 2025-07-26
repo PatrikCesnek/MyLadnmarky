@@ -84,7 +84,8 @@ class MapViewModel {
         error = nil
         do {
             let allLandmarks = try modelContext.fetch(descriptor)
-            self.landmarks = allLandmarks
+            #warning("Use all landmarks instead of mock data")
+            self.landmarks = Mock.MockLandmarks.data/*allLandmarks*/
         } catch {
             self.error = error.localizedDescription
         }

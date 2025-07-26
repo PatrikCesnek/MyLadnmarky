@@ -58,8 +58,10 @@ struct HomeCategoryScrollView: View {
 }
 
 #Preview {
-    HomeCategoryScrollView(
-        categories: Mock.MockLandmarks.mockCategories,
-        landmarks: Mock.MockLandmarks.data
-    )
+    NavigationStack {
+        HomeCategoryScrollView(
+            categories: Mock.MockLandmarks.mockCategories,
+            landmarks: Mock.MockLandmarks.data
+        )
+    }
 }

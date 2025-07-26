@@ -10,12 +10,12 @@ import SwiftUI
 struct ProfileContextView: View {
     private let name: String
     private let lastName: String?
-    private let landmarkCount: String
+    private let landmarkCount: String?
 
     init(
         name: String,
         lastName: String?,
-        landmarkCount: String
+        landmarkCount: String?
     ) {
         self.name = name
         self.lastName = lastName
