@@ -55,10 +55,18 @@ struct ProfileView: View {
         .navigationTitle(Constants.Buttons.profile)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ProfileEditButtonView(
-                isEditing: viewModel.isEditing,
-                editAction: { viewModel.editProfile(using: modelContext) }
+            Button(
+                action: {
+                    viewModel.editProfile(using: modelContext)
+                },
+                label: {
+                    viewModel.isEditing
+                    ? Image(systemName: Constants.SystemImages.editSaveButtonImage)
+                    : Image(systemName: Constants.SystemImages.editButtonImage)
+                }
             )
+            .tint(.green)
+            .fontWeight(.bold)
         }
     }
 }

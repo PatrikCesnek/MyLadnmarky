@@ -80,8 +80,8 @@ public struct Constants {
         static let barAnnotation = "wineglass.fill"
         static let shopsAnnotation = "bag.fill"
         static let entertainmentAnnotation = "music.note.house.fill"
-        static let editButtonImage = "pencil.circle"
-        static let editSaveButtonImage = "checkmark.circle"
+        static let editButtonImage = /*"pencil.circle"*/ "pencil"
+        static let editSaveButtonImage = /*"checkmark.circle"*/ "checkmark"
         static let gearXmark = "gear.badge.xmark"
     }
     
