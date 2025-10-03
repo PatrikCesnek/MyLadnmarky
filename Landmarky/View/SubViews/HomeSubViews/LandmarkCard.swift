@@ -8,24 +8,34 @@
 import SwiftUI
 
 struct LandmarkCard: View {
-    var landmark: Landmark
-    
+    private var landmark: Landmark
+
+    init(landmark: Landmark) {
+        self.landmark = landmark
+    }
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        ZStack {
             LandmarkImageView(
                 imageData: landmark.image,
                 cornerRadius: 10,
                 isCircular: false
             )
             .foregroundStyle(Color.gray)
-            .frame(width: 155, height: 155)
-            
-            Text(landmark.name)
-                .font(.caption)
-                .fontWeight(.semibold)
-                .lineLimit(1)
+            .frame(width: 200, height: 155)
+
+            VStack {
+                Spacer()
+
+                Text(landmark.name)
+                    .fontWeight(.bold)
+                    .lineLimit(1)
+                    .padding()
+                    .foregroundStyle(.white)
+                    .shadow(radius: 10)
+            }
         }
-        .frame(height: 185)
+        .frame(height: 155)
     }
 }
 

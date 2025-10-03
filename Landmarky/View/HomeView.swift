@@ -48,7 +48,6 @@ struct HomeView: View {
                             .foregroundStyle(.primary)
                         }
                     }
-                    .padding(.vertical)
                 }
                 .navigationTitle(Constants.Strings.homeTitle)
                 .onAppear {

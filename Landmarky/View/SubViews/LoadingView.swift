@@ -24,7 +24,7 @@ struct LoadingView: View {
                     .shadow(radius: 10)
                 
                 Circle()
-                    .trim(from: 0, to: 0.2)
+                    .trim(from: 0, to: 0.5)
                     .stroke(
                         .green,
                         style: StrokeStyle(

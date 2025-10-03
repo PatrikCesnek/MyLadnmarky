@@ -11,13 +11,14 @@ import SwiftUI
 struct LandmarkDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var isDeleted = false
-    
+    @State private var isShowingEditView = false
+
     private let landmark: Landmark
-    
+
     init(landmark: Landmark) {
         self.landmark = landmark
     }
-    
+
     var body: some View {
         VStack {
             ZStack {
@@ -30,7 +31,7 @@ struct LandmarkDetailView: View {
                 .frame(height: 300)
                 .background(ignoresSafeAreaEdges: [.top, .horizontal])
             }
-            
+
             LandmarkImageView(
                 imageData: landmark.image,
                 cornerRadius: 0,
@@ -38,18 +39,18 @@ struct LandmarkDetailView: View {
             )
             .offset(y: -130)
             .padding(.bottom, -130)
-            .frame(width: 300, height: 100)
+            .frame(width: 250, height: 100)
             .shadow(radius: 8)
-            
+
             LandmarkDetailInfoView(
                 title: landmark.name,
                 category: landmark.category,
                 description: landmark.landmarkDescription
             )
             .padding(16)
-            
+
             Spacer()
-            
+
             PrimaryButton(
                 action: {
                     NavigationHelper.startNavigation(
@@ -60,26 +61,35 @@ struct LandmarkDetailView: View {
                 text: Constants.Buttons.navigate
             )
         }
-//        .toolbar(.hidden, for: .navigationBar)
         .toolbar {
             ToolbarItem(
-                placement: .topBarTrailing,
-                content: {
-                    NavigationLink(
-                        destination: AddLandmarkView(
-                            latitude: HelperFunctions.getCoordinate(.lat, landmark.latitude),
-                            longitude: HelperFunctions.getCoordinate(.lon, landmark.longitude),
-                            landmark: landmark,
-                            isDeleted: $isDeleted
-                        ),
-                        label: {
-                            Image(systemName: Constants.SystemImages.editButtonImage
-                            )
-                            .foregroundStyle(Color.green)
-                        }
-                    )
+                placement: .topBarTrailing
+            ) {
+                Button(action: {
+                    isShowingEditView = true
+                }) {
+                    Image(systemName: Constants.SystemImages.editButtonImage)
+                        .font(.headline)
+                        .foregroundStyle(Color.green)
                 }
-            )
+                .buttonStyle(.borderless)
+                .accessibilityLabel(Text(Constants.Buttons.edit))
+            }
+        }
+        .fullScreenCover(isPresented: $isShowingEditView) {
+            NavigationStack {
+                AddLandmarkView(
+                    latitude: HelperFunctions.getCoordinate(.lat, landmark.latitude),
+                    longitude: HelperFunctions.getCoordinate(.lon, landmark.longitude),
+                    landmark: landmark,
+                    isDeleted: $isDeleted
+                )
+            }
+        }
+        .onChange(of: isDeleted) { _, newValue in
+            if newValue {
+                dismiss()
+            }
         }
     }
 }
