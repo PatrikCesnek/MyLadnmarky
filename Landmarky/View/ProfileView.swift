@@ -10,25 +10,19 @@ import SwiftUI
 struct ProfileView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var viewModel = ProfileViewModel()
-    
+
     var body: some View {
         VStack(alignment: .leading) {
-            if viewModel.user != nil {
-                ProfileContentView(
-                    isEditing: viewModel.isEditing,
-                    landmarkCount: viewModel.landmarkCountText,
-                    shouldShowAchievements: true,
-                    firstName: $viewModel.firstName,
-                    lastName: $viewModel.lastName
-                )
-            } else {
-                ProfileContentView(
-                    isEditing: viewModel.isEditing,
-                    landmarkCount: viewModel.landmarkCountText,
-                    firstName: $viewModel.firstName,
-                    lastName: $viewModel.lastName
-                )
-            }
+            ProfileContentView(
+                isEditing: viewModel.isEditing,
+                landmarkCount: viewModel.landmarkCountText,
+                shouldShowAchievements: viewModel.user != nil,
+                firstName: $viewModel.firstName,
+                lastName: $viewModel.lastName
+            )
+        }
+        .onAppear {
+            viewModel.loadProfile(using: modelContext)
         }
         .navigationTitle(Constants.Buttons.profile)
         .navigationBarTitleDisplayMode(.inline)

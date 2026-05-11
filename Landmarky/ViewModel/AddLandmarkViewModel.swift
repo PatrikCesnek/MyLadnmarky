@@ -10,37 +10,38 @@ import SwiftData
 import PhotosUI
 
 @Observable
-class AddLandmarkViewModel: ObservableObject {
+class AddLandmarkViewModel {
     var landmark: Landmark?
     var title: String = ""
     var categoryString: String = ""
     var description: String = ""
-    
+
     var latitude: Double
     var longitude: Double
-    
+
     var latText: String
     var lonText: String
-    
+
     var selectedCategory: String = Constants.Categories.other
     var isCustomCategory: Bool {
         selectedCategory == Constants.Categories.custom
     }
-    
+
     var category: String {
         selectedCategory == Constants.Categories.custom ? categoryString : selectedCategory
     }
-    
+
     var isEdit: Bool {
         landmark != nil
     }
-    
+
     var selectedImageData: Data?
     var showPhotoSourceSheet = false
     var showCamera = false
     var showPhotoPicker = false
     var error: String?
-    
+    var didSave = false
+
     init(
         landmark: Landmark?,
         latitude: Double,
@@ -51,15 +52,15 @@ class AddLandmarkViewModel: ObservableObject {
         self.longitude = longitude
         self.latText = String(latitude)
         self.lonText = String(longitude)
-        
+
         handleEdit(landmark: landmark)
     }
-    
+
     func handlePickedImage(_ image: UIImage?) {
         guard let image else { return }
         self.selectedImageData = image.jpegData(compressionQuality: 0.8)
     }
-    
+
     @MainActor
     func loadPhoto(from item: PhotosPickerItem?) async {
         guard let item else { return }
@@ -68,45 +69,43 @@ class AddLandmarkViewModel: ObservableObject {
             handlePickedImage(image)
         }
     }
-    
+
     func handleEdit(landmark: Landmark?) {
-        guard let landmark = landmark else { return }
+        guard let landmark else { return }
         title = landmark.name
         selectedCategory = landmark.category
         description = landmark.landmarkDescription ?? ""
-        selectedCategory = landmark.category
         selectedImageData = landmark.image
     }
-    
+
     @MainActor
     func editLandmark(using context: ModelContext) {
         guard let landmark else { return }
         error = nil
-        
+
         landmark.name = title
         landmark.category = category
         landmark.latitude = HelperFunctions.convertToDouble(latText)
         landmark.longitude = HelperFunctions.convertToDouble(lonText)
         landmark.image = selectedImageData
         landmark.landmarkDescription = description
-                
+
         do {
             try context.save()
-            //TODO: - show success alert
-            print("Landmark saved successfully!")
+            didSave = true
         } catch {
-            //TODO: - use proper error handling
-            print("Failed to save landmark: \(error)")
             self.error = error.localizedDescription
         }
     }
-    
+
     @MainActor
     func addLandmark(using context: ModelContext) {
         error = nil
-        
-        checkHasTitle()
-        
+
+        if title.isEmpty {
+            title = Constants.Strings.unknownPlace
+        }
+
         let newLandmark = Landmark(
             name: title,
             category: category,
@@ -115,28 +114,18 @@ class AddLandmarkViewModel: ObservableObject {
             image: selectedImageData,
             landmarkDescription: description
         )
-        
+
         context.insert(newLandmark)
-        
+
         do {
             try context.save()
-            //TODO: - show success alert
-            print("Landmark saved successfully!")
+            didSave = true
         } catch {
-            //TODO: - use proper error handling
-            print("Failed to save landmark: \(error)")
             self.error = error.localizedDescription
         }
     }
-    
+
     func deleteLandmark(using context: ModelContext, landmark: Landmark?) {
         HelperFunctions.deleteLandmark(using: context, landmark: landmark)
-    }
-    
-    private func checkHasTitle() {
-        if title.isEmpty {
-            //TODO: - error handling empty title
-            title = Constants.Strings.unknownPlace
-        }
     }
 }

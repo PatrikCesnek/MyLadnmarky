@@ -83,9 +83,7 @@ class MapViewModel {
         let descriptor = FetchDescriptor<Landmark>(sortBy: [SortDescriptor(\.name)])
         error = nil
         do {
-            let allLandmarks = try modelContext.fetch(descriptor)
-            #warning("Use all landmarks instead of mock data")
-            self.landmarks = Mock.MockLandmarks.data/*allLandmarks*/
+            self.landmarks = try modelContext.fetch(descriptor)
         } catch {
             self.error = error.localizedDescription
         }

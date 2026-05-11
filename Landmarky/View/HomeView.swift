@@ -38,7 +38,7 @@ struct HomeView: View {
                         } else if viewModel.landmarks.isEmpty {
                             EmptyView(
                                 title: Constants.Strings.noLandmarks,
-                                subtitle: Constants.Strings.createLadnmarks
+                                subtitle: Constants.Strings.createLandmarks
                             )
                         } else {
                             HomeCategoryScrollView(

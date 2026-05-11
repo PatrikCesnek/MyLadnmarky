@@ -28,9 +28,7 @@ class HomeViewModel {
         error = nil
         isLoading = true
         do {
-            let allLandmarks = try modelContext.fetch(descriptor)
-            #warning("Use all landmarks instead of mock data")
-            self.landmarks = Mock.MockLandmarks.data/*allLandmarks*/
+            self.landmarks = try modelContext.fetch(descriptor)
             isLoading = false
         } catch {
             self.error = error.localizedDescription

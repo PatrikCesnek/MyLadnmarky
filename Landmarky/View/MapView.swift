@@ -45,11 +45,11 @@ struct MapView: View {
                     )
                     
                     BottomPlusButton {
+                        let location = viewModel.getLandmarkLocation()
                         AddLandmarkView(
-                            latitude: viewModel.getLandmarkLocation().latitude,
-                            longitude: viewModel.getLandmarkLocation().longitude,
+                            latitude: location.latitude,
+                            longitude: location.longitude,
                             isDeleted: $viewModel.isDeleted
-                            //TODO: - Get rid of isDeleted when I don't need it
                         )
                     }
                     .padding(.horizontal, 8)
@@ -63,9 +63,7 @@ struct MapView: View {
         .navigationDestination(
             item: $viewModel.selectedLandmark,
             destination: { landmark in
-                withAnimation {
-                    LandmarkDetailView(landmark: landmark)
-                }
+                LandmarkDetailView(landmark: landmark)
             }
         )
         .toolbar(.hidden, for: .navigationBar)

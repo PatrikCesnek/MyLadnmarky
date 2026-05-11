@@ -13,12 +13,10 @@ final class Profile {
     var id = UUID()
     var name: String
     var lastName: String?
-    var landmarkCount: Int = 0
-    
-    init(id: UUID = UUID(), name: String, lastName: String? = nil, landmarkCount: Int = 0) {
+
+    init(id: UUID = UUID(), name: String, lastName: String? = nil) {
         self.id = id
         self.name = name
         self.lastName = lastName
-        self.landmarkCount = landmarkCount
     }
 }
