@@ -12,15 +12,18 @@ struct DetailMapView: View {
     private let latitude: Double
     private let longitude: Double
     private let name: String
+    private let category: String?
     
     init(
         latitude: Double,
         longitude: Double,
-        name: String
+        name: String,
+        category: String?
     ) {
         self.latitude = latitude
         self.longitude = longitude
         self.name = name
+        self.category = category
     }
     
     var body: some View {
@@ -38,21 +41,24 @@ struct DetailMapView: View {
                 )
             )
         ) {
-            Annotation(
-                name,
-                coordinate: CLLocationCoordinate2D(
+            LandmarkAnnotation(
+                landmark: Landmark(
+                    name: name,
+                    category: category ?? LandmarkCategory.all.localizedName,
                     latitude: latitude,
                     longitude: longitude
-                )
-            ) {
-                Image(systemName: Constants.SystemImages.mappin)
-                    .foregroundColor(.green)
-                    .font(.title)
-            }
+                ),
+                ontap: {}
+            )
         }
     }
 }
 
 #Preview {
-    DetailMapView(latitude: 50.0755, longitude: 14.4378, name: "Lorem")
+    DetailMapView(
+        latitude: 50.0755,
+        longitude: 14.4378,
+        name: "Lorem",
+        category: LandmarkCategory.lakes.localizedName
+    )
 }

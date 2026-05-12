@@ -24,7 +24,7 @@ struct LoadingView: View {
                     .shadow(radius: 10)
                 
                 Circle()
-                    .trim(from: 0, to: 0.2)
+                    .trim(from: 0, to: 0.5)
                     .stroke(
                         .green,
                         style: StrokeStyle(
@@ -33,7 +33,11 @@ struct LoadingView: View {
                         )
                     )
                     .rotationEffect(Angle(degrees: isLoading ? 360 : 0))
-                    .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false), value: self.isLoading)
+                    .animation(
+                        Animation.linear(duration: 1)
+                            .repeatForever(autoreverses: false),
+                        value: self.isLoading
+                    )
                     .onAppear() {
                         self.isLoading = true
                     }

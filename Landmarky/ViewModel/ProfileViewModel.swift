@@ -7,19 +7,73 @@
 
 import SwiftUI
 import SwiftData
-import Combine
 
 @Observable
 class ProfileViewModel {
     var user: Profile?
+    var firstName: String = ""
+    var lastName: String?
     var alertText: String?
-    var landmarkCount: Int?
+    var isEditing: Bool = false
+    var landmarkCount: Int = 0
     var landmarkCountText: String? {
-        landmarkCount.map { "\(Constants.Strings.landmarkCountString1) \($0) " + Constants.Strings.landmarkCountString2 }
+        "\(Constants.Strings.landmarkCountString1) \(landmarkCount) " + Constants.Strings.landmarkCountString2
     }
-    
-    func createMockUser() {
-        user = Profile(id: UUID(), name: "John", lastName: "Doe", landmarkCount: 2)
-        landmarkCount = user?.landmarkCount
+
+    @MainActor
+    func loadProfile(using context: ModelContext) {
+        let descriptor = FetchDescriptor<Profile>()
+        if let existing = try? context.fetch(descriptor).first {
+            user = existing
+            firstName = existing.name
+            lastName = existing.lastName
+        } else {
+            isEditing = true
+        }
+
+        let landmarkDescriptor = FetchDescriptor<Landmark>()
+        landmarkCount = (try? context.fetchCount(landmarkDescriptor)) ?? 0
+    }
+
+    @MainActor
+    func editProfile(using context: ModelContext) {
+        if isEditing && !saveProfile(using: context) {
+            return
+        }
+
+        isEditing.toggle()
+    }
+
+    @MainActor
+    @discardableResult
+    private func saveProfile(using context: ModelContext) -> Bool {
+        firstName = firstName.trimmingCharacters(in: .whitespacesAndNewlines)
+        lastName = lastName?.trimmingCharacters(in: .whitespacesAndNewlines)
+        if lastName?.isEmpty == true {
+            lastName = nil
+        }
+
+        guard !firstName.isEmpty else {
+            alertText = Constants.Strings.enterName
+            return false
+        }
+
+        if let user {
+            user.name = firstName
+            user.lastName = lastName
+        } else {
+            let newProfile = Profile(name: firstName, lastName: lastName)
+            context.insert(newProfile)
+            user = newProfile
+        }
+
+        do {
+            try context.save()
+            alertText = nil
+            return true
+        } catch {
+            alertText = error.localizedDescription
+            return false
+        }
     }
 }

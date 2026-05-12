@@ -9,45 +9,63 @@ import SwiftUI
 import MapKit
 
 struct MapView: View {
-    var viewModel = MapViewModel()
+    @State var viewModel = MapViewModel()
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
-        ZStack {
-            Map(initialPosition: viewModel.cameraPosition) {
-                UserAnnotation()
-                
-                ForEach(viewModel.landmarks, id: \.id) { landmark in
-                    Annotation(
-                        landmark.name,
-                        coordinate: CLLocationCoordinate2D(
-                            latitude: landmark.latitude ?? Constants.DefaultLandmarkLocation.defaultLat,
-                            longitude: landmark.longitude ?? Constants.DefaultLandmarkLocation.defaultLon
-                        )
-                    ) {
-                        Image(systemName: Constants.SystemImages.mappin)
-                            .foregroundColor(.green)
-                            .font(.title)
+        Group {
+            if let error = viewModel.error {
+                ErrorView(
+                    errorString: error,
+                    retryAction: {
+                        viewModel.displayLandmarks(modelContext: modelContext)
                     }
+                )
+                .padding(.horizontal, 16)
+            } else {
+                ZStack {
+                    Map() {
+                        UserAnnotation()
+                        
+                        ForEach(viewModel.validLandmarks, id: \.id) { landmark in
+                            LandmarkAnnotation(landmark: landmark) {
+                                viewModel.selectedLandmark = landmark
+                            }
+                        }
+                    }
+                    .mapControls {
+                        MapUserLocationButton()
+                        MapCompass()
+        //                MapPitchToggle() unfortunately only works with elevation for mapStyle and that breaks loading, so for now it has to be commented out
+        //                MapPitchToggle()
+                        MapScaleView()
+                    }
+                    .mapStyle(viewModel.mapStyle)
+                    
+                    BottomPlusButton {
+                        let location = viewModel.getLandmarkLocation()
+                        AddLandmarkView(
+                            latitude: location.latitude,
+                            longitude: location.longitude,
+                            isDeleted: $viewModel.isDeleted
+                        )
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.bottom, 24)
                 }
             }
-            .mapControls {
-                MapUserLocationButton()
-                MapCompass()
-                MapPitchToggle()
-                MapScaleView()
-            }
-            .mapStyle(viewModel.changeMapStyle(.imagery(elevation: .realistic)))
-            
-            BottomPlusButton {
-                AddLandmarkView(
-                    latitude: viewModel.getLandmarkLocation().latitude,
-                    longitude: viewModel.getLandmarkLocation().longitude
-                )
-            }
-            .padding(.horizontal, 8)
-            .padding(.bottom, 24)
         }
+        .onAppear {
+            viewModel.displayLandmarks(modelContext: modelContext)
+        }
+        .navigationDestination(
+            item: $viewModel.selectedLandmark,
+            destination: { landmark in
+                LandmarkDetailView(landmark: landmark)
+            }
+        )
         .toolbar(.hidden, for: .navigationBar)
+        .tint(.green)
     }
 }
 

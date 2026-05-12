@@ -8,41 +8,39 @@
 import SwiftUI
 
 struct LandmarkCard: View {
-    var landmark: Landmark
-    
+    private var landmark: Landmark
+
+    init(landmark: Landmark) {
+        self.landmark = landmark
+    }
+
     var body: some View {
-        VStack {
-            if let image = landmark.landmarkImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 140, height: 120)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-            } else {
-                Image(systemName: "photo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 140, height: 120)
-                    .foregroundColor(.gray)
+        ZStack {
+            LandmarkImageView(
+                imageData: landmark.image,
+                cornerRadius: 10,
+                isCircular: false
+            )
+            .foregroundStyle(Color.gray)
+            .frame(width: 200, height: 155)
+
+            VStack {
+                Spacer()
+
+                Text(landmark.name)
+                    .fontWeight(.bold)
+                    .lineLimit(1)
+                    .padding()
+                    .foregroundStyle(.white)
+                    .shadow(radius: 10)
             }
-            
-            Text(landmark.name)
-                .font(.subheadline)
-                .lineLimit(1)
         }
-        .frame(width: 140)
-        .padding()
-        .background(Color(.systemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 15))
-        .shadow(radius: 3)
+        .frame(height: 155)
     }
 }
 
 #Preview {
     LandmarkCard(
-        landmark: Landmark(
-            name: "New place",
-            category: "Lakes"
-        )
+        landmark: Mock.MockLandmarks.data[0]
     )
 }

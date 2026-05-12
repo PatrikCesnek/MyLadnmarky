@@ -43,3 +43,8 @@ final class Landmark {
     }
 }
 
+extension Landmark: Identifiable, Equatable {
+    static func == (lhs: Landmark, rhs: Landmark) -> Bool {
+        lhs.id == rhs.id
+    }
+}

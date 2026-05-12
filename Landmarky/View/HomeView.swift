@@ -12,41 +12,55 @@ struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 20) {
-                    if viewModel.isLoading {
-                        HStack {
-                            Spacer()
-                            
-                            LoadingView(lineWidth: 16)
-                                .frame(width: 200)
-                            
-                            Spacer()
-                        }
-                        .padding(16)
+        Group {
+            if let error = viewModel.error {
+                ErrorView(
+                    errorString: error,
+                    retryAction: {
+                        viewModel.fetchLandmarks(modelContext: modelContext)
+                    }
+                )
+                .padding(.horizontal, 16)
+            } else {
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 20) {
+                        if viewModel.isLoading {
+                            HStack {
+                                Spacer()
+                                
+                                LoadingView(lineWidth: 16)
+                                    .frame(width: 200)
                         
-                    } else if viewModel.landmarks.isEmpty {
-                        EmptyView(title: Constants.Strings.noLandmarks, subtitle: nil)
-                    } else {
-                        HomeCategoryScrollView(
-                            categories: viewModel.categories,
-                            landmarks: viewModel.landmarks
-                        )
-                        .foregroundStyle(.primary)
+                                Spacer()
+                            }
+                            .padding(16)
+                            
+                        } else if viewModel.landmarks.isEmpty {
+                            EmptyView(
+                                title: Constants.Strings.noLandmarks,
+                                subtitle: Constants.Strings.createLandmarks
+                            )
+                        } else {
+                            HomeCategoryScrollView(
+                                categories: viewModel.categories,
+                                landmarks: viewModel.filteredLandmarks()
+                            )
+                            .foregroundStyle(.primary)
+                        }
                     }
                 }
-                .padding(.vertical)
+                .navigationTitle(Constants.Strings.homeTitle)
+                .onAppear {
+                    viewModel.fetchLandmarks(modelContext: modelContext)
+                }
+                .searchable(text: $viewModel.searchText, prompt: Constants.Buttons.search)
             }
-            .navigationTitle(Constants.Strings.homeTitle)
-            .onAppear {
-                viewModel.fetchLandmarks(modelContext: modelContext)
-            }
-            .searchable(text: $viewModel.searchText, prompt: Constants.Strings.search)
         }
     }
 }
 
 #Preview {
-    HomeView()
+    NavigationStack {
+        HomeView()
+    }
 }

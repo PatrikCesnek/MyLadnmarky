@@ -8,49 +8,56 @@
 import SwiftUI
 
 struct ProfileView: View {
-    var viewModel = ProfileViewModel()
+    @Environment(\.modelContext) private var modelContext
+    @State private var viewModel = ProfileViewModel()
 
-    
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading) {
-                if let user = viewModel.user {
-                    Form {
-                        Section(Constants.Strings.profile) {
-                            VStack(alignment: .leading) {
-                                ProfileCellView(text: user.name, showDivider: true)
-                                ProfileCellView(text: user.lastName, showDivider: true)
-                                ProfileCellView(text: viewModel.landmarkCountText ?? Constants.Strings.noLandmarks, showDivider: false)
-                            }
-                        }
-                        
-                        Section(Constants.Strings.achievementsTitle) {
-                            VStack {
-                                ProfileCellView(
-                                    text: Constants.Strings.noAchievements,
-                                    showDivider: false
-                                )
-                            }
-                        }
-                    }
+        VStack(alignment: .leading) {
+            ProfileContentView(
+                isEditing: viewModel.isEditing,
+                landmarkCount: viewModel.landmarkCountText,
+                shouldShowAchievements: viewModel.user != nil,
+                firstName: $viewModel.firstName,
+                lastName: $viewModel.lastName
+            )
+        }
+        .onAppear {
+            viewModel.loadProfile(using: modelContext)
+        }
+        .alert(
+            Constants.Strings.errorTitle,
+            isPresented: Binding(
+                get: { viewModel.alertText != nil },
+                set: { isPresented in
+                    if !isPresented { viewModel.alertText = nil }
                 }
-            }
-            .navigationTitle(Constants.Strings.profile)
-            .toolbar {
-                Button(
-                    action: {},
-                    label: {
-                        Text(Constants.Strings.edit)
-                    }
-                )
-            }
-            .onAppear {
-                viewModel.createMockUser()
-            }
+            )
+        ) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(viewModel.alertText ?? "")
+        }
+        .navigationTitle(Constants.Buttons.profile)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            Button(
+                action: {
+                    viewModel.editProfile(using: modelContext)
+                },
+                label: {
+                    viewModel.isEditing
+                    ? Image(systemName: Constants.SystemImages.editSaveButtonImage)
+                    : Image(systemName: Constants.SystemImages.editButtonImage)
+                }
+            )
+            .tint(.green)
+            .fontWeight(.bold)
         }
     }
 }
 
 #Preview {
-    ProfileView()
+    NavigationStack {
+        ProfileView()
+    }
 }

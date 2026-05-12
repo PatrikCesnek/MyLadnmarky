@@ -13,26 +13,25 @@ import SwiftUI
 class HomeViewModel {
     var searchText: String = ""
     var isLoading: Bool = false
+    var error: String?
     
     private(set) var landmarks: [Landmark] = []
-    var categories: [LandmarkCategory] {
-        LandmarkCategory.allCases
+    var categories: [String] {
+        let predefined = LandmarkCategory.allCases.map { $0.localizedName }
+        let custom = Set(landmarks.map { $0.category }).subtracting(predefined)
+        return predefined + custom.sorted()
     }
 
     @MainActor
     func fetchLandmarks(modelContext: ModelContext) {
         let descriptor = FetchDescriptor<Landmark>(sortBy: [SortDescriptor(\.name)])
+        error = nil
         isLoading = true
         do {
-            let allLandmarks = try modelContext.fetch(descriptor)
-            //TODO: - uncomment following line
-            //                self.landmarks = allLandmarks
-            //TODO: - delete the following lines after we don't need it
-            print(allLandmarks)
-            self.landmarks = Mock.MockLandmarks.data // Let's leave it here for now for tesing purposes
+            self.landmarks = try modelContext.fetch(descriptor)
             isLoading = false
         } catch {
-            print("Error fetching landmarks: \(error.localizedDescription)")
+            self.error = error.localizedDescription
             isLoading = false
         }
     }
@@ -43,5 +42,13 @@ class HomeViewModel {
             (searchText.isEmpty || landmark.name.localizedCaseInsensitiveContains(searchText))
         }
         return filteredLandmarks
+    }
+    
+    func filteredLandmarks() -> [Landmark] {
+        landmarks.filter { landmark in
+            searchText.isEmpty ||
+            landmark.name.localizedCaseInsensitiveContains(searchText) ||
+            landmark.category.localizedCaseInsensitiveContains(searchText)
+        }
     }
 }

@@ -12,14 +12,17 @@ import SwiftData
 struct LandmarkyApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([Landmark.self, Profile.self])
-        let container = try! ModelContainer(for: schema)
+        let container = try? ModelContainer(for: schema)
+        guard let container = container else {
+            fatalError(#function + ": Failed to create ModelContainer")
+        }
         return container
     }()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-//                .tint(.green)
+                .tint(.green)
         }
         .modelContainer(sharedModelContainer)
     }

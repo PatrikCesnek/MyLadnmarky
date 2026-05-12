@@ -9,28 +9,38 @@ import SwiftUI
 import MapKit
 import SwiftData
 
+@MainActor
 @Observable
 class MapViewModel {
     var landmarks: [Landmark] = []
     var cameraPosition: MapCameraPosition = .automatic
     private let locationManager = CLLocationManager()
-    var mapStyle: MapStyle = .imagery(elevation: .realistic)
+    var mapStyle: MapStyle = .imagery
+    var selectedLandmark: Landmark?
+    var isDeleted = false
+    var error: String?
     
     init() {
-        requestLocation()
+        if locationManager.authorizationStatus == .authorizedWhenInUse || locationManager.authorizationStatus == .authorizedAlways {
+            updateUserLocation(locationManager.location?.coordinate)
+        } else {
+            requestLocation()
+        }
     }
 
     func updateUserLocation(_ location: CLLocationCoordinate2D?) {
         guard let location = location else {
             cameraPosition = .region(MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: 50.0755, longitude: 14.4378), // Default to Prague
-                span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                center: Constants.DefaultLandmarkLocation.defaultLocation,
+                latitudinalMeters: 1000,
+                longitudinalMeters: 1000
             ))
             return
         }
         cameraPosition = .region(MKCoordinateRegion(
             center: location,
-            span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            latitudinalMeters: 1000,
+            longitudinalMeters: 1000
         ))
     }
 
@@ -44,6 +54,8 @@ class MapViewModel {
     func requestLocation() {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.activityType = .fitness
         
         if let userLocation = locationManager.location?.coordinate {
             updateUserLocation(userLocation)
@@ -56,28 +68,24 @@ class MapViewModel {
     }
     
     func getLandmarkLocation() -> CLLocationCoordinate2D {
-        guard let ladnmarkLocation = locationManager.location?.coordinate else {
-            print("❌ User location unavailable")
+        guard let landmarkLocation = locationManager.location?.coordinate else {
+            self.error = Constants.Strings.locationError
             return CLLocationCoordinate2D(
                 latitude: Constants.DefaultLandmarkLocation.defaultLat,
                 longitude: Constants.DefaultLandmarkLocation.defaultLon
             )
         }
-        
-        return ladnmarkLocation
+        return landmarkLocation
     }
     
-//    func addLandmark(name: String, category: String) {
-//        let location = getLandmarkLocation()
-//        
-//        let newLandmark = Landmark(
-//            name: name,
-//            category: category,
-//            latitude: location.latitude,
-//            longitude: location.longitude
-//        )
-//        
-//        landmarks.append(newLandmark)
-//        print(landmarks)
-//    }
+    @MainActor
+    func displayLandmarks(modelContext: ModelContext) {
+        let descriptor = FetchDescriptor<Landmark>(sortBy: [SortDescriptor(\.name)])
+        error = nil
+        do {
+            self.landmarks = try modelContext.fetch(descriptor)
+        } catch {
+            self.error = error.localizedDescription
+        }
+    }
 }
