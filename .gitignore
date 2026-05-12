@@ -1,0 +1,111 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.fseventsd
+
+# Xcode user and machine-local state
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+*.moved-aside
+DerivedData/
+build/
+Build/
+*.ipa
+*.dSYM
+*.dSYM.zip
+*.xcarchive
+*.xcresult
+*.resultbundle
+*.hmap
+*.ipa
+*.app.dSYM
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# CocoaPods / Carthage / dependency managers
+Pods/
+Cartfile.resolved
+Carthage/Build/
+SourcePackages/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output/
+fastlane/readme.md
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Code coverage and profiling
+*.profraw
+*.profdata
+coverage/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*.orig
+*.rej
+*.pid
+
+# Archives and generated exports
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.mobileprovision
+*.cer
+*.p12
+*.key
+*.pem
+
+# AI assistants and local agent state
+.claude/
+.codex/
+.cursor/
+.continue/
+.aider*
+.aider.chat.history.md
+.aider.input.history
+.aider.tags.cache.v4/
+.windsurf/
+.qodo/
+.tabnine/
+.github/copilot/
+AGENTS.local.md
+CLAUDE.local.md
+.ai/
+.agent/
+.agents/cache/
+.agents/tmp/
+.agents/logs/
+.agents/memory/
+.ruflo/
+
+# Editor folders
+.vscode/
+.idea/

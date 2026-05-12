@@ -31,8 +31,12 @@ public struct Constants {
         static let createLandmarks = String(localized: "Go into the map tab and create your landmarks")
         static let errorTitle = String(localized: "Ooops, something went wrong...")
         static let locationError = String(localized: "Cannot get your location...")
+        static let firstName = String(localized: "First name")
+        static let lastName = String(localized: "Last name")
         static let enterName = String(localized: "Please enter your name")
         static let landmarkSaved = String(localized: "Landmark saved!")
+        static let invalidCoordinates = String(localized: "Please enter valid coordinates.")
+        static let invalidCustomCategory = String(localized: "Please enter a custom category.")
     }
 
     struct Buttons {

@@ -28,7 +28,9 @@ class AddLandmarkViewModel {
     }
 
     var category: String {
-        selectedCategory == Constants.Categories.custom ? categoryString : selectedCategory
+        selectedCategory == Constants.Categories.custom
+        ? categoryString.trimmingCharacters(in: .whitespacesAndNewlines)
+        : selectedCategory
     }
 
     var isEdit: Bool {
@@ -41,6 +43,25 @@ class AddLandmarkViewModel {
     var showPhotoPicker = false
     var error: String?
     var didSave = false
+
+    private var validatedCoordinates: (latitude: Double, longitude: Double)? {
+        guard let latitude = HelperFunctions.parseCoordinate(latText, type: .lat),
+              let longitude = HelperFunctions.parseCoordinate(lonText, type: .lon) else {
+            error = Constants.Strings.invalidCoordinates
+            return nil
+        }
+
+        return (latitude, longitude)
+    }
+
+    private var hasValidCategory: Bool {
+        if selectedCategory == Constants.Categories.custom && category.isEmpty {
+            error = Constants.Strings.invalidCustomCategory
+            return false
+        }
+
+        return true
+    }
 
     init(
         landmark: Landmark?,
@@ -73,7 +94,12 @@ class AddLandmarkViewModel {
     func handleEdit(landmark: Landmark?) {
         guard let landmark else { return }
         title = landmark.name
-        selectedCategory = landmark.category
+        if LandmarkCategory.predefinedCategories.map(\.localizedName).contains(landmark.category) {
+            selectedCategory = landmark.category
+        } else {
+            selectedCategory = Constants.Categories.custom
+            categoryString = landmark.category
+        }
         description = landmark.landmarkDescription ?? ""
         selectedImageData = landmark.image
     }
@@ -82,11 +108,14 @@ class AddLandmarkViewModel {
     func editLandmark(using context: ModelContext) {
         guard let landmark else { return }
         error = nil
+        guard hasValidCategory, let coordinates = validatedCoordinates else { return }
+        title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        description = description.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        landmark.name = title
+        landmark.name = title.isEmpty ? Constants.Strings.unknownPlace : title
         landmark.category = category
-        landmark.latitude = HelperFunctions.convertToDouble(latText)
-        landmark.longitude = HelperFunctions.convertToDouble(lonText)
+        landmark.latitude = coordinates.latitude
+        landmark.longitude = coordinates.longitude
         landmark.image = selectedImageData
         landmark.landmarkDescription = description
 
@@ -101,6 +130,10 @@ class AddLandmarkViewModel {
     @MainActor
     func addLandmark(using context: ModelContext) {
         error = nil
+        guard hasValidCategory, let coordinates = validatedCoordinates else { return }
+
+        title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        description = description.trimmingCharacters(in: .whitespacesAndNewlines)
 
         if title.isEmpty {
             title = Constants.Strings.unknownPlace
@@ -109,8 +142,8 @@ class AddLandmarkViewModel {
         let newLandmark = Landmark(
             name: title,
             category: category,
-            latitude: HelperFunctions.convertToDouble(latText),
-            longitude: HelperFunctions.convertToDouble(lonText),
+            latitude: coordinates.latitude,
+            longitude: coordinates.longitude,
             image: selectedImageData,
             landmarkDescription: description
         )
@@ -126,6 +159,13 @@ class AddLandmarkViewModel {
     }
 
     func deleteLandmark(using context: ModelContext, landmark: Landmark?) {
-        HelperFunctions.deleteLandmark(using: context, landmark: landmark)
+        error = nil
+
+        do {
+            try HelperFunctions.deleteLandmark(using: context, landmark: landmark)
+            didSave = true
+        } catch {
+            self.error = error.localizedDescription
+        }
     }
 }

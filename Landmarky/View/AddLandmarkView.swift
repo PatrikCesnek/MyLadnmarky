@@ -7,6 +7,7 @@
 
 import PhotosUI
 import SwiftUI
+import UIKit
 
 struct AddLandmarkView: View {
     @Environment(\.modelContext) private var modelContext
@@ -89,6 +90,16 @@ struct AddLandmarkView: View {
                         header: { Text(Constants.Strings.description) }
                     )
 
+                    Section(
+                        content: {
+                            AddCoordinateSectionView(
+                                latitude: $viewModel.latText,
+                                longitude: $viewModel.lonText
+                            )
+                        },
+                        header: { Text(Constants.Strings.location) }
+                    )
+
                     if viewModel.isEdit {
                         Section {
                             CenterView {
@@ -97,8 +108,9 @@ struct AddLandmarkView: View {
                                         using: modelContext,
                                         landmark: viewModel.landmark
                                     )
-                                    isDeleted = true
-                                    dismiss()
+                                    if viewModel.error == nil {
+                                        isDeleted = true
+                                    }
                                 }
                                 .foregroundStyle(Color.red)
                             }
@@ -136,8 +148,10 @@ struct AddLandmarkView: View {
             Button(Constants.Buttons.chooseFromGallery) {
                 viewModel.showPhotoPicker = true
             }
-            Button(Constants.Buttons.takePhoto) {
-                viewModel.showCamera = true
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                Button(Constants.Buttons.takePhoto) {
+                    viewModel.showCamera = true
+                }
             }
             Button(Constants.Buttons.cancel, role: .cancel) {}
         }

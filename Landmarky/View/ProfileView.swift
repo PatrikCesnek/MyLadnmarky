@@ -24,6 +24,19 @@ struct ProfileView: View {
         .onAppear {
             viewModel.loadProfile(using: modelContext)
         }
+        .alert(
+            Constants.Strings.errorTitle,
+            isPresented: Binding(
+                get: { viewModel.alertText != nil },
+                set: { isPresented in
+                    if !isPresented { viewModel.alertText = nil }
+                }
+            )
+        ) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(viewModel.alertText ?? "")
+        }
         .navigationTitle(Constants.Buttons.profile)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

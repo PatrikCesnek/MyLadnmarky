@@ -27,7 +27,7 @@ struct MapView: View {
                     Map() {
                         UserAnnotation()
                         
-                        ForEach(viewModel.landmarks, id: \.id) { landmark in
+                        ForEach(viewModel.validLandmarks, id: \.id) { landmark in
                             LandmarkAnnotation(landmark: landmark) {
                                 viewModel.selectedLandmark = landmark
                             }
@@ -40,9 +40,7 @@ struct MapView: View {
         //                MapPitchToggle()
                         MapScaleView()
                     }
-                    .mapStyle(
-                        viewModel.changeMapStyle(.imagery)
-                    )
+                    .mapStyle(viewModel.mapStyle)
                     
                     BottomPlusButton {
                         let location = viewModel.getLandmarkLocation()
@@ -57,7 +55,7 @@ struct MapView: View {
                 }
             }
         }
-        .onAppear{
+        .onAppear {
             viewModel.displayLandmarks(modelContext: modelContext)
         }
         .navigationDestination(

@@ -37,18 +37,25 @@ class ProfileViewModel {
 
     @MainActor
     func editProfile(using context: ModelContext) {
-        if isEditing {
-            saveProfile(using: context)
+        if isEditing && !saveProfile(using: context) {
+            return
         }
 
         isEditing.toggle()
     }
 
     @MainActor
-    private func saveProfile(using context: ModelContext) {
+    @discardableResult
+    private func saveProfile(using context: ModelContext) -> Bool {
+        firstName = firstName.trimmingCharacters(in: .whitespacesAndNewlines)
+        lastName = lastName?.trimmingCharacters(in: .whitespacesAndNewlines)
+        if lastName?.isEmpty == true {
+            lastName = nil
+        }
+
         guard !firstName.isEmpty else {
             alertText = Constants.Strings.enterName
-            return
+            return false
         }
 
         if let user {
@@ -62,8 +69,11 @@ class ProfileViewModel {
 
         do {
             try context.save()
+            alertText = nil
+            return true
         } catch {
             alertText = error.localizedDescription
+            return false
         }
     }
 }

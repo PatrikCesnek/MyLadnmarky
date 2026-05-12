@@ -14,12 +14,21 @@ enum CoordinateType {
 }
 
 struct HelperFunctions {
-    static func convertToDouble(_ input: String) -> Double {
-        guard let convertedText = Double(input) else {
-            return 0.0
+    static func parseCoordinate(_ input: String, type: CoordinateType) -> Double? {
+        let normalizedInput = input
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: ",", with: ".")
+
+        guard let value = Double(normalizedInput) else {
+            return nil
         }
-        
-        return convertedText
+
+        switch type {
+        case .lat:
+            return (-90...90).contains(value) ? value : nil
+        case .lon:
+            return (-180...180).contains(value) ? value : nil
+        }
     }
     
     static func getCategoryString(_ categoryName: String) -> String {
@@ -53,19 +62,11 @@ struct HelperFunctions {
         }
     }
     
-    static func deleteLandmark(using context: ModelContext, landmark: Landmark?) {
+    static func deleteLandmark(using context: ModelContext, landmark: Landmark?) throws {
         guard let landmark else { return }
-        
+
         context.delete(landmark)
-        
-        do {
-            try context.save()
-            // TODO: - show success alert
-            print("Landmark deleted successfully!")
-        } catch {
-            // TODO: - use proper error handling
-            print("Failed to delete landmark: \(error)")
-        }
+        try context.save()
     }
     
     static func getCoordinate(_ coordinateType: CoordinateType, _ coordinate: Double?) -> Double {
