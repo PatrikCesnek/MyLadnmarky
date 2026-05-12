@@ -21,6 +21,23 @@
         }
       }
     },
+    "Add landmark" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Přidat místo"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pridať miesto"
+          }
+        }
+      }
+    },
     "All" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -34,6 +51,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Všetko"
+          }
+        }
+      }
+    },
+    "Bars" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bary"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bary"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zrušit"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zrušiť"
+          }
+        }
+      }
+    },
+    "Cannot get your location..." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nelze získat vaši polohu..."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nepodarilo sa získať vašu polohu..."
           }
         }
       }
@@ -72,6 +140,23 @@
         }
       }
     },
+    "Choose from Gallery" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vybrat z galerie"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vybrať z galérie"
+          }
+        }
+      }
+    },
     "Custom" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -85,6 +170,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vlastné"
+          }
+        }
+      }
+    },
+    "Delete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Smazat"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zmazať"
           }
         }
       }
@@ -140,6 +242,23 @@
         }
       }
     },
+    "Go into the map tab and create your landmarks" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Přejděte na záložku mapa a vytvořte své místa"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prejdite na záložku mapa a vytvorte si miesta"
+          }
+        }
+      }
+    },
     "Hills" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -187,6 +306,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jazerá"
+          }
+        }
+      }
+    },
+    "Landmark saved!" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Místo uloženo!"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miesto uložené!"
           }
         }
       }
@@ -327,6 +463,23 @@
         }
       }
     },
+    "Ooops, something went wrong..." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ups, něco se pokazilo..."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ups, niečo sa pokazilo..."
+          }
+        }
+      }
+    },
     "Other" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -340,6 +493,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Iné"
+          }
+        }
+      }
+    },
+    "Please enter your name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zadejte prosím své jméno"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zadajte prosím svoje meno"
           }
         }
       }
@@ -412,6 +582,23 @@
         }
       }
     },
+    "Select Photo Source" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vybrat zdroj fotky"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vybrať zdroj fotky"
+          }
+        }
+      }
+    },
     "Shops" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -463,6 +650,23 @@
         }
       }
     },
+    "Take a photo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vyfotit"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odfotiť"
+          }
+        }
+      }
+    },
     "Title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -476,6 +680,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Názov"
+          }
+        }
+      }
+    },
+    "Try Again" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zkusit znovu"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skúsiť znova"
           }
         }
       }

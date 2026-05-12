@@ -11,11 +11,11 @@ import SwiftUI
 struct AddLandmarkView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @StateObject var viewModel: AddLandmarkViewModel
+    @State var viewModel: AddLandmarkViewModel
 
     @State private var selectedUIImage: UIImage?
     @State private var selectedPhotoItem: PhotosPickerItem?
-    
+
     @Binding private var isDeleted: Bool
 
     init(
@@ -24,8 +24,8 @@ struct AddLandmarkView: View {
         landmark: Landmark? = nil,
         isDeleted: Binding<Bool>
     ) {
-        _viewModel = StateObject(
-            wrappedValue: AddLandmarkViewModel(
+        _viewModel = State(
+            initialValue: AddLandmarkViewModel(
                 landmark: landmark,
                 latitude: latitude,
                 longitude: longitude
@@ -33,7 +33,7 @@ struct AddLandmarkView: View {
         )
         self._isDeleted = isDeleted
     }
-    
+
     var body: some View {
         VStack {
             if let error = viewModel.error {
@@ -66,7 +66,7 @@ struct AddLandmarkView: View {
                         }
                         .listRowBackground(Color.clear)
                     }
-                    
+
                     Section(
                         content: {
                             TitleSectionView(
@@ -78,7 +78,7 @@ struct AddLandmarkView: View {
                         },
                         header: { Text(Constants.Strings.title) }
                     )
-                    
+
                     Section(
                         content: {
                             TextEditor(
@@ -88,42 +88,46 @@ struct AddLandmarkView: View {
                         },
                         header: { Text(Constants.Strings.description) }
                     )
-                    
+
                     if viewModel.isEdit {
-                        Section(
-                            content: {
-                                CenterView{
-                                    Button(Constants.Buttons.delete){
-                                        viewModel.deleteLandmark(
-                                            using: modelContext,
-                                            landmark: viewModel.landmark
-                                        )
-                                        isDeleted = true
-                                        dismiss()
-                                    }
-                                    .foregroundStyle(Color.red)
+                        Section {
+                            CenterView {
+                                Button(Constants.Buttons.delete) {
+                                    viewModel.deleteLandmark(
+                                        using: modelContext,
+                                        landmark: viewModel.landmark
+                                    )
+                                    isDeleted = true
+                                    dismiss()
                                 }
+                                .foregroundStyle(Color.red)
                             }
-                        )
+                        }
                     }
                 }
                 .navigationTitle(Text(Constants.Strings.addLandmarkTitle))
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    Button(action: {
-                        if viewModel.isEdit {
-                            viewModel.editLandmark(using: modelContext)
-                        } else {
-                            viewModel.addLandmark(using: modelContext)
+                    Button(
+                        action: {
+                            if viewModel.isEdit {
+                                viewModel.editLandmark(using: modelContext)
+                            } else {
+                                viewModel.addLandmark(using: modelContext)
+                            }
+                        },
+                        label: {
+                            Image(systemName: Constants.SystemImages.editSaveButtonImage)
+                                .font(.headline)
                         }
-                        dismiss()
-                    }) {
-                        Text(Constants.Buttons.save)
-                            .font(.headline)
-                    }
+                    )
+                    .buttonStyle(.glassProminent)
+                    .tint(.green)
                 }
-                .tint(.green)
             }
+        }
+        .onChange(of: viewModel.didSave) { _, saved in
+            if saved { dismiss() }
         }
         .confirmationDialog(
             Constants.Strings.choosePhotoSource,

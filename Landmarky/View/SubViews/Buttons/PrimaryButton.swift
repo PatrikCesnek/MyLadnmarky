@@ -36,8 +36,7 @@ struct PrimaryButton: View {
                     .padding(.vertical, 8)
             }
         )
-        .buttonStyle(.borderedProminent)
-        .clipShape(RoundedRectangle(cornerRadius: 24))
+        .buttonStyle(.glassProminent)
         .tint(isError ? .red : .green)
         .padding(8)
     }

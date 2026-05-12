@@ -33,12 +33,11 @@ struct BottomPlusButton<Content: View>: View {
                             .font(.title)
                             .bold()
                             .padding(8)
-                            .background {
-                                Circle()
-                                    .fill(Color.green)
-                            }
                     }
                 )
+                .tint(.green)
+                .buttonStyle(.glassProminent)
+                .clipShape(Circle())
             }
         }
     }

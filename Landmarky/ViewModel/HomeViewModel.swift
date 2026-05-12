@@ -28,8 +28,7 @@ class HomeViewModel {
         error = nil
         isLoading = true
         do {
-            let allLandmarks = try modelContext.fetch(descriptor)
-            self.landmarks = allLandmarks
+            self.landmarks = try modelContext.fetch(descriptor)
             isLoading = false
         } catch {
             self.error = error.localizedDescription

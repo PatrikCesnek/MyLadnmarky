@@ -83,8 +83,7 @@ class MapViewModel {
         let descriptor = FetchDescriptor<Landmark>(sortBy: [SortDescriptor(\.name)])
         error = nil
         do {
-            let allLandmarks = try modelContext.fetch(descriptor)
-            self.landmarks = allLandmarks
+            self.landmarks = try modelContext.fetch(descriptor)
         } catch {
             self.error = error.localizedDescription
         }

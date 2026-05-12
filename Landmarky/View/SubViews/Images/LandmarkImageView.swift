@@ -48,7 +48,7 @@ struct LandmarkImageView: View {
                         systemName:
                         isCircular
                         ? Constants.SystemImages.emptyPhoto
-                        : Constants.SystemImages.empyPhotoCard
+                        : Constants.SystemImages.emptyPhotoCard
                     )
                     .renderingMode(.original)
                     .resizable()

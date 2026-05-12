@@ -9,8 +9,13 @@ import MapKit
 
 struct NavigationHelper {
     static func startNavigation(to destination: CLLocationCoordinate2D, name: String) {
-        let destinationPlacemark = MKPlacemark(coordinate: destination)
-        let destinationItem = MKMapItem(placemark: destinationPlacemark)
+        let destinationItem = MKMapItem(
+            location: CLLocation(
+                latitude: destination.latitude,
+                longitude: destination.longitude
+            ),
+            address: .none
+        )
         destinationItem.name = name
 
         let launchOptions = [

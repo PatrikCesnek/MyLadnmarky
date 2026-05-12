@@ -21,13 +21,13 @@ struct HomeCategoryScrollView: View {
             let categoryLandmarks = landmarks(for: category)
             
             if !categoryLandmarks.isEmpty {
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 8) {
                     Text(category)
                         .font(.headline)
-                        .padding(.leading, 10)
-                    
+                        .padding(.leading, 8)
+
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 15) {
+                        HStack(spacing: 8) {
                             ForEach(categoryLandmarks, id: \.id) { landmark in
                                 NavigationLink(
                                     destination: {
@@ -42,11 +42,11 @@ struct HomeCategoryScrollView: View {
                                 )
                             }
                         }
-                        .padding(.horizontal, 16)
                     }
                 }
             }
         }
+        .padding(.horizontal, 16)
     }
     
     private func landmarks(for category: String) -> [Landmark] {
@@ -58,8 +58,10 @@ struct HomeCategoryScrollView: View {
 }
 
 #Preview {
-    HomeCategoryScrollView(
-        categories: Mock.MockLandmarks.mockCategories,
-        landmarks: Mock.MockLandmarks.data
-    )
+    NavigationStack {
+        HomeCategoryScrollView(
+            categories: Mock.MockLandmarks.mockCategories,
+            landmarks: Mock.MockLandmarks.data
+        )
+    }
 }
