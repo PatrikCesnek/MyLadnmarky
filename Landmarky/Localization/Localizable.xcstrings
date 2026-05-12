@@ -242,6 +242,9 @@
         }
       }
     },
+    "First name" : {
+
+    },
     "Go into the map tab and create your landmarks" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -343,6 +346,9 @@
           }
         }
       }
+    },
+    "Last name" : {
+
     },
     "Latitude" : {
       "extractionState" : "manual",
@@ -463,6 +469,9 @@
         }
       }
     },
+    "OK" : {
+
+    },
     "Ooops, something went wrong..." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -496,6 +505,12 @@
           }
         }
       }
+    },
+    "Please enter a custom category." : {
+
+    },
+    "Please enter valid coordinates." : {
+
     },
     "Please enter your name" : {
       "extractionState" : "manual",

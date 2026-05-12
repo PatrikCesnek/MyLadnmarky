@@ -13,12 +13,16 @@ struct ProfileEditContextView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            ProfileCellEditView(text: $firstName)
+            ProfileCellEditView(
+                text: $firstName,
+                prompt: Constants.Strings.firstName
+            )
             ProfileCellEditView(
                 text: Binding(
                     get: { lastName ?? "" },
                     set: { lastName = $0.isEmpty ? nil : $0 }
                 ),
+                prompt: Constants.Strings.lastName,
                 showDivider: false
             )
         }
