@@ -14,8 +14,12 @@ class HomeViewModel {
     var searchText: String = ""
     var isLoading: Bool = false
     var error: String?
-    
+
     private(set) var landmarks: [Landmark] = []
+
+    var favoriteLandmarks: [Landmark] {
+        landmarks.filter { $0.isFavorite }
+    }
     var categories: [String] {
         let predefined = LandmarkCategory.allCases.map { $0.localizedName }
         let custom = Set(landmarks.map { $0.category }).subtracting(predefined)

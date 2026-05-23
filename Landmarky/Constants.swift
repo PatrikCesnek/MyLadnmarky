@@ -37,11 +37,27 @@ public struct Constants {
         static let landmarkSaved = String(localized: "Landmark saved!")
         static let invalidCoordinates = String(localized: "Please enter valid coordinates.")
         static let invalidCustomCategory = String(localized: "Please enter a custom category.")
+        static let travelDiary = String(localized: "Travel Diary")
+        static let newTrip = String(localized: "New Trip")
+        static let editTrip = String(localized: "Edit Trip")
+        static let noTrips = String(localized: "No trips yet")
+        static let startDocumenting = String(localized: "Start documenting your adventures")
+        static let multiDayTrip = String(localized: "Multi-day trip")
+        static let startDate = String(localized: "Start")
+        static let endDate = String(localized: "End")
+        static let dates = String(localized: "Dates")
+        static let favorites = String(localized: "Favorites")
+        static let statsLandmarks = String(localized: "Landmarks")
+        static let statsCountries = String(localized: "Countries")
+        static let statsBadges = String(localized: "Badges")
+        static let visitDateLabel = String(localized: "Visit date")
+        static let addVisitDate = String(localized: "Add visit date")
     }
 
     struct Buttons {
         static let home = String(localized: "Home")
         static let map = String(localized: "Map")
+        static let diary = String(localized: "Diary")
         static let profile = String(localized: "Profile")
         static let search = String(localized: "Search")
         static let edit = String(localized: "Edit")
@@ -88,6 +104,7 @@ public struct Constants {
         static let editButtonImage = "pencil"
         static let editSaveButtonImage = "checkmark"
         static let gearXmark = "gear.badge.xmark"
+        static let book = "book.fill"
     }
 
     struct DefaultLandmarkLocation {

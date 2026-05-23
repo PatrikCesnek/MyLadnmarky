@@ -11,6 +11,8 @@ struct ProfileContentView: View {
     private let isEditing: Bool
     private let landmarkCount: String?
     private let shouldShowAchievements: Bool
+    private let badgeStats: BadgeStats?
+    private let badgeItems: [BadgeItem]
     @Binding private var firstName: String
     @Binding private var lastName: String?
 
@@ -18,12 +20,16 @@ struct ProfileContentView: View {
         isEditing: Bool,
         landmarkCount: String?,
         shouldShowAchievements: Bool = false,
+        badgeStats: BadgeStats? = nil,
+        badgeItems: [BadgeItem] = [],
         firstName: Binding<String>,
         lastName: Binding<String?>
     ) {
         self.isEditing = isEditing
         self.landmarkCount = landmarkCount
         self.shouldShowAchievements = shouldShowAchievements
+        self.badgeStats = badgeStats
+        self.badgeItems = badgeItems
         self._firstName = firstName
         self._lastName = lastName
     }
@@ -56,14 +62,18 @@ struct ProfileContentView: View {
                 }
             }
 
-            if shouldShowAchievements {
+            if shouldShowAchievements, let stats = badgeStats {
+                Section {
+                    ProfileStatsView(
+                        landmarkCount: stats.landmarkCount,
+                        countriesCount: stats.uniqueCountries.count,
+                        badgesEarned: badgeItems.filter(\.isEarned).count,
+                        totalBadges: badgeItems.count
+                    )
+                }
+
                 Section(Constants.Strings.achievementsTitle) {
-                    VStack {
-                        ProfileCellView(
-                            text: Constants.Strings.noAchievements,
-                            showDivider: false
-                        )
-                    }
+                    BadgeGridView(items: badgeItems)
                 }
             }
         }

@@ -100,6 +100,20 @@ struct AddLandmarkView: View {
                         header: { Text(Constants.Strings.location) }
                     )
 
+                    Section(
+                        content: {
+                            Toggle(Constants.Strings.addVisitDate, isOn: $viewModel.hasVisitDate.animation())
+                            if viewModel.hasVisitDate {
+                                DatePicker(
+                                    Constants.Strings.visitDateLabel,
+                                    selection: $viewModel.visitDate,
+                                    displayedComponents: .date
+                                )
+                            }
+                        },
+                        header: { Text(Constants.Strings.visitDateLabel) }
+                    )
+
                     if viewModel.isEdit {
                         Section {
                             CenterView {

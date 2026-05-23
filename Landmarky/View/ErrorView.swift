@@ -9,41 +9,43 @@ import SwiftUI
 
 struct ErrorView: View {
     private let errorString: String
-    private let retryAction: () -> Void
-    
+    private let retryAction: (() -> Void)?
+
     init(
         errorString: String,
-        retryAction: @escaping () -> Void
+        retryAction: (() -> Void)? = nil
     ) {
         self.errorString = errorString
         self.retryAction = retryAction
     }
-    
+
     var body: some View {
         VStack(spacing: 24) {
             Spacer()
-            
+
             Image(systemName: Constants.SystemImages.gearXmark)
                 .resizable()
                 .frame(width: 80,height: 80)
                 .foregroundColor(.red)
                 .bold(true)
                 .symbolEffect(.rotate)
-            
+
             Text(Constants.Strings.errorTitle)
                 .font(.title)
                 .multilineTextAlignment(.center)
-            
+
             Text(errorString)
-            
+
             Spacer()
-            
-            PrimaryButton(
-                action: retryAction,
-                text: Constants.Buttons.errorRetryButton,
-                isError: true
-            )
-            .tint(.red)
+
+            if let retryAction {
+                PrimaryButton(
+                    action: retryAction,
+                    text: Constants.Buttons.errorRetryButton,
+                    isError: true
+                )
+                .tint(.red)
+            }
         }
     }
 }

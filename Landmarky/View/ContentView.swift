@@ -31,7 +31,17 @@ struct ContentView: View {
                     systemImage: Constants.SystemImages.map
                 )
             }
-            
+
+            NavigationStack {
+                DiaryView()
+            }
+            .tabItem {
+                Label(
+                    Constants.Buttons.diary,
+                    systemImage: Constants.SystemImages.book
+                )
+            }
+
             NavigationStack {
                 ProfileView()
             }
@@ -47,5 +57,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: [Landmark.self, Profile.self])
+        .modelContainer(for: [Landmark.self, Profile.self, Trip.self])
 }

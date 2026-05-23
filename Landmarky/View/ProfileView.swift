@@ -17,6 +17,8 @@ struct ProfileView: View {
                 isEditing: viewModel.isEditing,
                 landmarkCount: viewModel.landmarkCountText,
                 shouldShowAchievements: viewModel.user != nil,
+                badgeStats: viewModel.badgeStats,
+                badgeItems: viewModel.badgeItems,
                 firstName: $viewModel.firstName,
                 lastName: $viewModel.lastName
             )

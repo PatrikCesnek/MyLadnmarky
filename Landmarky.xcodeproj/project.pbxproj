@@ -29,9 +29,22 @@
 		02380C5D2D51263000855B4C /* LandmarkyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LandmarkyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		0243D0D82FC146E200EF25DD /* Exceptions for "Landmarky" folder in "Landmarky" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 02380C402D51262F00855B4C /* Landmarky */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		02380C432D51262F00855B4C /* Landmarky */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				0243D0D82FC146E200EF25DD /* Exceptions for "Landmarky" folder in "Landmarky" target */,
+			);
 			path = Landmarky;
 			sourceTree = "<group>";
 		};
@@ -406,11 +419,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Landmarky/Preview Content\"";
+				DEVELOPMENT_TEAM = 68223M5AWX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Landmarky/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is needed so you can take photos of your favourite places";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location is needed to help you navigate between your landmarks.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access lets you take a photo for a landmark you save on this device.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location access lets Landmarky show your position on the map and create landmarks at your current location.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo library access lets you choose an existing photo for a landmark you save on this device.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -438,11 +454,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Landmarky/Preview Content\"";
+				DEVELOPMENT_TEAM = 68223M5AWX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Landmarky/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is needed so you can take photos of your favourite places";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location is needed to help you navigate between your landmarks.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access lets you take a photo for a landmark you save on this device.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location access lets Landmarky show your position on the map and create landmarks at your current location.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo library access lets you choose an existing photo for a landmark you save on this device.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

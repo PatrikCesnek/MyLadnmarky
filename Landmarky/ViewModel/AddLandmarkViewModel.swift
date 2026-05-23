@@ -43,6 +43,8 @@ class AddLandmarkViewModel {
     var showPhotoPicker = false
     var error: String?
     var didSave = false
+    var visitDate: Date = Date()
+    var hasVisitDate: Bool = false
 
     private var validatedCoordinates: (latitude: Double, longitude: Double)? {
         guard let latitude = HelperFunctions.parseCoordinate(latText, type: .lat),
@@ -102,6 +104,10 @@ class AddLandmarkViewModel {
         }
         description = landmark.landmarkDescription ?? ""
         selectedImageData = landmark.image
+        if let date = landmark.visitDate {
+            visitDate = date
+            hasVisitDate = true
+        }
     }
 
     @MainActor
@@ -118,6 +124,7 @@ class AddLandmarkViewModel {
         landmark.longitude = coordinates.longitude
         landmark.image = selectedImageData
         landmark.landmarkDescription = description
+        landmark.visitDate = hasVisitDate ? visitDate : nil
 
         do {
             try context.save()
@@ -125,6 +132,8 @@ class AddLandmarkViewModel {
         } catch {
             self.error = error.localizedDescription
         }
+
+        geocodeLandmark(landmark, latitude: coordinates.latitude, longitude: coordinates.longitude, context: context)
     }
 
     @MainActor
@@ -145,7 +154,8 @@ class AddLandmarkViewModel {
             latitude: coordinates.latitude,
             longitude: coordinates.longitude,
             image: selectedImageData,
-            landmarkDescription: description
+            landmarkDescription: description,
+            visitDate: hasVisitDate ? visitDate : nil
         )
 
         context.insert(newLandmark)
@@ -155,6 +165,18 @@ class AddLandmarkViewModel {
             didSave = true
         } catch {
             self.error = error.localizedDescription
+        }
+
+        geocodeLandmark(newLandmark, latitude: coordinates.latitude, longitude: coordinates.longitude, context: context)
+    }
+
+    private func geocodeLandmark(_ landmark: Landmark, latitude: Double, longitude: Double, context: ModelContext) {
+        Task { @MainActor in
+            if let result = await GeocodingHelper.reverseGeocode(latitude: latitude, longitude: longitude) {
+                landmark.country = result.country
+                landmark.continent = result.continent
+                try? context.save()
+            }
         }
     }
 
