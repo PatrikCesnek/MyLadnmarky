@@ -13,19 +13,19 @@ enum BadgeTier: Int, CaseIterable, Comparable, Codable {
 
     var displayName: String {
         switch self {
-        case .bronze: String(localized: "Bronze")
-        case .silver: String(localized: "Silver")
-        case .gold: String(localized: "Gold")
-        case .platinum: String(localized: "Platinum")
-        case .diamond: String(localized: "Diamond")
+        case .bronze: Constants.Badges.Tiers.bronze
+        case .silver: Constants.Badges.Tiers.silver
+        case .gold: Constants.Badges.Tiers.gold
+        case .platinum: Constants.Badges.Tiers.platinum
+        case .diamond: Constants.Badges.Tiers.diamond
         }
     }
 
     var color: Color {
         switch self {
-        case .bronze: .orange
-        case .silver: .gray
-        case .gold: .yellow
+        case .bronze: Color(red: 0.55, green: 0.32, blue: 0.18)
+        case .silver: Color(red: 0.70, green: 0.72, blue: 0.74)
+        case .gold: Color(red: 0.86, green: 0.63, blue: 0.16)
         case .platinum: .cyan
         case .diamond: .purple
         }
@@ -65,10 +65,10 @@ struct BadgeStats {
         for landmark in landmarks {
             guard let country = landmark.country, let continent = landmark.continent else { continue }
             switch continent {
-            case "Europe": european.insert(country)
-            case "Asia": asian.insert(country)
-            case "North America", "South America": american.insert(country)
-            case "Africa": african.insert(country)
+            case Constants.Continents.europe: european.insert(country)
+            case Constants.Continents.asia: asian.insert(country)
+            case Constants.Continents.northAmerica, Constants.Continents.southAmerica: american.insert(country)
+            case Constants.Continents.africa: african.insert(country)
             default: break
             }
         }
@@ -122,100 +122,100 @@ enum Badge: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .firstSteps: String(localized: "First Steps")
-        case .photographer: String(localized: "Photographer")
-        case .storyteller: String(localized: "Storyteller")
-        case .diaryKeeper: String(localized: "Diary Keeper")
-        case .explorer: String(localized: "Explorer")
-        case .snapshot: String(localized: "Snapshot")
-        case .curiousMind: String(localized: "Curious Mind")
-        case .borderCrosser: String(localized: "Border Crosser")
-        case .chronicler: String(localized: "Chronicler")
-        case .adventurer: String(localized: "Adventurer")
-        case .photoAlbum: String(localized: "Photo Album")
-        case .versatile: String(localized: "Versatile")
-        case .worldTraveler: String(localized: "World Traveler")
-        case .continental: String(localized: "Continental")
-        case .europeanExplorer: String(localized: "European Explorer")
-        case .pathfinder: String(localized: "Pathfinder")
-        case .jetSetter: String(localized: "Jet Setter")
-        case .completionist: String(localized: "Completionist")
-        case .asianExplorer: String(localized: "Asian Explorer")
-        case .americasExplorer: String(localized: "Americas Explorer")
-        case .trailblazer: String(localized: "Trailblazer")
-        case .legend: String(localized: "Legend")
-        case .globeMaster: String(localized: "Globe Master")
-        case .worldCitizen: String(localized: "World Citizen")
-        case .eliteExplorer: String(localized: "Elite Explorer")
-        case .galleryOwner: String(localized: "Gallery Owner")
-        case .africanExplorer: String(localized: "African Explorer")
-        case .ultimateTraveler: String(localized: "Ultimate Traveler")
+        case .firstSteps: Constants.Badges.Names.firstSteps
+        case .photographer: Constants.Badges.Names.photographer
+        case .storyteller: Constants.Badges.Names.storyteller
+        case .diaryKeeper: Constants.Badges.Names.diaryKeeper
+        case .explorer: Constants.Badges.Names.explorer
+        case .snapshot: Constants.Badges.Names.snapshot
+        case .curiousMind: Constants.Badges.Names.curiousMind
+        case .borderCrosser: Constants.Badges.Names.borderCrosser
+        case .chronicler: Constants.Badges.Names.chronicler
+        case .adventurer: Constants.Badges.Names.adventurer
+        case .photoAlbum: Constants.Badges.Names.photoAlbum
+        case .versatile: Constants.Badges.Names.versatile
+        case .worldTraveler: Constants.Badges.Names.worldTraveler
+        case .continental: Constants.Badges.Names.continental
+        case .europeanExplorer: Constants.Badges.Names.europeanExplorer
+        case .pathfinder: Constants.Badges.Names.pathfinder
+        case .jetSetter: Constants.Badges.Names.jetSetter
+        case .completionist: Constants.Badges.Names.completionist
+        case .asianExplorer: Constants.Badges.Names.asianExplorer
+        case .americasExplorer: Constants.Badges.Names.americasExplorer
+        case .trailblazer: Constants.Badges.Names.trailblazer
+        case .legend: Constants.Badges.Names.legend
+        case .globeMaster: Constants.Badges.Names.globeMaster
+        case .worldCitizen: Constants.Badges.Names.worldCitizen
+        case .eliteExplorer: Constants.Badges.Names.eliteExplorer
+        case .galleryOwner: Constants.Badges.Names.galleryOwner
+        case .africanExplorer: Constants.Badges.Names.africanExplorer
+        case .ultimateTraveler: Constants.Badges.Names.ultimateTraveler
         }
     }
 
     var badgeDescription: String {
         switch self {
-        case .firstSteps: String(localized: "Save your first landmark")
-        case .photographer: String(localized: "Add a photo to a landmark")
-        case .storyteller: String(localized: "Write a description for a landmark")
-        case .diaryKeeper: String(localized: "Create your first trip")
-        case .explorer: String(localized: "Save 5 landmarks")
-        case .snapshot: String(localized: "Add photos to 5 landmarks")
-        case .curiousMind: String(localized: "Use 3 different categories")
-        case .borderCrosser: String(localized: "Visit 2 different countries")
-        case .chronicler: String(localized: "Create 5 trips")
-        case .adventurer: String(localized: "Save 10 landmarks")
-        case .photoAlbum: String(localized: "Add photos to 25 landmarks")
-        case .versatile: String(localized: "Use 5 different categories")
-        case .worldTraveler: String(localized: "Visit 5 different countries")
-        case .continental: String(localized: "Visit 2 different continents")
-        case .europeanExplorer: String(localized: "Visit 5 European countries")
-        case .pathfinder: String(localized: "Save 25 landmarks")
-        case .jetSetter: String(localized: "Visit 10 different countries")
-        case .completionist: String(localized: "Use all predefined categories")
-        case .asianExplorer: String(localized: "Visit 5 Asian countries")
-        case .americasExplorer: String(localized: "Visit 5 countries in the Americas")
-        case .trailblazer: String(localized: "Save 50 landmarks")
-        case .legend: String(localized: "Save 100 landmarks")
-        case .globeMaster: String(localized: "Visit 25 different countries")
-        case .worldCitizen: String(localized: "Visit all 6 inhabited continents")
-        case .eliteExplorer: String(localized: "Visit 50 different countries")
-        case .galleryOwner: String(localized: "Add photos to 50 landmarks")
-        case .africanExplorer: String(localized: "Visit 5 African countries")
-        case .ultimateTraveler: String(localized: "Visit 100 different countries")
+        case .firstSteps: Constants.Badges.Descriptions.firstSteps
+        case .photographer: Constants.Badges.Descriptions.photographer
+        case .storyteller: Constants.Badges.Descriptions.storyteller
+        case .diaryKeeper: Constants.Badges.Descriptions.diaryKeeper
+        case .explorer: Constants.Badges.Descriptions.explorer
+        case .snapshot: Constants.Badges.Descriptions.snapshot
+        case .curiousMind: Constants.Badges.Descriptions.curiousMind
+        case .borderCrosser: Constants.Badges.Descriptions.borderCrosser
+        case .chronicler: Constants.Badges.Descriptions.chronicler
+        case .adventurer: Constants.Badges.Descriptions.adventurer
+        case .photoAlbum: Constants.Badges.Descriptions.photoAlbum
+        case .versatile: Constants.Badges.Descriptions.versatile
+        case .worldTraveler: Constants.Badges.Descriptions.worldTraveler
+        case .continental: Constants.Badges.Descriptions.continental
+        case .europeanExplorer: Constants.Badges.Descriptions.europeanExplorer
+        case .pathfinder: Constants.Badges.Descriptions.pathfinder
+        case .jetSetter: Constants.Badges.Descriptions.jetSetter
+        case .completionist: Constants.Badges.Descriptions.completionist
+        case .asianExplorer: Constants.Badges.Descriptions.asianExplorer
+        case .americasExplorer: Constants.Badges.Descriptions.americasExplorer
+        case .trailblazer: Constants.Badges.Descriptions.trailblazer
+        case .legend: Constants.Badges.Descriptions.legend
+        case .globeMaster: Constants.Badges.Descriptions.globeMaster
+        case .worldCitizen: Constants.Badges.Descriptions.worldCitizen
+        case .eliteExplorer: Constants.Badges.Descriptions.eliteExplorer
+        case .galleryOwner: Constants.Badges.Descriptions.galleryOwner
+        case .africanExplorer: Constants.Badges.Descriptions.africanExplorer
+        case .ultimateTraveler: Constants.Badges.Descriptions.ultimateTraveler
         }
     }
 
     var icon: String {
         switch self {
-        case .firstSteps: "flag.fill"
-        case .photographer: "camera.fill"
-        case .storyteller: "book.closed.fill"
-        case .diaryKeeper: "text.book.closed.fill"
-        case .explorer: "map.fill"
-        case .snapshot: "photo.stack.fill"
-        case .curiousMind: "lightbulb.fill"
-        case .borderCrosser: "airplane.departure"
-        case .chronicler: "pencil.line"
-        case .adventurer: "figure.hiking"
-        case .photoAlbum: "photo.on.rectangle.angled"
-        case .versatile: "square.grid.3x3.fill"
-        case .worldTraveler: "globe"
-        case .continental: "globe.americas.fill"
-        case .europeanExplorer: "globe.europe.africa.fill"
-        case .pathfinder: "binoculars.fill"
-        case .jetSetter: "airplane.circle.fill"
-        case .completionist: "star.circle.fill"
-        case .asianExplorer: "globe.asia.australia.fill"
-        case .americasExplorer: "globe.americas.fill"
-        case .trailblazer: "flame.fill"
-        case .legend: "crown.fill"
-        case .globeMaster: "globe.badge.chevron.backward"
-        case .worldCitizen: "sparkles"
-        case .eliteExplorer: "medal.fill"
-        case .galleryOwner: "photo.artframe"
-        case .africanExplorer: "sun.max.fill"
-        case .ultimateTraveler: "trophy.fill"
+        case .firstSteps: Constants.Badges.Icons.firstSteps
+        case .photographer: Constants.Badges.Icons.photographer
+        case .storyteller: Constants.Badges.Icons.storyteller
+        case .diaryKeeper: Constants.Badges.Icons.diaryKeeper
+        case .explorer: Constants.Badges.Icons.explorer
+        case .snapshot: Constants.Badges.Icons.snapshot
+        case .curiousMind: Constants.Badges.Icons.curiousMind
+        case .borderCrosser: Constants.Badges.Icons.borderCrosser
+        case .chronicler: Constants.Badges.Icons.chronicler
+        case .adventurer: Constants.Badges.Icons.adventurer
+        case .photoAlbum: Constants.Badges.Icons.photoAlbum
+        case .versatile: Constants.Badges.Icons.versatile
+        case .worldTraveler: Constants.Badges.Icons.worldTraveler
+        case .continental: Constants.Badges.Icons.continental
+        case .europeanExplorer: Constants.Badges.Icons.europeanExplorer
+        case .pathfinder: Constants.Badges.Icons.pathfinder
+        case .jetSetter: Constants.Badges.Icons.jetSetter
+        case .completionist: Constants.Badges.Icons.completionist
+        case .asianExplorer: Constants.Badges.Icons.asianExplorer
+        case .americasExplorer: Constants.Badges.Icons.americasExplorer
+        case .trailblazer: Constants.Badges.Icons.trailblazer
+        case .legend: Constants.Badges.Icons.legend
+        case .globeMaster: Constants.Badges.Icons.globeMaster
+        case .worldCitizen: Constants.Badges.Icons.worldCitizen
+        case .eliteExplorer: Constants.Badges.Icons.eliteExplorer
+        case .galleryOwner: Constants.Badges.Icons.galleryOwner
+        case .africanExplorer: Constants.Badges.Icons.africanExplorer
+        case .ultimateTraveler: Constants.Badges.Icons.ultimateTraveler
         }
     }
 

@@ -83,6 +83,117 @@ public struct Constants {
         static let other = String(localized: "Other")
     }
 
+    struct Continents {
+        static let europe = "Europe"
+        static let asia = "Asia"
+        static let africa = "Africa"
+        static let northAmerica = "North America"
+        static let southAmerica = "South America"
+    }
+
+    struct Badges {
+        struct Tiers {
+            static let bronze = String(localized: "Bronze")
+            static let silver = String(localized: "Silver")
+            static let gold = String(localized: "Gold")
+            static let platinum = String(localized: "Platinum")
+            static let diamond = String(localized: "Diamond")
+        }
+
+        struct Names {
+            static let firstSteps = String(localized: "First Steps")
+            static let photographer = String(localized: "Photographer")
+            static let storyteller = String(localized: "Storyteller")
+            static let diaryKeeper = String(localized: "Diary Keeper")
+            static let explorer = String(localized: "Explorer")
+            static let snapshot = String(localized: "Snapshot")
+            static let curiousMind = String(localized: "Curious Mind")
+            static let borderCrosser = String(localized: "Border Crosser")
+            static let chronicler = String(localized: "Chronicler")
+            static let adventurer = String(localized: "Adventurer")
+            static let photoAlbum = String(localized: "Photo Album")
+            static let versatile = String(localized: "Versatile")
+            static let worldTraveler = String(localized: "World Traveler")
+            static let continental = String(localized: "Continental")
+            static let europeanExplorer = String(localized: "European Explorer")
+            static let pathfinder = String(localized: "Pathfinder")
+            static let jetSetter = String(localized: "Jet Setter")
+            static let completionist = String(localized: "Completionist")
+            static let asianExplorer = String(localized: "Asian Explorer")
+            static let americasExplorer = String(localized: "Americas Explorer")
+            static let trailblazer = String(localized: "Trailblazer")
+            static let legend = String(localized: "Legend")
+            static let globeMaster = String(localized: "Globe Master")
+            static let worldCitizen = String(localized: "World Citizen")
+            static let eliteExplorer = String(localized: "Elite Explorer")
+            static let galleryOwner = String(localized: "Gallery Owner")
+            static let africanExplorer = String(localized: "African Explorer")
+            static let ultimateTraveler = String(localized: "Ultimate Traveler")
+        }
+
+        struct Descriptions {
+            static let firstSteps = String(localized: "Save your first landmark")
+            static let photographer = String(localized: "Add a photo to a landmark")
+            static let storyteller = String(localized: "Write a description for a landmark")
+            static let diaryKeeper = String(localized: "Create your first trip")
+            static let explorer = String(localized: "Save 5 landmarks")
+            static let snapshot = String(localized: "Add photos to 5 landmarks")
+            static let curiousMind = String(localized: "Use 3 different categories")
+            static let borderCrosser = String(localized: "Visit 2 different countries")
+            static let chronicler = String(localized: "Create 5 trips")
+            static let adventurer = String(localized: "Save 10 landmarks")
+            static let photoAlbum = String(localized: "Add photos to 25 landmarks")
+            static let versatile = String(localized: "Use 5 different categories")
+            static let worldTraveler = String(localized: "Visit 5 different countries")
+            static let continental = String(localized: "Visit 2 different continents")
+            static let europeanExplorer = String(localized: "Visit 5 European countries")
+            static let pathfinder = String(localized: "Save 25 landmarks")
+            static let jetSetter = String(localized: "Visit 10 different countries")
+            static let completionist = String(localized: "Use all predefined categories")
+            static let asianExplorer = String(localized: "Visit 5 Asian countries")
+            static let americasExplorer = String(localized: "Visit 5 countries in the Americas")
+            static let trailblazer = String(localized: "Save 50 landmarks")
+            static let legend = String(localized: "Save 100 landmarks")
+            static let globeMaster = String(localized: "Visit 25 different countries")
+            static let worldCitizen = String(localized: "Visit all 6 inhabited continents")
+            static let eliteExplorer = String(localized: "Visit 50 different countries")
+            static let galleryOwner = String(localized: "Add photos to 50 landmarks")
+            static let africanExplorer = String(localized: "Visit 5 African countries")
+            static let ultimateTraveler = String(localized: "Visit 100 different countries")
+        }
+
+        struct Icons {
+            static let firstSteps = "flag.fill"
+            static let photographer = "camera.fill"
+            static let storyteller = "book.closed.fill"
+            static let diaryKeeper = "text.book.closed.fill"
+            static let explorer = "map.fill"
+            static let snapshot = "photo.stack.fill"
+            static let curiousMind = "lightbulb.fill"
+            static let borderCrosser = "airplane.departure"
+            static let chronicler = "pencil.line"
+            static let adventurer = "figure.hiking"
+            static let photoAlbum = "photo.on.rectangle.angled"
+            static let versatile = "square.grid.3x3.fill"
+            static let worldTraveler = "globe"
+            static let continental = "globe.americas.fill"
+            static let europeanExplorer = "globe.europe.africa.fill"
+            static let pathfinder = "binoculars.fill"
+            static let jetSetter = "airplane.circle.fill"
+            static let completionist = "star.circle.fill"
+            static let asianExplorer = "globe.asia.australia.fill"
+            static let americasExplorer = "globe.americas.fill"
+            static let trailblazer = "flame.fill"
+            static let legend = "crown.fill"
+            static let globeMaster = "globe.badge.chevron.backward"
+            static let worldCitizen = "sparkles"
+            static let eliteExplorer = "medal.fill"
+            static let galleryOwner = "photo.artframe"
+            static let africanExplorer = "sun.max.fill"
+            static let ultimateTraveler = "trophy.fill"
+        }
+    }
+
     struct SystemImages {
         static let plus = "plus"
         static let house = "house"
