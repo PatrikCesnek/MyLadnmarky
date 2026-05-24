@@ -13,10 +13,12 @@ final class Profile {
     var id = UUID()
     var name: String
     var lastName: String?
+    var image: Data?
 
-    init(id: UUID = UUID(), name: String, lastName: String? = nil) {
+    init(id: UUID = UUID(), name: String, lastName: String? = nil, image: Data? = nil) {
         self.id = id
         self.name = name
         self.lastName = lastName
+        self.image = image
     }
 }

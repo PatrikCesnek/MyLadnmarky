@@ -13,8 +13,10 @@ struct ProfileContentView: View {
     private let shouldShowAchievements: Bool
     private let badgeStats: BadgeStats?
     private let badgeItems: [BadgeItem]
+    private let choosePhotoAction: () -> Void
     @Binding private var firstName: String
     @Binding private var lastName: String?
+    @Binding private var imageData: Data?
 
     init(
         isEditing: Bool,
@@ -23,7 +25,9 @@ struct ProfileContentView: View {
         badgeStats: BadgeStats? = nil,
         badgeItems: [BadgeItem] = [],
         firstName: Binding<String>,
-        lastName: Binding<String?>
+        lastName: Binding<String?>,
+        imageData: Binding<Data?>,
+        choosePhotoAction: @escaping () -> Void = {}
     ) {
         self.isEditing = isEditing
         self.landmarkCount = landmarkCount
@@ -32,18 +36,14 @@ struct ProfileContentView: View {
         self.badgeItems = badgeItems
         self._firstName = firstName
         self._lastName = lastName
+        self._imageData = imageData
+        self.choosePhotoAction = choosePhotoAction
     }
 
     var body: some View {
         Form {
             CenterView {
-                LandmarkImageView(
-                    imageData: nil, // only for now
-                    cornerRadius: 0,
-                    isCircular: true,
-                    isProfile: true
-                )
-                .frame(height: 150)
+                profileImage
             }
             .listRowBackground(Color.clear)
 
@@ -78,15 +78,42 @@ struct ProfileContentView: View {
             }
         }
     }
+
+    private var profileImage: some View {
+        Group {
+            if isEditing {
+                Button {
+                    choosePhotoAction()
+                } label: {
+                    imageView
+                }
+                .buttonStyle(.plain)
+            } else {
+                imageView
+            }
+        }
+    }
+
+    private var imageView: some View {
+        LandmarkImageView(
+            imageData: imageData,
+            cornerRadius: 0,
+            isCircular: true,
+            isProfile: true
+        )
+        .frame(width: 150, height: 150)
+    }
 }
 
 #Preview {
     @Previewable @State var name: String = "John"
     @Previewable @State var lastName: String? = "Doe"
+    @Previewable @State var imageData: Data?
     ProfileContentView(
         isEditing: false,
         landmarkCount: "5",
         firstName: $name,
-        lastName: $lastName
+        lastName: $lastName,
+        imageData: $imageData
     )
 }
