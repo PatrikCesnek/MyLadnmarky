@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photo library access is needed so you can add photos to your landmarks.</string>
+	<string>Photo library access is needed so you can add photos to your profile, landmarks, and travel diary.</string>
 </dict>
 </plist>

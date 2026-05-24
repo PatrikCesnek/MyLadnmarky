@@ -5,6 +5,7 @@
 //  Created by Patrik Cesnek on 31/01/2025.
 //
 
+import PhotosUI
 import SwiftUI
 import SwiftData
 
@@ -13,6 +14,10 @@ class ProfileViewModel {
     var user: Profile?
     var firstName: String = ""
     var lastName: String?
+    var selectedImageData: Data?
+    var showPhotoSourceSheet = false
+    var showCamera = false
+    var showPhotoPicker = false
     var alertText: String?
     var isEditing: Bool = false
     var landmarkCount: Int = 0
@@ -29,6 +34,7 @@ class ProfileViewModel {
             user = existing
             firstName = existing.name
             lastName = existing.lastName
+            selectedImageData = existing.image
         } else {
             isEditing = true
         }
@@ -43,6 +49,20 @@ class ProfileViewModel {
         let stats = BadgeStats(landmarks: landmarks, tripCount: tripCount)
         badgeStats = stats
         badgeItems = Badge.evaluateAll(stats: stats)
+    }
+
+    func handlePickedImage(_ image: UIImage?) {
+        guard let image else { return }
+        selectedImageData = image.jpegData(compressionQuality: 0.8)
+    }
+
+    @MainActor
+    func loadPhoto(from item: PhotosPickerItem?) async {
+        guard let item else { return }
+        if let data = try? await item.loadTransferable(type: Data.self),
+           let image = UIImage(data: data) {
+            handlePickedImage(image)
+        }
     }
 
     @MainActor
@@ -71,8 +91,9 @@ class ProfileViewModel {
         if let user {
             user.name = firstName
             user.lastName = lastName
+            user.image = selectedImageData
         } else {
-            let newProfile = Profile(name: firstName, lastName: lastName)
+            let newProfile = Profile(name: firstName, lastName: lastName, image: selectedImageData)
             context.insert(newProfile)
             user = newProfile
         }
