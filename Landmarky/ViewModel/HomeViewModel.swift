@@ -28,9 +28,16 @@ class HomeViewModel {
 
     @MainActor
     func fetchLandmarks(modelContext: ModelContext) {
-        let descriptor = FetchDescriptor<Landmark>(sortBy: [SortDescriptor(\.name)])
         error = nil
         isLoading = true
+
+        if Constants.showsMockData {
+            landmarks = Mock.MockLandmarks.data.sorted { $0.name < $1.name }
+            isLoading = false
+            return
+        }
+
+        let descriptor = FetchDescriptor<Landmark>(sortBy: [SortDescriptor(\.name)])
         do {
             self.landmarks = try modelContext.fetch(descriptor)
             isLoading = false

@@ -80,8 +80,14 @@ class MapViewModel {
     
     @MainActor
     func displayLandmarks(modelContext: ModelContext) {
-        let descriptor = FetchDescriptor<Landmark>(sortBy: [SortDescriptor(\.name)])
         error = nil
+
+        if Constants.showsMockData {
+            landmarks = Mock.MockLandmarks.data.sorted { $0.name < $1.name }
+            return
+        }
+
+        let descriptor = FetchDescriptor<Landmark>(sortBy: [SortDescriptor(\.name)])
         do {
             self.landmarks = try modelContext.fetch(descriptor)
         } catch {

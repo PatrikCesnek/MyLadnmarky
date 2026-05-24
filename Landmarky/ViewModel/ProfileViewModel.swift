@@ -29,6 +29,23 @@ class ProfileViewModel {
 
     @MainActor
     func loadProfile(using context: ModelContext) {
+        if Constants.showsMockData {
+            let mockUser = Mock.MockProfile.user
+            user = mockUser
+            firstName = mockUser.name
+            lastName = mockUser.lastName
+            selectedImageData = mockUser.image
+            isEditing = false
+
+            let landmarks = Mock.MockLandmarks.data
+            landmarkCount = landmarks.count
+
+            let stats = BadgeStats(landmarks: landmarks, tripCount: Mock.MockTrips.data.count)
+            badgeStats = stats
+            badgeItems = Badge.evaluateAll(stats: stats)
+            return
+        }
+
         let descriptor = FetchDescriptor<Profile>()
         if let existing = try? context.fetch(descriptor).first {
             user = existing
@@ -67,11 +84,38 @@ class ProfileViewModel {
 
     @MainActor
     func editProfile(using context: ModelContext) {
+        if Constants.showsMockData {
+            if isEditing && !saveMockProfile() {
+                return
+            }
+
+            isEditing.toggle()
+            return
+        }
+
         if isEditing && !saveProfile(using: context) {
             return
         }
 
         isEditing.toggle()
+    }
+
+    @discardableResult
+    private func saveMockProfile() -> Bool {
+        firstName = firstName.trimmingCharacters(in: .whitespacesAndNewlines)
+        lastName = lastName?.trimmingCharacters(in: .whitespacesAndNewlines)
+        if lastName?.isEmpty == true {
+            lastName = nil
+        }
+
+        guard !firstName.isEmpty else {
+            alertText = Constants.Strings.enterName
+            return false
+        }
+
+        user = Profile(name: firstName, lastName: lastName, image: selectedImageData)
+        alertText = nil
+        return true
     }
 
     @MainActor

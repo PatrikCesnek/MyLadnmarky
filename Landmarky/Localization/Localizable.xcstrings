@@ -1118,13 +1118,19 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Moje landmarky"
+            "value" : "Moje místa"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My places"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Moje landmarky"
+            "value" : "Moje miesta"
           }
         }
       }
