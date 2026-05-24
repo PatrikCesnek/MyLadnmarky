@@ -18,7 +18,11 @@ final class Landmark {
     var longitude: Double?
     var image: Data?
     var landmarkDescription: String?
-    
+    var isFavorite: Bool = false
+    var visitDate: Date?
+    var country: String?
+    var continent: String?
+
     init(
         id: UUID = UUID(),
         name: String,
@@ -26,7 +30,11 @@ final class Landmark {
         latitude: Double? = nil,
         longitude: Double? = nil,
         image: Data? = nil,
-        landmarkDescription: String? = nil
+        landmarkDescription: String? = nil,
+        isFavorite: Bool = false,
+        visitDate: Date? = nil,
+        country: String? = nil,
+        continent: String? = nil
     ) {
         self.id = id
         self.name = name
@@ -35,6 +43,10 @@ final class Landmark {
         self.longitude = longitude
         self.image = image
         self.landmarkDescription = landmarkDescription
+        self.isFavorite = isFavorite
+        self.visitDate = visitDate
+        self.country = country
+        self.continent = continent
     }
     
     var landmarkImage: UIImage? {

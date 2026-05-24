@@ -10,20 +10,24 @@ import SwiftData
 
 @main
 struct LandmarkyApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([Landmark.self, Profile.self])
-        let container = try? ModelContainer(for: schema)
-        guard let container = container else {
-            fatalError(#function + ": Failed to create ModelContainer")
-        }
-        return container
-    }()
+    private var sharedModelContainer: ModelContainer?
+
+    init() {
+        let schema = Schema([Landmark.self, Profile.self, Trip.self])
+        self.sharedModelContainer = try? ModelContainer(for: schema)
+    }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .tint(.green)
+            if let container = sharedModelContainer {
+                ContentView()
+                    .tint(.green)
+                    .modelContainer(container)
+            } else {
+                ErrorView(
+                    errorString: Constants.Strings.errorTitle
+                )
+            }
         }
-        .modelContainer(sharedModelContainer)
     }
 }

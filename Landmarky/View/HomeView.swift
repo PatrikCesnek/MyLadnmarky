@@ -41,6 +41,10 @@ struct HomeView: View {
                                 subtitle: Constants.Strings.createLandmarks
                             )
                         } else {
+                            if !viewModel.favoriteLandmarks.isEmpty {
+                                FavoritesScrollView(landmarks: viewModel.favoriteLandmarks)
+                            }
+
                             HomeCategoryScrollView(
                                 categories: viewModel.categories,
                                 landmarks: viewModel.filteredLandmarks()

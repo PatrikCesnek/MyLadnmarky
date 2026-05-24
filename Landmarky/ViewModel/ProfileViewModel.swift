@@ -16,6 +16,8 @@ class ProfileViewModel {
     var alertText: String?
     var isEditing: Bool = false
     var landmarkCount: Int = 0
+    var badgeStats: BadgeStats?
+    var badgeItems: [BadgeItem] = []
     var landmarkCountText: String? {
         "\(Constants.Strings.landmarkCountString1) \(landmarkCount) " + Constants.Strings.landmarkCountString2
     }
@@ -32,7 +34,15 @@ class ProfileViewModel {
         }
 
         let landmarkDescriptor = FetchDescriptor<Landmark>()
-        landmarkCount = (try? context.fetchCount(landmarkDescriptor)) ?? 0
+        let landmarks = (try? context.fetch(landmarkDescriptor)) ?? []
+        landmarkCount = landmarks.count
+
+        let tripDescriptor = FetchDescriptor<Trip>()
+        let tripCount = (try? context.fetchCount(tripDescriptor)) ?? 0
+
+        let stats = BadgeStats(landmarks: landmarks, tripCount: tripCount)
+        badgeStats = stats
+        badgeItems = Badge.evaluateAll(stats: stats)
     }
 
     @MainActor

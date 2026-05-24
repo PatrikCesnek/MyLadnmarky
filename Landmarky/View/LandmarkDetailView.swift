@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LandmarkDetailView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
     @State private var isDeleted = false
     @State private var isShowingEditView = false
 
@@ -62,18 +63,28 @@ struct LandmarkDetailView: View {
             )
         }
         .toolbar {
-            ToolbarItem(
-                placement: .topBarTrailing
-            ) {
-                Button(action: {
-                    isShowingEditView = true
-                }) {
-                    Image(systemName: Constants.SystemImages.editButtonImage)
-                        .font(.headline)
-                        .foregroundStyle(Color.green)
+            ToolbarItem(placement: .topBarTrailing) {
+                HStack(spacing: 12) {
+                    Button {
+                        landmark.isFavorite.toggle()
+                        try? modelContext.save()
+                    } label: {
+                        Image(systemName: landmark.isFavorite ? "heart.fill" : "heart")
+                            .font(.headline)
+                            .foregroundStyle(landmark.isFavorite ? .red : .primary)
+                    }
+                    .buttonStyle(.borderless)
+
+                    Button(action: {
+                        isShowingEditView = true
+                    }) {
+                        Image(systemName: Constants.SystemImages.editButtonImage)
+                            .font(.headline)
+                            .foregroundStyle(Color.green)
+                    }
+                    .buttonStyle(.borderless)
+                    .accessibilityLabel(Text(Constants.Buttons.edit))
                 }
-                .buttonStyle(.borderless)
-                .accessibilityLabel(Text(Constants.Buttons.edit))
             }
         }
         .fullScreenCover(isPresented: $isShowingEditView) {
