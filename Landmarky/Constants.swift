@@ -52,6 +52,11 @@ public struct Constants {
         static let statsBadges = String(localized: "Badges")
         static let visitDateLabel = String(localized: "Visit date")
         static let addVisitDate = String(localized: "Add visit date")
+        static let photo = String(localized: "Photo")
+        static let addPhoto = String(localized: "Add Photo")
+        static let changePhoto = String(localized: "Change Photo")
+        static let removePhoto = String(localized: "Remove Photo")
+        static let addPhotos = String(localized: "Add Photos")
     }
 
     struct Buttons {
@@ -216,6 +221,9 @@ public struct Constants {
         static let editSaveButtonImage = "checkmark"
         static let gearXmark = "gear.badge.xmark"
         static let book = "book.fill"
+        static let calendar = "calendar"
+        static let photo = "photo"
+        static let xmarkCircleFill = "xmark.circle.fill"
     }
 
     struct DefaultLandmarkLocation {

@@ -3,14 +3,32 @@ import SwiftUI
 struct TripDetailView: View {
     let trip: Trip
     @State private var isEditing = false
+    @State private var selectedPhoto: SelectedTripPhoto?
     @Environment(\.modelContext) private var modelContext
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                Label(trip.dateRangeText, systemImage: "calendar")
+                Label(trip.dateRangeText, systemImage: Constants.SystemImages.calendar)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
+
+                if !trip.tripImages.isEmpty {
+                    LazyVGrid(columns: galleryColumns, alignment: .leading, spacing: 8) {
+                        ForEach(Array(trip.tripImages.enumerated()), id: \.offset) { _, image in
+                            Button {
+                                selectedPhoto = SelectedTripPhoto(image: image)
+                            } label: {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 80, height: 80)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                }
 
                 if let notes = trip.notes, !notes.isEmpty {
                     Text(notes)
@@ -36,7 +54,19 @@ struct TripDetailView: View {
                 AddTripView(trip: trip)
             }
         }
+        .sheet(item: $selectedPhoto) { photo in
+            TripPhotoDetailView(image: photo.image)
+        }
     }
+
+    private var galleryColumns: [GridItem] {
+        [GridItem(.adaptive(minimum: 80), spacing: 8)]
+    }
+}
+
+private struct SelectedTripPhoto: Identifiable {
+    let id = UUID()
+    let image: UIImage
 }
 
 #Preview {

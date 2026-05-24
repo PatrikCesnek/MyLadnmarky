@@ -65,6 +65,12 @@
         }
       }
     },
+    "Add Photo" : {
+
+    },
+    "Add Photos" : {
+
+    },
     "Add photos to 5 landmarks" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -353,6 +359,9 @@
           }
         }
       }
+    },
+    "Change Photo" : {
+
     },
     "Choose from Gallery" : {
       "extractionState" : "manual",
@@ -1239,6 +1248,9 @@
         }
       }
     },
+    "Photo" : {
+
+    },
     "Photo Album" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1357,6 +1369,9 @@
           }
         }
       }
+    },
+    "Remove Photo" : {
+
     },
     "Restaurants" : {
       "extractionState" : "manual",
