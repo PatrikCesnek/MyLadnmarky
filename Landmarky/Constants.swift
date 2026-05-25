@@ -9,10 +9,13 @@ import Foundation
 import MapKit
 
 public struct Constants {
+    static let showsMockData = false
+
     struct Strings {
         static let search = String(localized: "Search")
         static let homeTitle = String(localized: "My landmarks")
         static let achievementsTitle = String(localized: "Achievements")
+        static let privacyPolicy = String(localized: "Privacy Policy")
         static let noLandmarks = String(localized: "So far you have no saved landmarks")
         static let noAchievements = String(localized: "So far you don't have any achievements")
         static let unknownPlace = String(localized: "Unknown place")
@@ -223,6 +226,7 @@ public struct Constants {
         static let book = "book.fill"
         static let calendar = "calendar"
         static let photo = "photo"
+        static let privacy = "hand.raised.fill"
         static let xmarkCircleFill = "xmark.circle.fill"
     }
 

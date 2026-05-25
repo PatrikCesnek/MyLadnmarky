@@ -31,6 +31,23 @@
         }
       }
     },
+    "Privacy Policy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zásady ochrany osobních údajů"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zásady ochrany osobných údajov"
+          }
+        }
+      }
+    },
     "Add a photo to a landmark" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -76,6 +76,17 @@ struct ProfileContentView: View {
                     BadgeGridView(items: badgeItems)
                 }
             }
+
+            if let privacyPolicyURL = HelperFunctions.privacyPolicyURL {
+                Section {
+                    Link(destination: privacyPolicyURL) {
+                        Label(
+                            Constants.Strings.privacyPolicy,
+                            systemImage: Constants.SystemImages.privacy
+                        )
+                    }
+                }
+            }
         }
     }
 

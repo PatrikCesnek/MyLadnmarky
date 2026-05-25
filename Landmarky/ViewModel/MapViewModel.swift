@@ -69,12 +69,9 @@ class MapViewModel {
     
     func getLandmarkLocation() -> CLLocationCoordinate2D {
         guard let landmarkLocation = locationManager.location?.coordinate else {
-            self.error = Constants.Strings.locationError
-            return CLLocationCoordinate2D(
-                latitude: Constants.DefaultLandmarkLocation.defaultLat,
-                longitude: Constants.DefaultLandmarkLocation.defaultLon
-            )
+            return Constants.DefaultLandmarkLocation.defaultLocation
         }
+
         return landmarkLocation
     }
     
