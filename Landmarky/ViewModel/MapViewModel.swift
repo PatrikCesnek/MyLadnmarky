@@ -69,19 +69,22 @@ class MapViewModel {
     
     func getLandmarkLocation() -> CLLocationCoordinate2D {
         guard let landmarkLocation = locationManager.location?.coordinate else {
-            self.error = Constants.Strings.locationError
-            return CLLocationCoordinate2D(
-                latitude: Constants.DefaultLandmarkLocation.defaultLat,
-                longitude: Constants.DefaultLandmarkLocation.defaultLon
-            )
+            return Constants.DefaultLandmarkLocation.defaultLocation
         }
+
         return landmarkLocation
     }
     
     @MainActor
     func displayLandmarks(modelContext: ModelContext) {
-        let descriptor = FetchDescriptor<Landmark>(sortBy: [SortDescriptor(\.name)])
         error = nil
+
+        if Constants.showsMockData {
+            landmarks = Mock.MockLandmarks.data.sorted { $0.name < $1.name }
+            return
+        }
+
+        let descriptor = FetchDescriptor<Landmark>(sortBy: [SortDescriptor(\.name)])
         do {
             self.landmarks = try modelContext.fetch(descriptor)
         } catch {

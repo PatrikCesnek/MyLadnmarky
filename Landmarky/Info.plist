@@ -2,7 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access lets you take photos for your profile, landmarks, and travel diary. Photos stay on your device unless you choose to share them.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location access lets Landmarky show your position on Apple Maps and create landmarks at your current location.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photo library access is needed so you can add photos to your profile, landmarks, and travel diary.</string>
+	<string>Photo library access lets you choose photos for your profile, landmarks, and travel diary. Photos stay on your device unless you choose to share them.</string>
 </dict>
 </plist>

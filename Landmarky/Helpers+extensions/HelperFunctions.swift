@@ -61,6 +61,27 @@ struct HelperFunctions {
         default: return .green
         }
     }
+
+    static var privacyPolicyURL: URL? {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "worldwanderer-web.netlify.app"
+        components.path = "/privacy"
+        components.queryItems = [
+            URLQueryItem(name: "lang", value: appLanguageCode)
+        ]
+
+        return components.url
+    }
+
+    private static var appLanguageCode: String {
+        let preferredLanguage = Bundle.main.preferredLocalizations.first
+            ?? Locale.current.language.languageCode?.identifier
+            ?? "en"
+        let code = preferredLanguage.split(separator: "-").first.map(String.init) ?? preferredLanguage
+
+        return code == "Base" ? "en" : code.lowercased()
+    }
     
     static func deleteLandmark(using context: ModelContext, landmark: Landmark?) throws {
         guard let landmark else { return }

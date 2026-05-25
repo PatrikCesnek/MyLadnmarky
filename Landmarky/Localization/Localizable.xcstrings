@@ -31,6 +31,23 @@
         }
       }
     },
+    "Privacy Policy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zásady ochrany osobních údajů"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zásady ochrany osobných údajov"
+          }
+        }
+      }
+    },
     "Add a photo to a landmark" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1118,13 +1135,19 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Moje landmarky"
+            "value" : "Moje místa"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My places"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Moje landmarky"
+            "value" : "Moje miesta"
           }
         }
       }
