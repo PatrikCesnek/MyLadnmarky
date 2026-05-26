@@ -18,12 +18,14 @@ struct AddLandmarkView: View {
     @State private var selectedPhotoItem: PhotosPickerItem?
 
     @Binding private var isDeleted: Bool
+    private let onSave: () -> Void
 
     init(
         latitude: Double,
         longitude: Double,
         landmark: Landmark? = nil,
-        isDeleted: Binding<Bool>
+        isDeleted: Binding<Bool>,
+        onSave: @escaping () -> Void = {}
     ) {
         _viewModel = State(
             initialValue: AddLandmarkViewModel(
@@ -33,6 +35,7 @@ struct AddLandmarkView: View {
             )
         )
         self._isDeleted = isDeleted
+        self.onSave = onSave
     }
 
     var body: some View {
@@ -153,7 +156,23 @@ struct AddLandmarkView: View {
             }
         }
         .onChange(of: viewModel.didSave) { _, saved in
-            if saved { dismiss() }
+            if saved {
+                onSave()
+                dismiss()
+            }
+        }
+        .alert(
+            Constants.Strings.errorTitle,
+            isPresented: Binding(
+                get: { viewModel.alertText != nil },
+                set: { isPresented in
+                    if !isPresented { viewModel.alertText = nil }
+                }
+            )
+        ) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(viewModel.alertText ?? "")
         }
         .confirmationDialog(
             Constants.Strings.choosePhotoSource,

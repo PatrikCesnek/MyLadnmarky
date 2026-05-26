@@ -47,7 +47,10 @@ struct MapView: View {
                         AddLandmarkView(
                             latitude: location.latitude,
                             longitude: location.longitude,
-                            isDeleted: $viewModel.isDeleted
+                            isDeleted: $viewModel.isDeleted,
+                            onSave: {
+                                viewModel.displayLandmarks(modelContext: modelContext)
+                            }
                         )
                     }
                     .padding(.horizontal, 8)

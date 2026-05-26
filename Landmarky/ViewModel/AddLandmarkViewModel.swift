@@ -42,6 +42,7 @@ class AddLandmarkViewModel {
     var showCamera = false
     var showPhotoPicker = false
     var error: String?
+    var alertText: String?
     var didSave = false
     var visitDate: Date = Date()
     var hasVisitDate: Bool = false
@@ -58,7 +59,7 @@ class AddLandmarkViewModel {
 
     private var hasValidCategory: Bool {
         if selectedCategory == Constants.Categories.custom && category.isEmpty {
-            error = Constants.Strings.invalidCustomCategory
+            alertText = Constants.Strings.invalidCustomCategory
             return false
         }
 
@@ -114,6 +115,7 @@ class AddLandmarkViewModel {
     func editLandmark(using context: ModelContext) {
         guard let landmark else { return }
         error = nil
+        alertText = nil
         guard hasValidCategory, let coordinates = validatedCoordinates else { return }
         title = title.trimmingCharacters(in: .whitespacesAndNewlines)
         description = description.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -139,6 +141,7 @@ class AddLandmarkViewModel {
     @MainActor
     func addLandmark(using context: ModelContext) {
         error = nil
+        alertText = nil
         guard hasValidCategory, let coordinates = validatedCoordinates else { return }
 
         title = title.trimmingCharacters(in: .whitespacesAndNewlines)

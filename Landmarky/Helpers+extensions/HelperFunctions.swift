@@ -46,19 +46,30 @@ struct HelperFunctions {
         }
     }
     
+    enum PlaceColors {
+        static let lakes = Color(hex: "3399FF")           // Vibrant blue
+        static let castles = Color(hex: "8B6F47")         // Warm stone
+        static let restaurants = Color(hex: "FF8033")     // Sunset orange
+        static let bars = Color(hex: "E63366")            // Vivid pink/magenta
+        static let shops = Color(hex: "B366CC")           // Rich purple
+        static let entertainment = Color(hex: "FFD700")   // Gold
+        static let nature = Color(hex: "33B366")          // Forest green
+        static let neutral = Color(hex: "999999")         // Neutral gray
+    }
+
     static func changeAnnotationColor(categoryName: String) -> Color {
         switch categoryName {
-        case Constants.Categories.lakes: return .blue
-        case Constants.Categories.castles: return .gray
-        case Constants.Categories.restaurants: return .orange
-        case Constants.Categories.bars: return .pink
-        case Constants.Categories.shops: return .purple
-        case Constants.Categories.entertainment: return .yellow
+        case Constants.Categories.lakes: return PlaceColors.lakes
+        case Constants.Categories.castles: return PlaceColors.castles
+        case Constants.Categories.restaurants: return PlaceColors.restaurants
+        case Constants.Categories.bars: return PlaceColors.bars
+        case Constants.Categories.shops: return PlaceColors.shops
+        case Constants.Categories.entertainment: return PlaceColors.entertainment
         case Constants.Categories.hills,
-            Constants.Categories.lookouts,
-            Constants.Categories.custom,
-            Constants.Categories.other: return .green
-        default: return .green
+            Constants.Categories.lookouts: return PlaceColors.nature
+        case Constants.Categories.custom,
+            Constants.Categories.other: return PlaceColors.neutral
+        default: return PlaceColors.nature
         }
     }
 
@@ -109,3 +120,44 @@ struct HelperFunctions {
         )
     }
 }
+extension Color {
+    init(hex: String) {
+        let cleanedHex = hex
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: "#", with: "")
+
+        var value: UInt64 = 0
+        Scanner(string: cleanedHex).scanHexInt64(&value)
+
+        let alpha: Double
+        let red: Double
+        let green: Double
+        let blue: Double
+
+        switch cleanedHex.count {
+        case 3:
+            alpha = 1
+            red = Double((value >> 8) & 0xF) / 15
+            green = Double((value >> 4) & 0xF) / 15
+            blue = Double(value & 0xF) / 15
+        case 6:
+            alpha = 1
+            red = Double((value >> 16) & 0xFF) / 255
+            green = Double((value >> 8) & 0xFF) / 255
+            blue = Double(value & 0xFF) / 255
+        case 8:
+            alpha = Double((value >> 24) & 0xFF) / 255
+            red = Double((value >> 16) & 0xFF) / 255
+            green = Double((value >> 8) & 0xFF) / 255
+            blue = Double(value & 0xFF) / 255
+        default:
+            alpha = 1
+            red = 0
+            green = 0.5
+            blue = 0
+        }
+
+        self.init(.sRGB, red: red, green: green, blue: blue, opacity: alpha)
+    }
+}
+
