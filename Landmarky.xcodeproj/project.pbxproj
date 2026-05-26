@@ -423,6 +423,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Landmarky/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Worldwanderer;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access lets you take photos for your profile, landmarks, and travel diary. Photos stay on your device unless you choose to share them.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location access lets Landmarky show your position on Apple Maps and create landmarks at your current location.";
@@ -461,6 +462,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Landmarky/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Worldwanderer;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access lets you take photos for your profile, landmarks, and travel diary. Photos stay on your device unless you choose to share them.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location access lets Landmarky show your position on Apple Maps and create landmarks at your current location.";
