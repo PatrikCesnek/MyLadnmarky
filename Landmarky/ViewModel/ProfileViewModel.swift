@@ -37,7 +37,7 @@ class ProfileViewModel {
             selectedImageData = mockUser.image
             isEditing = false
 
-            let landmarks = Mock.MockLandmarks.data
+            let landmarks = Mock.MockLandmarks.data.filter { !$0.isWishlisted }
             landmarkCount = landmarks.count
 
             let stats = BadgeStats(landmarks: landmarks, tripCount: Mock.MockTrips.data.count)
@@ -56,7 +56,9 @@ class ProfileViewModel {
             isEditing = true
         }
 
-        let landmarkDescriptor = FetchDescriptor<Landmark>()
+        let landmarkDescriptor = FetchDescriptor<Landmark>(
+            predicate: #Predicate { $0.isWishlisted == false }
+        )
         let landmarks = (try? context.fetch(landmarkDescriptor)) ?? []
         landmarkCount = landmarks.count
 

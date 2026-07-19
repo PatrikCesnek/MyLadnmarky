@@ -84,6 +84,7 @@ coverage/
 *.pem
 
 # AI assistants and local agent state
+CLAUDE.md
 .claude/
 .codex/
 .cursor/
@@ -105,6 +106,8 @@ CLAUDE.local.md
 .agents/logs/
 .agents/memory/
 .ruflo/
+.claude-flow/
+.swarm/
 
 # Editor folders
 .vscode/

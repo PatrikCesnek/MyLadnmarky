@@ -890,6 +890,23 @@
         }
       }
     },
+    "Historical landmarks" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Historické památky"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Historické pamiatky"
+          }
+        }
+      }
+    },
     "Home" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -954,6 +971,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Miesto uložené!"
+          }
+        }
+      }
+    },
+    "Your wish list is empty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Váš seznam přání je prázdný"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Váš zoznam prianí je prázdny"
           }
         }
       }
@@ -1112,6 +1146,23 @@
         }
       }
     },
+    "Mark as visited" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Označit jako navštívené"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Označiť ako navštívené"
+          }
+        }
+      }
+    },
     "Multi-day trip" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1186,6 +1237,23 @@
         }
       }
     },
+    "No results" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Žádné výsledky"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Žiadne výsledky"
+          }
+        }
+      }
+    },
     "No trips yet" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1199,6 +1267,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zatiaľ žiadne výlety"
+          }
+        }
+      }
+    },
+    "Not yet visited" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zatím nenavštíveno"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zatiaľ nenavštívené"
           }
         }
       }
@@ -1250,6 +1335,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Iné"
+          }
+        }
+      }
+    },
+    "Parks" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parky"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parky"
           }
         }
       }
@@ -1515,6 +1617,23 @@
         }
       }
     },
+    "Save places you want to visit and check them off when you get there" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ukládejte místa, která chcete navštívit, a odškrtněte si je, když se tam dostanete"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ukladajte miesta, ktoré chcete navštíviť, a odškrtnite si ich, keď sa tam dostanete"
+          }
+        }
+      }
+    },
     "Save your first landmark" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1545,6 +1664,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hľadať"
+          }
+        }
+      }
+    },
+    "Search for a place" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vyhledat místo"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vyhľadať miesto"
           }
         }
       }
@@ -1698,6 +1834,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rozprávač"
+          }
+        }
+      }
+    },
+    "Swipe to enter coordinates manually" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Přejetím zadáte souřadnice ručně"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Potiahnutím zadáte súradnice manuálne"
           }
         }
       }
@@ -2106,6 +2259,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dátum návštevy"
+          }
+        }
+      }
+    },
+    "Want to visit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chci navštívit"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chcem navštíviť"
+          }
+        }
+      }
+    },
+    "Wish list" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seznam přání"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zoznam prianí"
           }
         }
       }

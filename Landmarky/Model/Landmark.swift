@@ -19,6 +19,7 @@ final class Landmark {
     var image: Data?
     var landmarkDescription: String?
     var isFavorite: Bool = false
+    var isWishlisted: Bool = false
     var visitDate: Date?
     var country: String?
     var continent: String?
@@ -32,6 +33,7 @@ final class Landmark {
         image: Data? = nil,
         landmarkDescription: String? = nil,
         isFavorite: Bool = false,
+        isWishlisted: Bool = false,
         visitDate: Date? = nil,
         country: String? = nil,
         continent: String? = nil
@@ -44,6 +46,7 @@ final class Landmark {
         self.image = image
         self.landmarkDescription = landmarkDescription
         self.isFavorite = isFavorite
+        self.isWishlisted = isWishlisted
         self.visitDate = visitDate
         self.country = country
         self.continent = continent

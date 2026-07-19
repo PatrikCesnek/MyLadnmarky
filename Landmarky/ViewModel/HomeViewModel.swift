@@ -32,12 +32,17 @@ class HomeViewModel {
         isLoading = true
 
         if Constants.showsMockData {
-            landmarks = Mock.MockLandmarks.data.sorted { $0.name < $1.name }
+            landmarks = Mock.MockLandmarks.data
+                .filter { !$0.isWishlisted }
+                .sorted { $0.name < $1.name }
             isLoading = false
             return
         }
 
-        let descriptor = FetchDescriptor<Landmark>(sortBy: [SortDescriptor(\.name)])
+        let descriptor = FetchDescriptor<Landmark>(
+            predicate: #Predicate { $0.isWishlisted == false },
+            sortBy: [SortDescriptor(\.name)]
+        )
         do {
             self.landmarks = try modelContext.fetch(descriptor)
             isLoading = false
