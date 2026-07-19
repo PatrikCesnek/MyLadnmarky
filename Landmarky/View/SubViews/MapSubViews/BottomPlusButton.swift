@@ -9,23 +9,25 @@ import SwiftUI
 
 struct BottomPlusButton<Content: View>: View {
     private let destination: () -> Content
-    
+
+    @State private var isPresented = false
+    @State private var sessionID = UUID()
+
     init(@ViewBuilder destination: @escaping () -> Content) {
         self.destination = destination
     }
-    
+
     public var body: some View {
         VStack(alignment: .trailing) {
             Spacer()
-            
+
             HStack(alignment: .bottom) {
                 Spacer()
-                
-                NavigationLink(
-                    destination: {
-                        withAnimation {
-                            destination()
-                        }
+
+                Button(
+                    action: {
+                        sessionID = UUID()
+                        isPresented = true
                     },
                     label: {
                         Image(systemName: Constants.SystemImages.plus)
@@ -39,6 +41,10 @@ struct BottomPlusButton<Content: View>: View {
                 .buttonStyle(.glassProminent)
                 .clipShape(Circle())
             }
+        }
+        .navigationDestination(isPresented: $isPresented) {
+            destination()
+                .id(sessionID)
         }
     }
 }

@@ -95,27 +95,39 @@ struct AddLandmarkView: View {
 
                     Section(
                         content: {
-                            AddCoordinateSectionView(
+                            LocationCarouselView(
                                 latitude: $viewModel.latText,
-                                longitude: $viewModel.lonText
+                                longitude: $viewModel.lonText,
+                                title: $viewModel.title
                             )
                         },
                         header: { Text(Constants.Strings.location) }
                     )
 
-                    Section(
-                        content: {
-                            Toggle(Constants.Strings.addVisitDate, isOn: $viewModel.hasVisitDate.animation())
-                            if viewModel.hasVisitDate {
-                                DatePicker(
-                                    Constants.Strings.visitDateLabel,
-                                    selection: $viewModel.visitDate,
-                                    displayedComponents: .date
-                                )
-                            }
-                        },
-                        header: { Text(Constants.Strings.visitDateLabel) }
-                    )
+                    if viewModel.showsWishlistToggle {
+                        Section(
+                            content: {
+                                Toggle(Constants.Strings.wantToVisit, isOn: $viewModel.isWishlisted.animation())
+                            },
+                            header: { Text(Constants.Strings.wishlist) }
+                        )
+                    }
+
+                    if !viewModel.isWishlisted {
+                        Section(
+                            content: {
+                                Toggle(Constants.Strings.addVisitDate, isOn: $viewModel.hasVisitDate.animation())
+                                if viewModel.hasVisitDate {
+                                    DatePicker(
+                                        Constants.Strings.visitDateLabel,
+                                        selection: $viewModel.visitDate,
+                                        displayedComponents: .date
+                                    )
+                                }
+                            },
+                            header: { Text(Constants.Strings.visitDateLabel) }
+                        )
+                    }
 
                     if viewModel.isEdit {
                         Section {

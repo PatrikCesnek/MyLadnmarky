@@ -50,6 +50,26 @@ struct LandmarkDetailView: View {
             )
             .padding(16)
 
+            if landmark.isWishlisted {
+                HStack {
+                    Label(Constants.Strings.notYetVisited, systemImage: Constants.SystemImages.notVisitedClock)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+
+                    Spacer()
+
+                    Button {
+                        WishlistVisitService.markVisited(landmark, in: modelContext)
+                    } label: {
+                        Label(Constants.Strings.markAsVisited, systemImage: Constants.SystemImages.visitedCheckmark)
+                            .font(.caption.weight(.semibold))
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.green)
+                }
+                .padding(.horizontal, 16)
+            }
+
             Spacer()
 
             PrimaryButton(

@@ -60,6 +60,15 @@ public struct Constants {
         static let changePhoto = String(localized: "Change Photo")
         static let removePhoto = String(localized: "Remove Photo")
         static let addPhotos = String(localized: "Add Photos")
+        static let wishlist = String(localized: "Wish list")
+        static let wantToVisit = String(localized: "Want to visit")
+        static let notYetVisited = String(localized: "Not yet visited")
+        static let markAsVisited = String(localized: "Mark as visited")
+        static let emptyWishlist = String(localized: "Your wish list is empty")
+        static let emptyWishlistSubtitle = String(localized: "Save places you want to visit and check them off when you get there")
+        static let searchPlace = String(localized: "Search for a place")
+        static let noResults = String(localized: "No results")
+        static let swipeForCoordinates = String(localized: "Swipe to enter coordinates manually")
     }
 
     struct Buttons {
@@ -81,7 +90,9 @@ public struct Constants {
     struct Categories {
         static let lakes = String(localized: "Lakes")
         static let hills = String(localized: "Hills")
+        static let parks = String(localized: "Parks")
         static let castles = String(localized: "Castles")
+        static let historicalLandmarks = String(localized: "Historical landmarks")
         static let lookouts = String(localized: "Lookouts")
         static let restaurants = String(localized: "Restaurants")
         static let bars = String(localized: "Bars")
@@ -214,7 +225,9 @@ public struct Constants {
         static let emptyPhotoCard = "photo"
         static let lakeAnnotation = "water.waves"
         static let hillAnnotation = "mountain.2.fill"
+        static let parkAnnotation = "tree.fill"
         static let castleAnnotation = "building.columns.fill"
+        static let historicalLandmarkAnnotation = "scroll.fill"
         static let lookoutAnnotation = "binoculars.fill"
         static let restaurantAnnotation = "fork.knife.circle.fill"
         static let barAnnotation = "wineglass.fill"
@@ -228,6 +241,14 @@ public struct Constants {
         static let photo = "photo"
         static let privacy = "hand.raised.fill"
         static let xmarkCircleFill = "xmark.circle.fill"
+        static let wishlist = "bookmark"
+        static let notVisitedClock = "clock"
+        static let visitedCheckmark = "checkmark.circle.fill"
+        static let search = "magnifyingglass"
+    }
+
+    struct Wishlist {
+        static let autoVisitRadiusMeters: Double = 250
     }
 
     struct DefaultLandmarkLocation {

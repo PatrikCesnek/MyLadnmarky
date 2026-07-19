@@ -43,21 +43,25 @@ struct LandmarkImageView: View {
                     Image(systemName: Constants.SystemImages.personCircle)
                         .resizable()
                         .scaledToFit()
-                } else {
-                    Image(
-                        systemName:
-                        isCircular
-                        ? Constants.SystemImages.emptyPhoto
-                        : Constants.SystemImages.emptyPhotoCard
-                    )
-                    .renderingMode(.original)
-                    .resizable()
-                    .cornerRadius(cornerRadius)
-                    .overlay {
-                        if isCircular {
-                            Circle().stroke(.white, lineWidth: 6)
-                        }
+                } else if isCircular {
+                    ZStack {
+                        Circle()
+                            .fill(Color(.systemGray5))
+
+                        Image(systemName: Constants.SystemImages.emptyPhotoCard)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(28)
+                            .foregroundStyle(.secondary)
                     }
+                    .overlay {
+                        Circle().stroke(.white, lineWidth: 6)
+                    }
+                } else {
+                    Image(systemName: Constants.SystemImages.emptyPhotoCard)
+                        .renderingMode(.original)
+                        .resizable()
+                        .cornerRadius(cornerRadius)
                 }
             }
         }

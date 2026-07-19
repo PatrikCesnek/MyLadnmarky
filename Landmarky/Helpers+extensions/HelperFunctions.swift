@@ -36,7 +36,9 @@ struct HelperFunctions {
         switch category {
         case .lakes: return Constants.SystemImages.lakeAnnotation
         case .hills: return Constants.SystemImages.hillAnnotation
+        case .parks: return Constants.SystemImages.parkAnnotation
         case .castles: return Constants.SystemImages.castleAnnotation
+        case .historicalLandmarks: return Constants.SystemImages.historicalLandmarkAnnotation
         case .lookouts: return Constants.SystemImages.lookoutAnnotation
         case .restaurants: return Constants.SystemImages.restaurantAnnotation
         case .bars: return Constants.SystemImages.barAnnotation
@@ -49,6 +51,8 @@ struct HelperFunctions {
     enum PlaceColors {
         static let lakes = Color(hex: "3399FF")           // Vibrant blue
         static let castles = Color(hex: "8B6F47")         // Warm stone
+        static let parks = Color(hex: "66BB33")           // Fresh green
+        static let historical = Color(hex: "C0392B")      // Brick red
         static let restaurants = Color(hex: "FF8033")     // Sunset orange
         static let bars = Color(hex: "E63366")            // Vivid pink/magenta
         static let shops = Color(hex: "B366CC")           // Rich purple
@@ -61,6 +65,8 @@ struct HelperFunctions {
         switch categoryName {
         case Constants.Categories.lakes: return PlaceColors.lakes
         case Constants.Categories.castles: return PlaceColors.castles
+        case Constants.Categories.parks: return PlaceColors.parks
+        case Constants.Categories.historicalLandmarks: return PlaceColors.historical
         case Constants.Categories.restaurants: return PlaceColors.restaurants
         case Constants.Categories.bars: return PlaceColors.bars
         case Constants.Categories.shops: return PlaceColors.shops

@@ -46,6 +46,8 @@ class AddLandmarkViewModel {
     var didSave = false
     var visitDate: Date = Date()
     var hasVisitDate: Bool = false
+    var isWishlisted: Bool = false
+    private(set) var showsWishlistToggle = true
 
     private var validatedCoordinates: (latitude: Double, longitude: Double)? {
         guard let latitude = HelperFunctions.parseCoordinate(latText, type: .lat),
@@ -105,6 +107,8 @@ class AddLandmarkViewModel {
         }
         description = landmark.landmarkDescription ?? ""
         selectedImageData = landmark.image
+        isWishlisted = landmark.isWishlisted
+        showsWishlistToggle = landmark.isWishlisted
         if let date = landmark.visitDate {
             visitDate = date
             hasVisitDate = true
@@ -126,7 +130,8 @@ class AddLandmarkViewModel {
         landmark.longitude = coordinates.longitude
         landmark.image = selectedImageData
         landmark.landmarkDescription = description
-        landmark.visitDate = hasVisitDate ? visitDate : nil
+        landmark.isWishlisted = isWishlisted
+        landmark.visitDate = (hasVisitDate && !isWishlisted) ? visitDate : nil
 
         do {
             try context.save()
@@ -158,7 +163,8 @@ class AddLandmarkViewModel {
             longitude: coordinates.longitude,
             image: selectedImageData,
             landmarkDescription: description,
-            visitDate: hasVisitDate ? visitDate : nil
+            isWishlisted: isWishlisted,
+            visitDate: (hasVisitDate && !isWishlisted) ? visitDate : nil
         )
 
         context.insert(newLandmark)
