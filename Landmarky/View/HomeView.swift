@@ -54,6 +54,16 @@ struct HomeView: View {
                     }
                 }
                 .navigationTitle(Constants.Strings.homeTitle)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        NavigationLink {
+                            WishlistView()
+                        } label: {
+                            Image(systemName: Constants.SystemImages.wishlist)
+                        }
+                        .accessibilityLabel(Text(Constants.Strings.wishlist))
+                    }
+                }
                 .onAppear {
                     viewModel.fetchLandmarks(modelContext: modelContext)
                 }

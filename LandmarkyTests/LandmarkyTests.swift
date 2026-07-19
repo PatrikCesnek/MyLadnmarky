@@ -22,6 +22,105 @@ struct LandmarkyTests {
     }
 
     @MainActor
+    @Test func addLandmarkSavesWishlistStateWithoutVisitDate() throws {
+        let context = try makeContext()
+        let viewModel = AddLandmarkViewModel(
+            landmark: nil,
+            latitude: Constants.DefaultLandmarkLocation.defaultLat,
+            longitude: Constants.DefaultLandmarkLocation.defaultLon
+        )
+
+        viewModel.title = "Devín Castle"
+        viewModel.selectedCategory = Constants.Categories.castles
+        viewModel.latText = "48.174"
+        viewModel.lonText = "16.978"
+        viewModel.isWishlisted = true
+        viewModel.hasVisitDate = true
+
+        viewModel.addLandmark(using: context)
+
+        let landmarks = try context.fetch(FetchDescriptor<Landmark>())
+        #expect(landmarks.count == 1)
+        #expect(landmarks.first?.isWishlisted == true)
+        #expect(landmarks.first?.visitDate == nil)
+    }
+
+    @MainActor
+    @Test func wishlistToggleHiddenForVisitedLandmarksOnly() {
+        let newLandmarkVM = AddLandmarkViewModel(landmark: nil, latitude: 48, longitude: 17)
+        #expect(newLandmarkVM.showsWishlistToggle)
+
+        let visited = Landmark(name: "Visited", category: "Parks", latitude: 48, longitude: 17)
+        let visitedVM = AddLandmarkViewModel(landmark: visited, latitude: 48, longitude: 17)
+        #expect(!visitedVM.showsWishlistToggle)
+
+        let wishlisted = Landmark(name: "Wanted", category: "Parks", latitude: 48, longitude: 17, isWishlisted: true)
+        let wishlistedVM = AddLandmarkViewModel(landmark: wishlisted, latitude: 48, longitude: 17)
+        #expect(wishlistedVM.showsWishlistToggle)
+    }
+
+    @MainActor
+    @Test func markVisitedClearsWishlistAndSetsVisitDate() throws {
+        let context = try makeContext()
+        let landmark = Landmark(
+            name: "Sky Bridge",
+            category: Constants.Categories.lookouts,
+            latitude: 50.2,
+            longitude: 16.8,
+            isWishlisted: true
+        )
+        context.insert(landmark)
+        try context.save()
+
+        WishlistVisitService.markVisited(landmark, in: context)
+
+        #expect(landmark.isWishlisted == false)
+        #expect(landmark.visitDate != nil)
+    }
+
+    @Test func autoVisitSelectsOnlyNearbyWishlistedLandmarks() {
+        let near = Landmark(name: "Near", category: "Parks", latitude: 48.1495, longitude: 17.1077, isWishlisted: true)
+        let far = Landmark(name: "Far", category: "Parks", latitude: 48.25, longitude: 17.1077, isWishlisted: true)
+        let nearButVisited = Landmark(name: "Visited", category: "Parks", latitude: 48.1495, longitude: 17.1077)
+        let noCoordinates = Landmark(name: "Nowhere", category: "Parks", isWishlisted: true)
+
+        let result = WishlistVisitService.landmarksToAutoVisit(
+            currentLatitude: 48.1486,
+            currentLongitude: 17.1077,
+            wishlisted: [near, far, nearButVisited, noCoordinates],
+            radiusMeters: 250
+        )
+
+        #expect(result.map(\.name) == ["Near"])
+    }
+
+    @MainActor
+    @Test func placeSearchSelectionFillsQueryAndClearsResults() {
+        let viewModel = PlaceSearchViewModel()
+        let result = PlaceSearchResult(
+            name: "Bratislava Castle",
+            detail: "Bratislava, Slovakia",
+            latitude: 48.142,
+            longitude: 17.1
+        )
+
+        viewModel.select(result)
+
+        #expect(viewModel.query == "Bratislava Castle")
+        #expect(viewModel.results.isEmpty)
+        #expect(!viewModel.isSearching)
+    }
+
+    @Test func parksAndHistoricalLandmarksAreFullyRegistered() {
+        for category in [LandmarkCategory.parks, .historicalLandmarks] {
+            #expect(LandmarkCategory.predefinedCategories.contains(category))
+            #expect(LandmarkCategory(from: category.localizedName) == category)
+            #expect(HelperFunctions.getCategoryString(category.localizedName) != Constants.SystemImages.mappin)
+            #expect(HelperFunctions.changeAnnotationColor(categoryName: category.localizedName) != HelperFunctions.PlaceColors.neutral)
+        }
+    }
+
+    @MainActor
     @Test func addLandmarkTrimsInputAndPersistsValidData() throws {
         let context = try makeContext()
         let viewModel = AddLandmarkViewModel(
