@@ -41,6 +41,53 @@ struct OnboardingPolicyTests {
     }
 }
 
+@MainActor
+struct ProfileNameServiceTests {
+    @Test func savesTrimmedNameIntoANewProfile() throws {
+        let context = try TestSupport.makeContext()
+
+        let saved = try ProfileNameService.save(firstName: "  Patrik ", lastName: " Cesnek  ", in: context)
+
+        #expect(saved)
+        let profiles = try context.fetch(FetchDescriptor<Profile>())
+        #expect(profiles.count == 1)
+        #expect(profiles.first?.name == "Patrik")
+        #expect(profiles.first?.lastName == "Cesnek")
+    }
+
+    @Test func emptyLastNameIsStoredAsNil() throws {
+        let context = try TestSupport.makeContext()
+
+        try ProfileNameService.save(firstName: "Patrik", lastName: "   ", in: context)
+
+        #expect(try context.fetch(FetchDescriptor<Profile>()).first?.lastName == nil)
+    }
+
+    @Test func blankFirstNameSavesNothing() throws {
+        let context = try TestSupport.makeContext()
+
+        let saved = try ProfileNameService.save(firstName: "  ", lastName: "Cesnek", in: context)
+
+        #expect(!saved)
+        #expect(try context.fetch(FetchDescriptor<Profile>()).isEmpty)
+    }
+
+    @Test func savingAgainUpdatesTheSameProfileAndKeepsPhoto() throws {
+        let context = try TestSupport.makeContext()
+        context.insert(Profile(name: "Old", lastName: "Name", image: Data([1, 2, 3])))
+        try context.save()
+
+        try ProfileNameService.save(firstName: "Patrik", lastName: "", in: context)
+        try ProfileNameService.save(firstName: "Patrik", lastName: "Cesnek", in: context)
+
+        let profiles = try context.fetch(FetchDescriptor<Profile>())
+        #expect(profiles.count == 1)
+        #expect(profiles.first?.name == "Patrik")
+        #expect(profiles.first?.lastName == "Cesnek")
+        #expect(profiles.first?.image == Data([1, 2, 3]))
+    }
+}
+
 struct LocalizationCoverageTests {
     private static let supportedLanguages = ["sk", "cs"]
 

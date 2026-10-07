@@ -152,6 +152,8 @@ public struct Constants {
         static let skip = String(localized: "Skip")
         static let onboardingWelcomeTitle = String(localized: "Welcome to Worldwanderer")
         static let onboardingWelcomeMessage = String(localized: "Your private travel map and diary. Save the places that matter and watch your world fill up.")
+        static let onboardingNameTitle = String(localized: "What should we call you?")
+        static let onboardingNameMessage = String(localized: "Your name stays on your iPhone, like everything else.")
         static let onboardingFeaturesTitle = String(localized: "What you can do")
         static let onboardingFeatureWorld = String(localized: "Every country you visit lights up on your world map.")
         static let onboardingFeatureDiary = String(localized: "Keep trips with photos, notes and the places you saw.")

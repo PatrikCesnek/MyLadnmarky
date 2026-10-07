@@ -4576,6 +4576,40 @@
           }
         }
       }
+    },
+    "What should we call you?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jak vás máme oslovovat?"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ako vás máme oslovovať?"
+          }
+        }
+      }
+    },
+    "Your name stays on your iPhone, like everything else." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vaše jméno zůstává ve vašem iPhonu, stejně jako všechno ostatní."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vaše meno zostáva vo vašom iPhone, rovnako ako všetko ostatné."
+          }
+        }
+      }
     }
   },
   "version" : "1.1"
