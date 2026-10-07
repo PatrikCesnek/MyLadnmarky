@@ -11,6 +11,9 @@ final class Trip {
     var notes: String?
     var image: Data?
     var images: [Data]?
+    /// Places visited on this trip. Deleting the trip keeps the places (nullify).
+    @Relationship(deleteRule: .nullify, inverse: \Landmark.trips)
+    var landmarks: [Landmark]? = []
 
     init(
         id: UUID = UUID(),
@@ -47,6 +50,11 @@ final class Trip {
 
     var tripImages: [UIImage] {
         photoData.compactMap { UIImage(data: $0) }
+    }
+
+    /// Linked places in the order they were visited; undated ones go last, by name.
+    var orderedLandmarks: [Landmark] {
+        TripPlaces.visitOrder(landmarks ?? [])
     }
 
     var tripImage: UIImage? {

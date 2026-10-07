@@ -69,6 +69,139 @@ public struct Constants {
         static let searchPlace = String(localized: "Search for a place")
         static let noResults = String(localized: "No results")
         static let swipeForCoordinates = String(localized: "Swipe to enter coordinates manually")
+        static let badgeUnlocked = String(localized: "Badge unlocked!")
+        static let nextBadge = String(localized: "Next badge")
+        static let places = String(localized: "Places")
+        static let addPlaces = String(localized: "Add places")
+        static let editPlaces = String(localized: "Edit places")
+        static let allPlaces = String(localized: "All places")
+        static let suggestedForDates = String(localized: "Suggested for these dates")
+        static let partOfTrip = String(localized: "Part of trip")
+        static let yourWorld = String(localized: "Your world")
+        static let continents = String(localized: "Continents")
+        static let visitedCountries = String(localized: "Visited countries")
+        static let noCountriesYet = String(localized: "No countries yet")
+        static let noCountriesYetSubtitle = String(localized: "Save a place and its country lights up on your map")
+
+        static let findPlacesInPhotos = String(localized: "Find places in your photos")
+        static let photoImportIntro = String(localized: "Worldwanderer looks at where your photos were taken and suggests places to save. You choose what gets added.")
+        static let photosStayOnDevice = String(localized: "Your photos never leave your iPhone.")
+        static let scanMyPhotos = String(localized: "Scan my photos")
+        static let scanningPhotos = String(localized: "Scanning your photos…")
+        static let addingPlaces = String(localized: "Adding places…")
+        static let noNewPlacesFound = String(localized: "No new places found")
+        static let noNewPlacesFoundSubtitle = String(localized: "Only photos with a location that isn't saved yet show up here.")
+        static let photoAccessOff = String(localized: "Photo access is off")
+        static let photoAccessOffSubtitle = String(localized: "Allow access in Settings to find places in your photos.")
+        static let openSettings = String(localized: "Open Settings")
+        static let limitedPhotoAccess = String(localized: "Only photos you've shared with Worldwanderer are scanned.")
+        static let selectAll = String(localized: "Select all")
+        static let deselectAll = String(localized: "Deselect all")
+        static let placesAdded = String(localized: "Places added!")
+
+        static func foundPlaces(_ count: Int) -> String {
+            String(localized: "We found \(count) places")
+        }
+
+        static func addPlacesCount(_ count: Int) -> String {
+            String(localized: "Add \(count) places")
+        }
+
+        static func photosCount(_ count: Int) -> String {
+            String(localized: "\(count) photos")
+        }
+
+        static let yearInReview = String(localized: "Year in review")
+        static let yearInReviewIntro = String(localized: "A look back at your year of exploring")
+        static let placesYouVisited = String(localized: "Places you visited")
+        static let favoriteCategory = String(localized: "Favorite category")
+        static let busiestMonth = String(localized: "Busiest month")
+        static let trips = String(localized: "Trips")
+        static let longestTrip = String(localized: "Longest trip")
+        static let badgesEarned = String(localized: "Badges earned")
+        static let year = String(localized: "Year")
+        static let nothingToReview = String(localized: "Nothing to look back on yet")
+        static let nothingToReviewSubtitle = String(localized: "Save places and trips and your year in review fills up.")
+
+        static func yourYear(_ year: Int) -> String {
+            let yearText = String(year)
+            return String(localized: "Your \(yearText)")
+        }
+
+        static func yearReviewReady(_ year: Int) -> String {
+            let yearText = String(year)
+            return String(localized: "Your \(yearText) in review is ready")
+        }
+
+        static func newCountriesCount(_ count: Int) -> String {
+            String(localized: "\(count) new countries")
+        }
+
+        static func tripsCount(_ count: Int) -> String {
+            String(localized: "\(count) trips")
+        }
+
+        static func daysCount(_ count: Int) -> String {
+            String(localized: "\(count) days")
+        }
+
+        static func badgesCount(_ count: Int) -> String {
+            String(localized: "\(count) badges")
+        }
+
+        static let skip = String(localized: "Skip")
+        static let onboardingWelcomeTitle = String(localized: "Welcome to Worldwanderer")
+        static let onboardingWelcomeMessage = String(localized: "Your private travel map and diary. Save the places that matter and watch your world fill up.")
+        static let onboardingNameTitle = String(localized: "What should we call you?")
+        static let onboardingNameMessage = String(localized: "Your name stays on your iPhone, like everything else.")
+        static let onboardingFeaturesTitle = String(localized: "What you can do")
+        static let onboardingFeatureWorld = String(localized: "Every country you visit lights up on your world map.")
+        static let onboardingFeatureDiary = String(localized: "Keep trips with photos, notes and the places you saw.")
+        static let onboardingFeatureShare = String(localized: "Turn places, trips and your year into cards to share.")
+        static let onboardingPrivacyTitle = String(localized: "Private by design")
+        static let onboardingPrivacyMessage = String(localized: "No account, no ads, no tracking. Everything stays on your iPhone, and you decide what to share.")
+        static let onboardingStartTitle = String(localized: "Let's get started")
+        static let onboardingStartMessage = String(localized: "The quickest start: let Worldwanderer find the places in your photos.")
+        static let allowLocation = String(localized: "Allow location")
+        static let allowLocationReason = String(localized: "To show you on the map, save places where you stand and check off wish list places when you arrive.")
+        static let startExploring = String(localized: "Start exploring")
+
+        static func onboardingFeatureBadges(_ count: Int) -> String {
+            String(localized: "Unlock \(count) badges as you explore.")
+        }
+
+        static func countriesCount(_ count: Int) -> String {
+            String(localized: "\(count) countries")
+        }
+
+        static func continentsCount(_ count: Int) -> String {
+            String(localized: "\(count) continents")
+        }
+
+        static func worldShare(_ share: Double) -> String {
+            let percent = share.formatted(.percent.precision(.fractionLength(0...1)))
+            return String(localized: "\(percent) of the world")
+        }
+
+        static func worldSummary(continents: Int, share: Double) -> String {
+            "\(continentsCount(continents)) · \(worldShare(share))"
+        }
+
+        static func addPlacesFromDates(_ count: Int) -> String {
+            String(localized: "Add \(count) places from these dates")
+        }
+
+        static func placesCount(_ count: Int) -> String {
+            String(localized: "\(count) places")
+        }
+
+        static func badgePosition(_ index: Int, of total: Int) -> String {
+            String(localized: "\(index) of \(total)")
+        }
+
+        static func badgeRemaining(_ count: Int) -> String {
+            String(localized: "\(count) to go")
+        }
     }
 
     struct Buttons {
@@ -85,6 +218,9 @@ public struct Constants {
         static let takePhoto = String(localized: "Take a photo")
         static let chooseFromGallery = String(localized: "Choose from Gallery")
         static let errorRetryButton = String(localized: "Try Again")
+        static let continueButton = String(localized: "Continue")
+        static let done = String(localized: "Done")
+        static let share = String(localized: "Share")
     }
 
     struct Categories {
@@ -108,6 +244,20 @@ public struct Constants {
         static let africa = "Africa"
         static let northAmerica = "North America"
         static let southAmerica = "South America"
+        static let oceania = "Oceania"
+
+        /// Continents are stored in English; this is the display name.
+        static func localizedName(_ continent: String) -> String {
+            switch continent {
+            case europe: String(localized: "Europe")
+            case asia: String(localized: "Asia")
+            case africa: String(localized: "Africa")
+            case northAmerica: String(localized: "North America")
+            case southAmerica: String(localized: "South America")
+            case oceania: String(localized: "Oceania")
+            default: continent
+            }
+        }
     }
 
     struct Badges {
@@ -245,6 +395,9 @@ public struct Constants {
         static let notVisitedClock = "clock"
         static let visitedCheckmark = "checkmark.circle.fill"
         static let search = "magnifyingglass"
+        static let globe = "globe.europe.africa.fill"
+        static let share = "square.and.arrow.up"
+        static let photoImport = "photo.on.rectangle.angled"
     }
 
     struct Wishlist {

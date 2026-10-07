@@ -25,6 +25,8 @@ struct ProfileCellEditView: View {
     var body: some View {
         VStack(alignment: .leading) {
             TextField(prompt, text: $text)
+                .autocorrectionDisabled()
+                .textInputAutocapitalization(.words)
             if showDivider {
                 Divider()
             }

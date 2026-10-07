@@ -34,12 +34,21 @@ struct TripDetailView: View {
                     Text(notes)
                         .font(.body)
                 }
+
+                if !trip.orderedLandmarks.isEmpty {
+                    TripPlacesSection(landmarks: trip.orderedLandmarks)
+                        .padding(.top, 8)
+                }
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .navigationTitle(trip.title)
         .toolbar {
+            ShareCardButton(title: trip.title, contentID: shareContentID) {
+                TripShareCard(trip: trip)
+            }
+
             Button {
                 isEditing = true
             } label: {
@@ -57,6 +66,16 @@ struct TripDetailView: View {
         .sheet(item: $selectedPhoto) { photo in
             TripPhotoDetailView(image: photo.image)
         }
+    }
+
+    /// Changes whenever something shown on the share card changes.
+    private var shareContentID: String {
+        [
+            trip.title,
+            trip.dateRangeText,
+            String(trip.photoData.count),
+            (trip.landmarks ?? []).map(\.id.uuidString).sorted().joined()
+        ].joined(separator: "|")
     }
 
     private var galleryColumns: [GridItem] {

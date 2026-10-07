@@ -53,7 +53,7 @@ struct BadgeStats {
             return !desc.isEmpty
         }.count
         self.uniqueCategories = Set(landmarks.map { $0.category })
-        self.uniqueCountries = Set(landmarks.compactMap { $0.country })
+        self.uniqueCountries = Set(landmarks.compactMap { $0.countryKey })
         self.uniqueContinents = Set(landmarks.compactMap { $0.continent })
         self.tripCount = tripCount
 
@@ -63,7 +63,7 @@ struct BadgeStats {
         var african = Set<String>()
 
         for landmark in landmarks {
-            guard let country = landmark.country, let continent = landmark.continent else { continue }
+            guard let country = landmark.countryKey, let continent = landmark.continent else { continue }
             switch continent {
             case Constants.Continents.europe: european.insert(country)
             case Constants.Continents.asia: asian.insert(country)
@@ -300,6 +300,19 @@ enum Badge: String, CaseIterable, Identifiable {
         case .africanExplorer: return (min(stats.africanCountries.count, 5), 5)
         case .ultimateTraveler: return (min(stats.uniqueCountries.count, 100), 100)
         }
+    }
+
+    /// The unearned badge the user is closest to, preferring lower tiers on ties.
+    /// Badges with no progress at all aren't suggested.
+    static func nextUp(stats: BadgeStats) -> BadgeItem? {
+        evaluateAll(stats: stats)
+            .filter { !$0.isEarned && $0.progress.current > 0 && $0.progress.target > 0 }
+            .max { lhs, rhs in
+                let lhsRatio = Double(lhs.progress.current) / Double(lhs.progress.target)
+                let rhsRatio = Double(rhs.progress.current) / Double(rhs.progress.target)
+                if lhsRatio != rhsRatio { return lhsRatio < rhsRatio }
+                return lhs.badge.tier > rhs.badge.tier
+            }
     }
 
     static func evaluateAll(stats: BadgeStats) -> [BadgeItem] {

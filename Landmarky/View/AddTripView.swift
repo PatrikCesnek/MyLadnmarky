@@ -1,4 +1,5 @@
 import PhotosUI
+import SwiftData
 import SwiftUI
 import UIKit
 
@@ -16,6 +17,11 @@ struct AddTripView: View {
     @State private var showPhotoSourceSheet = false
     @State private var showPhotoPicker = false
     @State private var showCamera = false
+    @State private var selectedLandmarkIDs: Set<UUID> = []
+    @State private var showPlacesPicker = false
+
+    @Query(filter: #Predicate<Landmark> { $0.isWishlisted == false }, sort: \Landmark.name)
+    private var visitedLandmarks: [Landmark]
 
     private let galleryColumns = [
         GridItem(.adaptive(minimum: 80), spacing: 8)
@@ -31,6 +37,7 @@ struct AddTripView: View {
             _notes = State(initialValue: trip.notes ?? "")
             _isMultiDay = State(initialValue: trip.endDate != nil)
             _selectedImageData = State(initialValue: trip.photoData)
+            _selectedLandmarkIDs = State(initialValue: Set((trip.landmarks ?? []).map(\.id)))
         }
     }
 
@@ -58,6 +65,8 @@ struct AddTripView: View {
                     )
                 }
             }
+
+            placesSection
 
             Section(Constants.Strings.photo) {
                 if !selectedImageData.isEmpty {
@@ -105,7 +114,7 @@ struct AddTripView: View {
                 Image(systemName: Constants.SystemImages.editSaveButtonImage)
                     .font(.headline)
             }
-            .buttonStyle(.glassProminent)
+            .prominentButtonStyle()
             .tint(.green)
         }
         .confirmationDialog(
@@ -130,9 +139,75 @@ struct AddTripView: View {
         .onChange(of: selectedPhotoItems) { _, newItems in
             Task { await loadPhotos(from: newItems) }
         }
+        .sheet(isPresented: $showPlacesPicker) {
+            NavigationStack {
+                TripPlacesPickerView(
+                    selection: $selectedLandmarkIDs,
+                    startDate: startDate,
+                    endDate: isMultiDay ? endDate : nil
+                )
+            }
+        }
         .sheet(isPresented: $showCamera) {
             ImagePickerView(sourceType: .camera) { image in
                 handlePickedImage(image)
+            }
+        }
+    }
+
+    /// Resolved from visited places plus the trip's current links, so saving never drops a
+    /// link just because that place isn't in the picker's list.
+    private var selectedLandmarks: [Landmark] {
+        var candidates: [UUID: Landmark] = [:]
+        for landmark in visitedLandmarks + (existingTrip?.landmarks ?? []) {
+            candidates[landmark.id] = landmark
+        }
+        return TripPlaces.visitOrder(selectedLandmarkIDs.compactMap { candidates[$0] })
+    }
+
+    private var dateSuggestions: [Landmark] {
+        TripPlaces.suggestions(
+            startDate: startDate,
+            endDate: isMultiDay ? endDate : nil,
+            from: visitedLandmarks
+        )
+    }
+
+    private var placesSection: some View {
+        Section(Constants.Strings.places) {
+            ForEach(selectedLandmarks) { landmark in
+                Label {
+                    Text(landmark.name)
+                } icon: {
+                    Image(systemName: HelperFunctions.getCategoryString(landmark.category))
+                        .foregroundStyle(HelperFunctions.changeAnnotationColor(categoryName: landmark.category))
+                }
+            }
+            .onDelete { offsets in
+                let landmarks = selectedLandmarks
+                for index in offsets {
+                    selectedLandmarkIDs.remove(landmarks[index].id)
+                }
+            }
+
+            if selectedLandmarkIDs.isEmpty, !dateSuggestions.isEmpty {
+                Button {
+                    selectedLandmarkIDs.formUnion(dateSuggestions.map(\.id))
+                } label: {
+                    Label(
+                        Constants.Strings.addPlacesFromDates(dateSuggestions.count),
+                        systemImage: "calendar.badge.plus"
+                    )
+                }
+            }
+
+            Button {
+                showPlacesPicker = true
+            } label: {
+                Label(
+                    selectedLandmarkIDs.isEmpty ? Constants.Strings.addPlaces : Constants.Strings.editPlaces,
+                    systemImage: "mappin.and.ellipse"
+                )
             }
         }
     }
@@ -171,7 +246,10 @@ struct AddTripView: View {
         let trimmedTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedTitle.isEmpty else { return }
 
+        let linkedLandmarks = selectedLandmarks
+
         if let trip = existingTrip {
+            trip.landmarks = linkedLandmarks
             trip.title = trimmedTitle
             trip.startDate = startDate
             trip.endDate = isMultiDay ? endDate : nil
@@ -187,6 +265,7 @@ struct AddTripView: View {
                 images: selectedImageData
             )
             modelContext.insert(trip)
+            trip.landmarks = linkedLandmarks
         }
 
         try? modelContext.save()
@@ -221,5 +300,5 @@ struct AddTripView: View {
     NavigationStack {
         AddTripView()
     }
-    .modelContainer(for: [Trip.self])
+    .modelContainer(for: AppSchema.models, inMemory: true)
 }

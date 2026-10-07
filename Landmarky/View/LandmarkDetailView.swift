@@ -20,6 +20,17 @@ struct LandmarkDetailView: View {
         self.landmark = landmark
     }
 
+    /// Changes whenever something shown on the share card changes.
+    private var shareContentID: String {
+        [
+            landmark.name,
+            landmark.category,
+            landmark.countryCode ?? "",
+            String(landmark.image?.count ?? 0),
+            String(landmark.visitDate?.timeIntervalSince1970 ?? 0)
+        ].joined(separator: "|")
+    }
+
     var body: some View {
         VStack {
             ZStack {
@@ -49,6 +60,27 @@ struct LandmarkDetailView: View {
                 description: landmark.landmarkDescription
             )
             .padding(16)
+
+            if !landmark.linkedTrips.isEmpty {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        ForEach(landmark.linkedTrips) { trip in
+                            NavigationLink {
+                                TripDetailView(trip: trip)
+                            } label: {
+                                Label(trip.title, systemImage: Constants.SystemImages.book)
+                                    .font(.caption.weight(.semibold))
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(.green.opacity(0.15), in: Capsule())
+                                    .foregroundStyle(.green)
+                            }
+                            .accessibilityLabel(Text("\(Constants.Strings.partOfTrip): \(trip.title)"))
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                }
+            }
 
             if landmark.isWishlisted {
                 HStack {
@@ -85,6 +117,10 @@ struct LandmarkDetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 HStack(spacing: 12) {
+                    ShareCardButton(title: landmark.name, contentID: shareContentID) {
+                        LandmarkShareCard(landmark: landmark)
+                    }
+
                     Button {
                         landmark.isFavorite.toggle()
                         try? modelContext.save()
