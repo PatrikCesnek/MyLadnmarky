@@ -77,6 +77,28 @@ public struct Constants {
         static let allPlaces = String(localized: "All places")
         static let suggestedForDates = String(localized: "Suggested for these dates")
         static let partOfTrip = String(localized: "Part of trip")
+        static let yourWorld = String(localized: "Your world")
+        static let continents = String(localized: "Continents")
+        static let visitedCountries = String(localized: "Visited countries")
+        static let noCountriesYet = String(localized: "No countries yet")
+        static let noCountriesYetSubtitle = String(localized: "Save a place and its country lights up on your map")
+
+        static func countriesCount(_ count: Int) -> String {
+            String(localized: "\(count) countries")
+        }
+
+        static func continentsCount(_ count: Int) -> String {
+            String(localized: "\(count) continents")
+        }
+
+        static func worldShare(_ share: Double) -> String {
+            let percent = share.formatted(.percent.precision(.fractionLength(0...1)))
+            return String(localized: "\(percent) of the world")
+        }
+
+        static func worldSummary(continents: Int, share: Double) -> String {
+            "\(continentsCount(continents)) · \(worldShare(share))"
+        }
 
         static func addPlacesFromDates(_ count: Int) -> String {
             String(localized: "Add \(count) places from these dates")
@@ -134,6 +156,20 @@ public struct Constants {
         static let africa = "Africa"
         static let northAmerica = "North America"
         static let southAmerica = "South America"
+        static let oceania = "Oceania"
+
+        /// Continents are stored in English; this is the display name.
+        static func localizedName(_ continent: String) -> String {
+            switch continent {
+            case europe: String(localized: "Europe")
+            case asia: String(localized: "Asia")
+            case africa: String(localized: "Africa")
+            case northAmerica: String(localized: "North America")
+            case southAmerica: String(localized: "South America")
+            case oceania: String(localized: "Oceania")
+            default: continent
+            }
+        }
     }
 
     struct Badges {
@@ -271,6 +307,7 @@ public struct Constants {
         static let notVisitedClock = "clock"
         static let visitedCheckmark = "checkmark.circle.fill"
         static let search = "magnifyingglass"
+        static let globe = "globe.europe.africa.fill"
     }
 
     struct Wishlist {

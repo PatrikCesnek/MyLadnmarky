@@ -23,6 +23,8 @@ final class Landmark {
     var visitDate: Date?
     var country: String?
     var continent: String?
+    /// ISO 3166-1 alpha-2, e.g. "SK". Language independent, unlike `country`.
+    var countryCode: String?
     /// Trips this place belongs to. Inverse of `Trip.landmarks`; removing a trip only unlinks it.
     var trips: [Trip]? = []
 
@@ -38,7 +40,8 @@ final class Landmark {
         isWishlisted: Bool = false,
         visitDate: Date? = nil,
         country: String? = nil,
-        continent: String? = nil
+        continent: String? = nil,
+        countryCode: String? = nil
     ) {
         self.id = id
         self.name = name
@@ -52,6 +55,13 @@ final class Landmark {
         self.visitDate = visitDate
         self.country = country
         self.continent = continent
+        self.countryCode = countryCode
+    }
+
+    /// Identity used when counting countries: the ISO code, or the stored name for places
+    /// saved before codes existed and not yet backfilled.
+    var countryKey: String? {
+        countryCode ?? country
     }
     
     var linkedTrips: [Trip] {

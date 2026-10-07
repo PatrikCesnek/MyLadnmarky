@@ -76,6 +76,11 @@ struct ContentView: View {
             WishlistVisitService.autoVisitNearby(using: modelContext)
             celebration.refresh()
         }
+        .task {
+            let backfill = CountryBackfillService(context: modelContext)
+            _ = try? backfill.backfillFromNames()
+            _ = try? await backfill.backfillByGeocoding()
+        }
         .onChange(of: scenePhase) { _, phase in
             if phase == .active {
                 WishlistVisitService.autoVisitNearby(using: modelContext)

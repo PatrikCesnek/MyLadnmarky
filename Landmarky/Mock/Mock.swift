@@ -6,25 +6,26 @@
 //
 
 import Foundation
+import SwiftData
 import SwiftUI
 
 struct Mock {
     struct MockLandmarks {
         @MainActor static let data: [Landmark] = [
-            Landmark(name: "Crystal Lake", category: LandmarkCategory.lakes.localizedName, latitude: 49.2, longitude: 16.6, landmarkDescription: mockDescription, isFavorite: true, visitDate: Date(timeIntervalSinceNow: -86400 * 18), country: "Czechia", continent: Constants.Continents.europe),
-            Landmark(name: "Eagle Peak", category: LandmarkCategory.hills.localizedName, latitude: 50.1, longitude: 14.4, visitDate: Date(timeIntervalSinceNow: -86400 * 12), country: "Czechia", continent: Constants.Continents.europe),
-            Landmark(name: "Riverside Park", category: LandmarkCategory.parks.localizedName, latitude: 48.15, longitude: 17.07, visitDate: Date(timeIntervalSinceNow: -86400 * 10), country: "Slovakia", continent: Constants.Continents.europe),
-            Landmark(name: "King's Castle", category: LandmarkCategory.castles.localizedName, latitude: 48.7, longitude: 17.2, landmarkDescription: mockDescription, isFavorite: true, visitDate: Date(timeIntervalSinceNow: -86400 * 8), country: "Slovakia", continent: Constants.Continents.europe),
-            Landmark(name: "Roman Gate", category: LandmarkCategory.historicalLandmarks.localizedName, latitude: 48.11, longitude: 16.86, landmarkDescription: mockDescription, country: "Austria", continent: Constants.Continents.europe),
-            Landmark(name: "Sky Tower", category: LandmarkCategory.lookouts.localizedName, latitude: 49.5, longitude: 15.9, country: "Czechia", continent: Constants.Continents.europe),
-            Landmark(name: "Gourmet Bistro", category: LandmarkCategory.restaurants.localizedName, latitude: 50.3, longitude: 14.2, country: "Czechia", continent: Constants.Continents.europe),
-            Landmark(name: "Sunset Bar", category: LandmarkCategory.bars.localizedName, latitude: 49.8, longitude: 15.0, landmarkDescription: mockDescription, country: "Czechia", continent: Constants.Continents.europe),
-            Landmark(name: "Central Mall", category: LandmarkCategory.shops.localizedName, latitude: 48.9, longitude: 16.5, country: "Austria", continent: Constants.Continents.europe),
-            Landmark(name: "Dreamland Park", category: LandmarkCategory.entertainment.localizedName, latitude: 50.0, longitude: 17.1, country: "Poland", continent: Constants.Continents.europe),
-            Landmark(name: "Mystic Point", category: LandmarkCategory.custom.localizedName, latitude: 49.6, longitude: 15.7, country: "Czechia", continent: Constants.Continents.europe),
-            Landmark(name: "Hidden Gem", category: LandmarkCategory.other.localizedName, latitude: 48.5, longitude: 16.3, landmarkDescription: mockDescription, country: "Hungary", continent: Constants.Continents.europe),
-            Landmark(name: "Veľká Homola", category: LandmarkCategory.lookouts.localizedName, latitude: 48.3446, longitude: 17.2495, isFavorite: true, country: "Slovakia", continent: Constants.Continents.europe),
-            Landmark(name: "Aurora Falls", category: LandmarkCategory.parks.localizedName, latitude: 48.9, longitude: 19.6, landmarkDescription: mockDescription, isWishlisted: true, country: "Slovakia", continent: Constants.Continents.europe),
+            Landmark(name: "Crystal Lake", category: LandmarkCategory.lakes.localizedName, latitude: 49.2, longitude: 16.6, landmarkDescription: mockDescription, isFavorite: true, visitDate: Date(timeIntervalSinceNow: -86400 * 18), country: "Czechia", continent: Constants.Continents.europe, countryCode: "CZ"),
+            Landmark(name: "Eagle Peak", category: LandmarkCategory.hills.localizedName, latitude: 50.1, longitude: 14.4, visitDate: Date(timeIntervalSinceNow: -86400 * 12), country: "Czechia", continent: Constants.Continents.europe, countryCode: "CZ"),
+            Landmark(name: "Riverside Park", category: LandmarkCategory.parks.localizedName, latitude: 48.15, longitude: 17.07, visitDate: Date(timeIntervalSinceNow: -86400 * 10), country: "Slovakia", continent: Constants.Continents.europe, countryCode: "SK"),
+            Landmark(name: "King's Castle", category: LandmarkCategory.castles.localizedName, latitude: 48.7, longitude: 17.2, landmarkDescription: mockDescription, isFavorite: true, visitDate: Date(timeIntervalSinceNow: -86400 * 8), country: "Slovakia", continent: Constants.Continents.europe, countryCode: "SK"),
+            Landmark(name: "Roman Gate", category: LandmarkCategory.historicalLandmarks.localizedName, latitude: 48.11, longitude: 16.86, landmarkDescription: mockDescription, country: "Austria", continent: Constants.Continents.europe, countryCode: "AT"),
+            Landmark(name: "Sky Tower", category: LandmarkCategory.lookouts.localizedName, latitude: 49.5, longitude: 15.9, country: "Czechia", continent: Constants.Continents.europe, countryCode: "CZ"),
+            Landmark(name: "Gourmet Bistro", category: LandmarkCategory.restaurants.localizedName, latitude: 50.3, longitude: 14.2, country: "Czechia", continent: Constants.Continents.europe, countryCode: "CZ"),
+            Landmark(name: "Sunset Bar", category: LandmarkCategory.bars.localizedName, latitude: 49.8, longitude: 15.0, landmarkDescription: mockDescription, country: "Czechia", continent: Constants.Continents.europe, countryCode: "CZ"),
+            Landmark(name: "Central Mall", category: LandmarkCategory.shops.localizedName, latitude: 48.9, longitude: 16.5, country: "Austria", continent: Constants.Continents.europe, countryCode: "AT"),
+            Landmark(name: "Dreamland Park", category: LandmarkCategory.entertainment.localizedName, latitude: 50.0, longitude: 17.1, country: "Poland", continent: Constants.Continents.europe, countryCode: "PL"),
+            Landmark(name: "Mystic Point", category: LandmarkCategory.custom.localizedName, latitude: 49.6, longitude: 15.7, country: "Czechia", continent: Constants.Continents.europe, countryCode: "CZ"),
+            Landmark(name: "Hidden Gem", category: LandmarkCategory.other.localizedName, latitude: 48.5, longitude: 16.3, landmarkDescription: mockDescription, country: "Hungary", continent: Constants.Continents.europe, countryCode: "HU"),
+            Landmark(name: "Veľká Homola", category: LandmarkCategory.lookouts.localizedName, latitude: 48.3446, longitude: 17.2495, isFavorite: true, country: "Slovakia", continent: Constants.Continents.europe, countryCode: "SK"),
+            Landmark(name: "Aurora Falls", category: LandmarkCategory.parks.localizedName, latitude: 48.9, longitude: 19.6, landmarkDescription: mockDescription, isWishlisted: true, country: "Slovakia", continent: Constants.Continents.europe, countryCode: "SK"),
             Landmark(
                 name: "Kučišdorfská priehrada",
                 category: LandmarkCategory.lakes.localizedName,
@@ -32,7 +33,8 @@ struct Mock {
                 longitude: 17.262833,
                 landmarkDescription: mockDescription,
                 country: "Slovakia",
-                continent: Constants.Continents.europe
+                continent: Constants.Continents.europe,
+                countryCode: "SK"
             )
         ]
         
@@ -74,5 +76,40 @@ struct Mock {
 
     struct MockProfile {
         @MainActor static let user = Profile(name: "Patrik", lastName: "Traveler")
+    }
+
+    /// In-memory store filled with fresh copies of the mock data, for previews.
+    @MainActor
+    static func previewContainer() -> ModelContainer {
+        let schema = AppSchema.schema
+        let container = try! ModelContainer(
+            for: schema,
+            configurations: ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+        )
+        let context = container.mainContext
+        let landmarks = MockLandmarks.data.map { mock in
+            Landmark(
+                name: mock.name,
+                category: mock.category,
+                latitude: mock.latitude,
+                longitude: mock.longitude,
+                landmarkDescription: mock.landmarkDescription,
+                isFavorite: mock.isFavorite,
+                isWishlisted: mock.isWishlisted,
+                visitDate: mock.visitDate,
+                country: mock.country,
+                continent: mock.continent,
+                countryCode: mock.countryCode
+            )
+        }
+        landmarks.forEach(context.insert)
+
+        for (index, mock) in MockTrips.data.enumerated() {
+            let trip = Trip(title: mock.title, startDate: mock.startDate, endDate: mock.endDate, notes: mock.notes)
+            context.insert(trip)
+            trip.landmarks = Array(landmarks.dropFirst(index * 2).prefix(3))
+        }
+        try? context.save()
+        return container
     }
 }

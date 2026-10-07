@@ -182,8 +182,10 @@ class AddLandmarkViewModel {
 
     private func geocodeLandmark(_ landmark: Landmark, latitude: Double, longitude: Double, context: ModelContext) {
         Task {
-            if let result = await GeocodingHelper.reverseGeocode(latitude: latitude, longitude: longitude) {
+            if let result = await GeocodingHelper.reverseGeocode(latitude: latitude, longitude: longitude),
+               !landmark.isDeleted, landmark.modelContext != nil {
                 landmark.country = result.country
+                landmark.countryCode = result.countryCode
                 landmark.continent = result.continent
                 try? context.save()
             }
