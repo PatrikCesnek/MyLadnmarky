@@ -2733,13 +2733,13 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tvůj svět"
+            "value" : "Váš svět"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tvoj svet"
+            "value" : "Váš svet"
           }
         }
       }
@@ -2801,13 +2801,13 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ulož si místo a jeho země se rozsvítí na tvé mapě"
+            "value" : "Uložte si místo a jeho země se rozsvítí na vaší mapě"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ulož si miesto a jeho krajina sa rozsvieti na tvojej mape"
+            "value" : "Uložte si miesto a jeho krajina sa rozsvieti na vašej mape"
           }
         }
       }
