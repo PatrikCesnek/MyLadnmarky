@@ -18,6 +18,7 @@ struct ProfileContentView: View {
     @Binding private var lastName: String?
     @Binding private var imageData: Data?
     @State private var isShowingPhotoImport = false
+    @State private var isShowingYearInReview = false
 
     init(
         isEditing: Bool,
@@ -79,6 +80,12 @@ struct ProfileContentView: View {
                     }
 
                     Button {
+                        isShowingYearInReview = true
+                    } label: {
+                        Label(Constants.Strings.yearInReview, systemImage: "sparkles")
+                    }
+
+                    Button {
                         isShowingPhotoImport = true
                     } label: {
                         Label(Constants.Strings.findPlacesInPhotos, systemImage: Constants.SystemImages.photoImport)
@@ -100,6 +107,9 @@ struct ProfileContentView: View {
                     }
                 }
             }
+        }
+        .fullScreenCover(isPresented: $isShowingYearInReview) {
+            YearInReviewView()
         }
         .sheet(isPresented: $isShowingPhotoImport) {
             NavigationStack {

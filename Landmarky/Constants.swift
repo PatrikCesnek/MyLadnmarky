@@ -111,6 +111,44 @@ public struct Constants {
             String(localized: "\(count) photos")
         }
 
+        static let yearInReview = String(localized: "Year in review")
+        static let yearInReviewIntro = String(localized: "A look back at your year of exploring")
+        static let placesYouVisited = String(localized: "Places you visited")
+        static let favoriteCategory = String(localized: "Favorite category")
+        static let busiestMonth = String(localized: "Busiest month")
+        static let trips = String(localized: "Trips")
+        static let longestTrip = String(localized: "Longest trip")
+        static let badgesEarned = String(localized: "Badges earned")
+        static let year = String(localized: "Year")
+        static let nothingToReview = String(localized: "Nothing to look back on yet")
+        static let nothingToReviewSubtitle = String(localized: "Save places and trips and your year in review fills up.")
+
+        static func yourYear(_ year: Int) -> String {
+            let yearText = String(year)
+            return String(localized: "Your \(yearText)")
+        }
+
+        static func yearReviewReady(_ year: Int) -> String {
+            let yearText = String(year)
+            return String(localized: "Your \(yearText) in review is ready")
+        }
+
+        static func newCountriesCount(_ count: Int) -> String {
+            String(localized: "\(count) new countries")
+        }
+
+        static func tripsCount(_ count: Int) -> String {
+            String(localized: "\(count) trips")
+        }
+
+        static func daysCount(_ count: Int) -> String {
+            String(localized: "\(count) days")
+        }
+
+        static func badgesCount(_ count: Int) -> String {
+            String(localized: "\(count) badges")
+        }
+
         static func countriesCount(_ count: Int) -> String {
             String(localized: "\(count) countries")
         }

@@ -39,7 +39,7 @@ struct BadgeUnlockService {
         let recordedIDs = Set(records.map(\.badgeID))
 
         for badge in Badge.allCases where badge.isEarned(stats: stats) && !recordedIDs.contains(badge.id) {
-            let record = EarnedBadge(badgeID: badge.id, unlockedAt: now(), isCelebrated: isBaseline)
+            let record = EarnedBadge(badgeID: badge.id, unlockedAt: now(), isCelebrated: isBaseline, isBaseline: isBaseline)
             context.insert(record)
             records.append(record)
         }
@@ -64,10 +64,11 @@ struct BadgeUnlockService {
         try context.save()
     }
 
-    /// Unlock dates by badge, for timelines such as the year in review.
+    /// Known unlock dates by badge, for timelines such as the year in review. Badges recorded
+    /// by the first-run baseline are left out — their real unlock date is unknown.
     func unlockDates() throws -> [Badge: Date] {
         try mergedRecords().reduce(into: [:]) { result, record in
-            guard let badge = record.badge else { return }
+            guard let badge = record.badge, !record.isBaseline else { return }
             result[badge] = record.unlockedAt
         }
     }
@@ -82,6 +83,7 @@ struct BadgeUnlockService {
         for record in all {
             if let existing = keptByID[record.badgeID] {
                 existing.isCelebrated = existing.isCelebrated || record.isCelebrated
+                existing.isBaseline = existing.isBaseline && record.isBaseline
                 context.delete(record)
             } else {
                 keptByID[record.badgeID] = record

@@ -27,6 +27,7 @@ struct BadgeUnlockTests {
         #expect(Set(records.compactMap(\.badge)) == [.firstSteps, .explorer])
         #expect(records.allSatisfy { $0.isCelebrated })
         #expect(defaults.bool(forKey: BadgeUnlockService.baselineKey))
+        #expect(try BadgeUnlockService(context: context, defaults: defaults).unlockDates().isEmpty)
     }
 
     @Test func newUnlockIsRecordedOnceAndQueuedForCelebration() throws {

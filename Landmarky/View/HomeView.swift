@@ -11,6 +11,7 @@ struct HomeView: View {
     @State private var viewModel = HomeViewModel()
     @Environment(\.modelContext) private var modelContext
     @State private var isShowingPhotoImport = false
+    @State private var reviewYear: ReviewYear?
 
     var body: some View {
         Group {
@@ -54,6 +55,21 @@ struct HomeView: View {
                             .tint(.green)
                             .padding(.horizontal)
                         } else {
+                            if let year = viewModel.featuredReviewYear {
+                                Button {
+                                    reviewYear = ReviewYear(year: year)
+                                } label: {
+                                    Label(Constants.Strings.yearReviewReady(year), systemImage: "sparkles")
+                                        .font(.headline)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding()
+                                        .foregroundStyle(.white)
+                                        .background(ShareCardStyle.background, in: RoundedRectangle(cornerRadius: 18))
+                                }
+                                .buttonStyle(.plain)
+                                .padding(.horizontal)
+                            }
+
                             if let nextBadge = viewModel.nextBadge {
                                 NextBadgeCard(item: nextBadge)
                             }
@@ -94,6 +110,9 @@ struct HomeView: View {
                     viewModel.fetchLandmarks(modelContext: modelContext)
                 }
                 .searchable(text: $viewModel.searchText, prompt: Constants.Buttons.search)
+                .fullScreenCover(item: $reviewYear) { review in
+                    YearInReviewView(preferredYear: review.year)
+                }
                 .sheet(isPresented: $isShowingPhotoImport, onDismiss: {
                     viewModel.fetchLandmarks(modelContext: modelContext)
                 }) {
@@ -104,6 +123,11 @@ struct HomeView: View {
             }
         }
     }
+}
+
+private struct ReviewYear: Identifiable {
+    let year: Int
+    var id: Int { year }
 }
 
 #Preview {
