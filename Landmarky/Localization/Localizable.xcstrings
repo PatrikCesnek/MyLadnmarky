@@ -12,7 +12,8 @@
             "value" : "%1$lld/%2$lld"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Achievements" : {
       "extractionState" : "manual",
@@ -83,10 +84,38 @@
       }
     },
     "Add Photo" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Přidat fotku"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pridať fotku"
+          }
+        }
+      }
     },
     "Add Photos" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Přidat fotky"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pridať fotky"
+          }
+        }
+      }
     },
     "Add photos to 5 landmarks" : {
       "extractionState" : "manual",
@@ -378,7 +407,21 @@
       }
     },
     "Change Photo" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Změnit fotku"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zmeniť fotku"
+          }
+        }
+      }
     },
     "Choose from Gallery" : {
       "extractionState" : "manual",
@@ -1374,7 +1417,21 @@
       }
     },
     "Photo" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotka"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotka"
+          }
+        }
+      }
     },
     "Photo Album" : {
       "extractionState" : "manual",
@@ -1496,7 +1553,21 @@
       }
     },
     "Remove Photo" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odstranit fotku"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odstrániť fotku"
+          }
+        }
+      }
     },
     "Restaurants" : {
       "extractionState" : "manual",
@@ -2332,7 +2403,21 @@
       }
     },
     "Write a description for a landmark" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Napište popis k místu"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Napíšte popis k miestu"
+          }
+        }
+      }
     },
     "You have: " : {
       "extractionState" : "manual",
@@ -4164,6 +4249,327 @@
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "%lld odznakov"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Skip" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Přeskočit"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preskočiť"
+          }
+        }
+      }
+    },
+    "Welcome to Worldwanderer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vítejte ve Worldwanderer"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vitajte vo Worldwanderer"
+          }
+        }
+      }
+    },
+    "Your private travel map and diary. Save the places that matter and watch your world fill up." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vaše soukromá cestovní mapa a deník. Ukládejte místa, na kterých vám záleží, a sledujte, jak se váš svět zaplňuje."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vaša súkromná cestovná mapa a denník. Ukladajte miesta, na ktorých vám záleží, a sledujte, ako sa váš svet zapĺňa."
+          }
+        }
+      }
+    },
+    "What you can do" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Co všechno můžete"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Čo všetko môžete"
+          }
+        }
+      }
+    },
+    "Every country you visit lights up on your world map." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Každá země, kterou navštívíte, se rozsvítí na vaší mapě světa."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Každá krajina, ktorú navštívite, sa rozsvieti na vašej mape sveta."
+          }
+        }
+      }
+    },
+    "Keep trips with photos, notes and the places you saw." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uchovejte si výlety s fotkami, poznámkami a místy, která jste viděli."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uchovajte si výlety s fotkami, poznámkami a miestami, ktoré ste videli."
+          }
+        }
+      }
+    },
+    "Turn places, trips and your year into cards to share." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proměňte místa, výlety a celý rok v karty ke sdílení."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premeňte miesta, výlety a celý rok na karty na zdieľanie."
+          }
+        }
+      }
+    },
+    "Private by design" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soukromí na prvním místě"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Súkromie na prvom mieste"
+          }
+        }
+      }
+    },
+    "No account, no ads, no tracking. Everything stays on your iPhone, and you decide what to share." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Žádný účet, žádné reklamy, žádné sledování. Vše zůstává ve vašem iPhonu a vy rozhodujete, co sdílíte."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Žiadny účet, žiadne reklamy, žiadne sledovanie. Všetko zostáva vo vašom iPhone a vy rozhodujete, čo zdieľate."
+          }
+        }
+      }
+    },
+    "Let's get started" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pojďme na to"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poďme na to"
+          }
+        }
+      }
+    },
+    "The quickest start: let Worldwanderer find the places in your photos." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nejrychlejší začátek: nechte Worldwanderer najít místa ve vašich fotkách."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Najrýchlejší začiatok: nechajte Worldwanderer nájsť miesta vo vašich fotkách."
+          }
+        }
+      }
+    },
+    "Allow location" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Povolit polohu"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Povoliť polohu"
+          }
+        }
+      }
+    },
+    "To show you on the map, save places where you stand and check off wish list places when you arrive." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abychom vás ukázali na mapě, uložili místo, kde právě stojíte, a odškrtli místa ze seznamu přání, když na ně dorazíte."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aby sme vás ukázali na mape, uložili miesto, kde práve stojíte, a odškrtli miesta zo zoznamu želaní, keď na ne prídete."
+          }
+        }
+      }
+    },
+    "Start exploring" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Začít objevovat"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Začať objavovať"
+          }
+        }
+      }
+    },
+    "Unlock %lld badges as you explore." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Při objevování odemkněte %lld odznak."
+                }
+              },
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Při objevování odemkněte %lld odznaky."
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Při objevování odemkněte %lld odznaku."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Při objevování odemkněte %lld odznaků."
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Unlock %lld badge as you explore."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Unlock %lld badges as you explore."
+                }
+              }
+            }
+          }
+        },
+        "sk" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Pri objavovaní odomknite %lld odznak."
+                }
+              },
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Pri objavovaní odomknite %lld odznaky."
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Pri objavovaní odomknite %lld odznaku."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Pri objavovaní odomknite %lld odznakov."
                 }
               }
             }
