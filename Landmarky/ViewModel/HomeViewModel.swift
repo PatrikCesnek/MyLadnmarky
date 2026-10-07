@@ -18,6 +18,15 @@ class HomeViewModel {
     private(set) var landmarks: [Landmark] = []
     private(set) var nextBadge: BadgeItem?
 
+    /// The closing year, during December and January, if it has visited places.
+    var featuredReviewYear: Int? {
+        guard let year = YearInReview.featuredYear(today: Date()) else { return nil }
+        let hasPlaces = landmarks.contains { landmark in
+            landmark.visitDate.map { Calendar.current.component(.year, from: $0) == year } ?? false
+        }
+        return hasPlaces ? year : nil
+    }
+
     var favoriteLandmarks: [Landmark] {
         landmarks.filter { $0.isFavorite }
     }

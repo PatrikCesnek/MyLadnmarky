@@ -36,6 +36,8 @@ struct ShareCardTests {
         #expect(ShareCardRenderer.render(BadgeShareCard(badge: .legend), fileName: "badge") != nil)
         #expect(ShareCardRenderer.render(TripShareCard(trip: trip), fileName: "trip") != nil)
         #expect(ShareCardRenderer.render(WorldShareCard(map: map, summary: summary), fileName: "world") != nil)
+        let review = YearInReview(year: 2026, landmarks: [], trips: [trip], badgeUnlocks: [:])
+        #expect(ShareCardRenderer.render(YearShareCard(review: review, map: map), fileName: "year") != nil)
     }
 
     @Test func sharedImageCarriesNoLocationMetadataFromThePhoto() throws {

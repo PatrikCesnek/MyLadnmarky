@@ -18,11 +18,15 @@ final class EarnedBadge {
     var badgeID: String = ""
     var unlockedAt: Date = Date()
     var isCelebrated: Bool = false
+    /// Recorded when the feature first ran on a device: the badge was earned earlier, on an
+    /// unknown date, so `unlockedAt` must not be used in timelines.
+    var isBaseline: Bool = false
 
-    init(badgeID: String, unlockedAt: Date = Date(), isCelebrated: Bool = false) {
+    init(badgeID: String, unlockedAt: Date = Date(), isCelebrated: Bool = false, isBaseline: Bool = false) {
         self.badgeID = badgeID
         self.unlockedAt = unlockedAt
         self.isCelebrated = isCelebrated
+        self.isBaseline = isBaseline
     }
 
     var badge: Badge? {
