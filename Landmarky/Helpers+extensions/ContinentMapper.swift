@@ -12,6 +12,23 @@ struct ContinentMapper {
         return "Unknown"
     }
 
+    static let inhabitedContinents = [
+        "Europe", "Asia", "Africa", "North America", "South America", "Oceania"
+    ]
+
+    /// Number of sovereign countries the app assigns to a continent.
+    static func countryCount(in continent: String) -> Int {
+        switch continent {
+        case "Europe": europe.count
+        case "Asia": asia.count
+        case "Africa": africa.count
+        case "North America": northAmerica.count
+        case "South America": southAmerica.count
+        case "Oceania": oceania.count
+        default: 0
+        }
+    }
+
     private static let europe: Set<String> = [
         "AL", "AD", "AT", "BY", "BE", "BA", "BG", "HR", "CY", "CZ",
         "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IS", "IE", "IT",

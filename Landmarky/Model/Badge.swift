@@ -53,7 +53,7 @@ struct BadgeStats {
             return !desc.isEmpty
         }.count
         self.uniqueCategories = Set(landmarks.map { $0.category })
-        self.uniqueCountries = Set(landmarks.compactMap { $0.country })
+        self.uniqueCountries = Set(landmarks.compactMap { $0.countryKey })
         self.uniqueContinents = Set(landmarks.compactMap { $0.continent })
         self.tripCount = tripCount
 
@@ -63,7 +63,7 @@ struct BadgeStats {
         var african = Set<String>()
 
         for landmark in landmarks {
-            guard let country = landmark.country, let continent = landmark.continent else { continue }
+            guard let country = landmark.countryKey, let continent = landmark.continent else { continue }
             switch continent {
             case Constants.Continents.europe: european.insert(country)
             case Constants.Continents.asia: asian.insert(country)

@@ -59,6 +59,15 @@ struct HomeView: View {
                 }
                 .navigationTitle(Constants.Strings.homeTitle)
                 .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        NavigationLink {
+                            VisitedCountriesView()
+                        } label: {
+                            Image(systemName: Constants.SystemImages.globe)
+                        }
+                        .accessibilityLabel(Text(Constants.Strings.yourWorld))
+                    }
+
                     ToolbarItem(placement: .topBarTrailing) {
                         NavigationLink {
                             WishlistView()

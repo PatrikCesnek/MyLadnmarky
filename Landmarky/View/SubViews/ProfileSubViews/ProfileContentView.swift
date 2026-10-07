@@ -70,6 +70,12 @@ struct ProfileContentView: View {
                         badgesEarned: badgeItems.filter(\.isEarned).count,
                         totalBadges: badgeItems.count
                     )
+
+                    NavigationLink {
+                        VisitedCountriesView()
+                    } label: {
+                        Label(Constants.Strings.yourWorld, systemImage: Constants.SystemImages.globe)
+                    }
                 }
 
                 Section(Constants.Strings.achievementsTitle) {

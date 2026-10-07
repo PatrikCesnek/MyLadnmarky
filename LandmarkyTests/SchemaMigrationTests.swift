@@ -15,6 +15,7 @@ import Testing
 /// `Fixtures/Store-v1.x.store` were produced by running the shipped code (v1.0 = 2287576,
 /// v1.1 = 34f63fb) — they are byte-for-byte what users have on their phones. When a
 /// release changes the schema, add a fixture generated from that release; never edit these.
+@MainActor
 @Suite(.serialized)
 struct SchemaMigrationTests {
     private let visitDate = Date(timeIntervalSince1970: 1_750_000_000)
@@ -74,6 +75,10 @@ struct SchemaMigrationTests {
         trip.landmarks = landmarks
         try context.save()
         #expect(landmarks.allSatisfy { $0.trips?.count == 1 })
+
+        #expect(landmarks.allSatisfy { $0.countryCode == nil })
+        try CountryBackfillService(context: context, geocode: { _, _ in nil }).backfillFromNames()
+        #expect(landmarks.first { $0.name == "Devín Castle" }?.countryCode == "SK")
 
         context.insert(EarnedBadge(badgeID: Badge.firstSteps.id))
         try context.save()
