@@ -5,8 +5,8 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Camera access lets you take photos for your profile, landmarks, and travel diary. Photos stay on your device unless you choose to share them.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location access lets Landmarky show your position on Apple Maps and create landmarks at your current location.</string>
+	<string>Location access lets Worldwanderer show your position on Apple Maps, create landmarks at your current location, and check off wish list places when you arrive.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photo library access lets you choose photos for your profile, landmarks, and travel diary. Photos stay on your device unless you choose to share them.</string>
+	<string>Photo library access lets you choose photos for your profile, landmarks, and travel diary, and find places based on where your photos were taken. Your photos never leave your device.</string>
 </dict>
 </plist>

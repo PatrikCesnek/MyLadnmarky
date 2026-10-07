@@ -17,6 +17,7 @@ struct ProfileContentView: View {
     @Binding private var firstName: String
     @Binding private var lastName: String?
     @Binding private var imageData: Data?
+    @State private var isShowingPhotoImport = false
 
     init(
         isEditing: Bool,
@@ -76,6 +77,12 @@ struct ProfileContentView: View {
                     } label: {
                         Label(Constants.Strings.yourWorld, systemImage: Constants.SystemImages.globe)
                     }
+
+                    Button {
+                        isShowingPhotoImport = true
+                    } label: {
+                        Label(Constants.Strings.findPlacesInPhotos, systemImage: Constants.SystemImages.photoImport)
+                    }
                 }
 
                 Section(Constants.Strings.achievementsTitle) {
@@ -92,6 +99,11 @@ struct ProfileContentView: View {
                         )
                     }
                 }
+            }
+        }
+        .sheet(isPresented: $isShowingPhotoImport) {
+            NavigationStack {
+                PhotoImportView()
             }
         }
     }

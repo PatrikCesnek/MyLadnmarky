@@ -9,6 +9,8 @@ struct GeocodedPlace: Equatable, Sendable {
     /// ISO 3166-1 alpha-2 code, stable across languages.
     let countryCode: String
     let continent: String
+    /// Our category for the point of interest, when Maps knows what kind of place it is.
+    var category: LandmarkCategory? = nil
 }
 
 struct GeocodingHelper {
@@ -36,7 +38,8 @@ struct GeocodingHelper {
             name: mapItem.name ?? addressRepresentations.cityName,
             country: country,
             countryCode: countryCode.uppercased(),
-            continent: ContinentMapper.continent(forCountryCode: countryCode)
+            continent: ContinentMapper.continent(forCountryCode: countryCode),
+            category: mapItem.pointOfInterestCategory.flatMap(LandmarkCategory.init(pointOfInterest:))
         )
     }
 
@@ -53,5 +56,30 @@ struct GeocodingHelper {
             countryCode: countryCode.uppercased(),
             continent: ContinentMapper.continent(forCountryCode: countryCode)
         )
+    }
+}
+
+extension LandmarkCategory {
+    /// Maps Apple Maps' point-of-interest kinds onto our categories; nil when nothing fits.
+    init?(pointOfInterest category: MKPointOfInterestCategory) {
+        if #available(iOS 18.0, *) {
+            switch category {
+            case .castle, .fortress: self = .castles; return
+            case .landmark, .nationalMonument: self = .historicalLandmarks; return
+            case .hiking, .rockClimbing: self = .hills; return
+            default: break
+            }
+        }
+
+        switch category {
+        case .park, .nationalPark, .campground: self = .parks
+        case .beach, .marina: self = .lakes
+        case .museum: self = .historicalLandmarks
+        case .restaurant, .bakery, .cafe, .foodMarket: self = .restaurants
+        case .nightlife, .brewery, .winery: self = .bars
+        case .store: self = .shops
+        case .amusementPark, .aquarium, .zoo, .theater, .movieTheater, .stadium: self = .entertainment
+        default: return nil
+        }
     }
 }

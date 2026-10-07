@@ -83,6 +83,34 @@ public struct Constants {
         static let noCountriesYet = String(localized: "No countries yet")
         static let noCountriesYetSubtitle = String(localized: "Save a place and its country lights up on your map")
 
+        static let findPlacesInPhotos = String(localized: "Find places in your photos")
+        static let photoImportIntro = String(localized: "Worldwanderer looks at where your photos were taken and suggests places to save. You choose what gets added.")
+        static let photosStayOnDevice = String(localized: "Your photos never leave your iPhone.")
+        static let scanMyPhotos = String(localized: "Scan my photos")
+        static let scanningPhotos = String(localized: "Scanning your photos…")
+        static let addingPlaces = String(localized: "Adding places…")
+        static let noNewPlacesFound = String(localized: "No new places found")
+        static let noNewPlacesFoundSubtitle = String(localized: "Only photos with a location that isn't saved yet show up here.")
+        static let photoAccessOff = String(localized: "Photo access is off")
+        static let photoAccessOffSubtitle = String(localized: "Allow access in Settings to find places in your photos.")
+        static let openSettings = String(localized: "Open Settings")
+        static let limitedPhotoAccess = String(localized: "Only photos you've shared with Worldwanderer are scanned.")
+        static let selectAll = String(localized: "Select all")
+        static let deselectAll = String(localized: "Deselect all")
+        static let placesAdded = String(localized: "Places added!")
+
+        static func foundPlaces(_ count: Int) -> String {
+            String(localized: "We found \(count) places")
+        }
+
+        static func addPlacesCount(_ count: Int) -> String {
+            String(localized: "Add \(count) places")
+        }
+
+        static func photosCount(_ count: Int) -> String {
+            String(localized: "\(count) photos")
+        }
+
         static func countriesCount(_ count: Int) -> String {
             String(localized: "\(count) countries")
         }
@@ -310,6 +338,7 @@ public struct Constants {
         static let search = "magnifyingglass"
         static let globe = "globe.europe.africa.fill"
         static let share = "square.and.arrow.up"
+        static let photoImport = "photo.on.rectangle.angled"
     }
 
     struct Wishlist {
