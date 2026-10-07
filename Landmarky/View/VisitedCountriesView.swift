@@ -41,6 +41,16 @@ struct VisitedCountriesView: View {
         }
         .navigationTitle(Constants.Strings.yourWorld)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if !summary.countries.isEmpty {
+                ShareCardButton(title: Constants.Strings.yourWorld, contentID: summary.codes) { () async -> WorldShareCard? in
+                    guard let map = await Task.detached(priority: .userInitiated, operation: { WorldMap.bundled }).value else {
+                        return nil
+                    }
+                    return WorldShareCard(map: map, summary: summary)
+                }
+            }
+        }
     }
 
     private func header(_ summary: VisitedCountriesSummary) -> some View {

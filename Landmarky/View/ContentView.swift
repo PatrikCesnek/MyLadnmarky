@@ -66,6 +66,13 @@ struct ContentView: View {
                         withAnimation(.easeInOut(duration: 0.25)) {
                             celebration.dismissCurrent()
                         }
+                    },
+                    accessory: {
+                        ShareCardButton(title: badge.displayName, contentID: badge, style: .labeled) {
+                            BadgeShareCard(badge: badge)
+                        }
+                        .buttonStyle(.bordered)
+                        .tint(badge.tier.color)
                     }
                 )
                 .transition(.opacity)
