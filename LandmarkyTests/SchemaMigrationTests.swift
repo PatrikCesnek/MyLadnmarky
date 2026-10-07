@@ -68,6 +68,12 @@ struct SchemaMigrationTests {
     /// and proof that the migrated store accepts writes of the new models.
     private func assertNewSchemaDefaults(landmarks: [Landmark], trip: Trip, context: ModelContext) throws {
         #expect(try context.fetch(FetchDescriptor<EarnedBadge>()).isEmpty)
+        #expect(trip.landmarks?.isEmpty ?? true)
+        #expect(landmarks.allSatisfy { $0.trips?.isEmpty ?? true })
+
+        trip.landmarks = landmarks
+        try context.save()
+        #expect(landmarks.allSatisfy { $0.trips?.count == 1 })
 
         context.insert(EarnedBadge(badgeID: Badge.firstSteps.id))
         try context.save()

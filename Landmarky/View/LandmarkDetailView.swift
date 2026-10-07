@@ -50,6 +50,27 @@ struct LandmarkDetailView: View {
             )
             .padding(16)
 
+            if !landmark.linkedTrips.isEmpty {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        ForEach(landmark.linkedTrips) { trip in
+                            NavigationLink {
+                                TripDetailView(trip: trip)
+                            } label: {
+                                Label(trip.title, systemImage: Constants.SystemImages.book)
+                                    .font(.caption.weight(.semibold))
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(.green.opacity(0.15), in: Capsule())
+                                    .foregroundStyle(.green)
+                            }
+                            .accessibilityLabel(Text("\(Constants.Strings.partOfTrip): \(trip.title)"))
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                }
+            }
+
             if landmark.isWishlisted {
                 HStack {
                     Label(Constants.Strings.notYetVisited, systemImage: Constants.SystemImages.notVisitedClock)
