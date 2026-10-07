@@ -103,12 +103,32 @@ class PlaceSearchViewModel {
         let response = try await MKLocalSearch(request: request).start()
 
         return response.mapItems.prefix(5).map { item in
-            PlaceSearchResult(
+            let coordinate = coordinate(of: item)
+            return PlaceSearchResult(
                 name: item.name ?? "",
-                detail: item.address?.fullAddress ?? "",
-                latitude: item.location.coordinate.latitude,
-                longitude: item.location.coordinate.longitude
+                detail: addressText(of: item),
+                latitude: coordinate.latitude,
+                longitude: coordinate.longitude
             )
+        }
+    }
+
+    nonisolated private static func coordinate(of item: MKMapItem) -> CLLocationCoordinate2D {
+        if #available(iOS 26.0, *) {
+            return item.location.coordinate
+        } else {
+            return item.placemark.coordinate
+        }
+    }
+
+    nonisolated private static func addressText(of item: MKMapItem) -> String {
+        if #available(iOS 26.0, *) {
+            return item.address?.fullAddress ?? ""
+        } else {
+            let placemark = item.placemark
+            return [placemark.thoroughfare, placemark.locality, placemark.country]
+                .compactMap { $0 }
+                .joined(separator: ", ")
         }
     }
 }

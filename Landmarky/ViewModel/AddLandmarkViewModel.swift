@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 import PhotosUI
 
+@MainActor
 @Observable
 class AddLandmarkViewModel {
     var landmark: Landmark?
@@ -180,7 +181,7 @@ class AddLandmarkViewModel {
     }
 
     private func geocodeLandmark(_ landmark: Landmark, latitude: Double, longitude: Double, context: ModelContext) {
-        Task { @MainActor in
+        Task {
             if let result = await GeocodingHelper.reverseGeocode(latitude: latitude, longitude: longitude) {
                 landmark.country = result.country
                 landmark.continent = result.continent

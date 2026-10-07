@@ -88,7 +88,7 @@ struct DiaryView: View {
                 Image(systemName: Constants.SystemImages.plus)
                     .font(.headline)
             }
-            .buttonStyle(.glassProminent)
+            .prominentButtonStyle()
             .tint(.green)
         }
         .sheet(isPresented: $showAddTrip) {

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Mock {
     struct MockLandmarks {
-        static let data: [Landmark] = [
+        @MainActor static let data: [Landmark] = [
             Landmark(name: "Crystal Lake", category: LandmarkCategory.lakes.localizedName, latitude: 49.2, longitude: 16.6, landmarkDescription: mockDescription, isFavorite: true, visitDate: Date(timeIntervalSinceNow: -86400 * 18), country: "Czechia", continent: Constants.Continents.europe),
             Landmark(name: "Eagle Peak", category: LandmarkCategory.hills.localizedName, latitude: 50.1, longitude: 14.4, visitDate: Date(timeIntervalSinceNow: -86400 * 12), country: "Czechia", continent: Constants.Continents.europe),
             Landmark(name: "Riverside Park", category: LandmarkCategory.parks.localizedName, latitude: 48.15, longitude: 17.07, visitDate: Date(timeIntervalSinceNow: -86400 * 10), country: "Slovakia", continent: Constants.Continents.europe),
@@ -51,7 +51,7 @@ struct Mock {
     }
 
     struct MockTrips {
-        static let data: [Trip] = [
+        @MainActor static let data: [Trip] = [
             Trip(
                 title: "Moravian Weekend",
                 startDate: Date(timeIntervalSinceNow: -86400 * 14),
@@ -73,6 +73,6 @@ struct Mock {
     }
 
     struct MockProfile {
-        static let user = Profile(name: "Patrik", lastName: "Traveler")
+        @MainActor static let user = Profile(name: "Patrik", lastName: "Traveler")
     }
 }

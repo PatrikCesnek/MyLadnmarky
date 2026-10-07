@@ -162,7 +162,7 @@ struct AddLandmarkView: View {
                                 .font(.headline)
                         }
                     )
-                    .buttonStyle(.glassProminent)
+                    .prominentButtonStyle()
                     .tint(.green)
                 }
             }

@@ -105,7 +105,7 @@ struct AddTripView: View {
                 Image(systemName: Constants.SystemImages.editSaveButtonImage)
                     .font(.headline)
             }
-            .buttonStyle(.glassProminent)
+            .prominentButtonStyle()
             .tint(.green)
         }
         .confirmationDialog(
