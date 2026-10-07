@@ -302,6 +302,19 @@ enum Badge: String, CaseIterable, Identifiable {
         }
     }
 
+    /// The unearned badge the user is closest to, preferring lower tiers on ties.
+    /// Badges with no progress at all aren't suggested.
+    static func nextUp(stats: BadgeStats) -> BadgeItem? {
+        evaluateAll(stats: stats)
+            .filter { !$0.isEarned && $0.progress.current > 0 && $0.progress.target > 0 }
+            .max { lhs, rhs in
+                let lhsRatio = Double(lhs.progress.current) / Double(lhs.progress.target)
+                let rhsRatio = Double(rhs.progress.current) / Double(rhs.progress.target)
+                if lhsRatio != rhsRatio { return lhsRatio < rhsRatio }
+                return lhs.badge.tier > rhs.badge.tier
+            }
+    }
+
     static func evaluateAll(stats: BadgeStats) -> [BadgeItem] {
         Badge.allCases.map { badge in
             BadgeItem(

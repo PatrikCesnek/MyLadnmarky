@@ -56,16 +56,8 @@ class ProfileViewModel {
             isEditing = true
         }
 
-        let landmarkDescriptor = FetchDescriptor<Landmark>(
-            predicate: #Predicate { $0.isWishlisted == false }
-        )
-        let landmarks = (try? context.fetch(landmarkDescriptor)) ?? []
-        landmarkCount = landmarks.count
-
-        let tripDescriptor = FetchDescriptor<Trip>()
-        let tripCount = (try? context.fetchCount(tripDescriptor)) ?? 0
-
-        let stats = BadgeStats(landmarks: landmarks, tripCount: tripCount)
+        let stats = (try? BadgeStatsProvider.stats(in: context)) ?? BadgeStats(landmarks: [], tripCount: 0)
+        landmarkCount = stats.landmarkCount
         badgeStats = stats
         badgeItems = Badge.evaluateAll(stats: stats)
     }

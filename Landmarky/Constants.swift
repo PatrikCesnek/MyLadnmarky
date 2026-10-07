@@ -69,6 +69,16 @@ public struct Constants {
         static let searchPlace = String(localized: "Search for a place")
         static let noResults = String(localized: "No results")
         static let swipeForCoordinates = String(localized: "Swipe to enter coordinates manually")
+        static let badgeUnlocked = String(localized: "Badge unlocked!")
+        static let nextBadge = String(localized: "Next badge")
+
+        static func badgePosition(_ index: Int, of total: Int) -> String {
+            String(localized: "\(index) of \(total)")
+        }
+
+        static func badgeRemaining(_ count: Int) -> String {
+            String(localized: "\(count) to go")
+        }
     }
 
     struct Buttons {
@@ -85,6 +95,7 @@ public struct Constants {
         static let takePhoto = String(localized: "Take a photo")
         static let chooseFromGallery = String(localized: "Choose from Gallery")
         static let errorRetryButton = String(localized: "Try Again")
+        static let continueButton = String(localized: "Continue")
     }
 
     struct Categories {

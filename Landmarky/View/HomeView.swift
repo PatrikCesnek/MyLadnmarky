@@ -41,6 +41,10 @@ struct HomeView: View {
                                 subtitle: Constants.Strings.createLandmarks
                             )
                         } else {
+                            if let nextBadge = viewModel.nextBadge {
+                                NextBadgeCard(item: nextBadge)
+                            }
+
                             if !viewModel.favoriteLandmarks.isEmpty {
                                 FavoritesScrollView(landmarks: viewModel.favoriteLandmarks)
                             }
