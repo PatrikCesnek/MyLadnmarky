@@ -16,6 +16,7 @@ class HomeViewModel {
     var error: String?
 
     private(set) var landmarks: [Landmark] = []
+    private(set) var nextBadge: BadgeItem?
 
     var favoriteLandmarks: [Landmark] {
         landmarks.filter { $0.isFavorite }
@@ -35,6 +36,7 @@ class HomeViewModel {
             landmarks = Mock.MockLandmarks.data
                 .filter { !$0.isWishlisted }
                 .sorted { $0.name < $1.name }
+            nextBadge = Badge.nextUp(stats: BadgeStats(landmarks: landmarks, tripCount: Mock.MockTrips.data.count))
             isLoading = false
             return
         }
@@ -45,6 +47,8 @@ class HomeViewModel {
         )
         do {
             self.landmarks = try modelContext.fetch(descriptor)
+            let tripCount = try modelContext.fetchCount(FetchDescriptor<Trip>())
+            nextBadge = Badge.nextUp(stats: BadgeStats(landmarks: landmarks, tripCount: tripCount))
             isLoading = false
         } catch {
             self.error = error.localizedDescription
