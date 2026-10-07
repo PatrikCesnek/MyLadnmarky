@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @State private var viewModel = HomeViewModel()
     @Environment(\.modelContext) private var modelContext
+    @State private var isShowingPhotoImport = false
 
     var body: some View {
         Group {
@@ -40,6 +41,18 @@ struct HomeView: View {
                                 title: Constants.Strings.noLandmarks,
                                 subtitle: Constants.Strings.createLandmarks
                             )
+
+                            Button {
+                                isShowingPhotoImport = true
+                            } label: {
+                                Label(Constants.Strings.findPlacesInPhotos, systemImage: Constants.SystemImages.photoImport)
+                                    .font(.headline)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 6)
+                            }
+                            .prominentButtonStyle()
+                            .tint(.green)
+                            .padding(.horizontal)
                         } else {
                             if let nextBadge = viewModel.nextBadge {
                                 NextBadgeCard(item: nextBadge)
@@ -81,6 +94,13 @@ struct HomeView: View {
                     viewModel.fetchLandmarks(modelContext: modelContext)
                 }
                 .searchable(text: $viewModel.searchText, prompt: Constants.Buttons.search)
+                .sheet(isPresented: $isShowingPhotoImport, onDismiss: {
+                    viewModel.fetchLandmarks(modelContext: modelContext)
+                }) {
+                    NavigationStack {
+                        PhotoImportView()
+                    }
+                }
             }
         }
     }
