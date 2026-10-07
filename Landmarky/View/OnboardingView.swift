@@ -16,17 +16,32 @@ struct OnboardingView: View {
 
     let onFinish: (Outcome) -> Void
 
+    @Environment(\.modelContext) private var modelContext
     @State private var page = 0
     @State private var location = LocationPermissionRequester()
-    private let pageCount = 4
+    @State private var firstName = ""
+    @State private var lastName = ""
+    @FocusState private var focusedField: NameField?
+    private let pageCount = 5
+    private let namePage = 1
+
+    private enum NameField {
+        case first
+        case last
+    }
+
+    private var hasFirstName: Bool {
+        !firstName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
 
     var body: some View {
         VStack(spacing: 0) {
             HStack {
                 Spacer()
-                if page < pageCount - 1 {
+                if page < pageCount - 1, page != namePage {
                     Button(Constants.Strings.skip) {
-                        withAnimation { page = pageCount - 1 }
+                        // Skipping the intro pages still stops at the (required) name.
+                        withAnimation { page = hasFirstName || page > namePage ? pageCount - 1 : namePage }
                     }
                     .foregroundStyle(.secondary)
                 }
@@ -36,11 +51,13 @@ struct OnboardingView: View {
 
             TabView(selection: $page) {
                 welcome.tag(0)
-                features.tag(1)
-                privacy.tag(2)
-                getStarted.tag(3)
+                name.tag(namePage)
+                features.tag(2)
+                privacy.tag(3)
+                getStarted.tag(4)
             }
-            .tabViewStyle(.page(indexDisplayMode: .always))
+            // Dots would sit on top of the name fields while the keyboard is up.
+            .tabViewStyle(.page(indexDisplayMode: focusedField == nil ? .always : .never))
             .indexViewStyle(.page(backgroundDisplayMode: .always))
 
             if page < pageCount - 1 {
@@ -54,11 +71,31 @@ struct OnboardingView: View {
                 }
                 .prominentButtonStyle()
                 .tint(.green)
+                .disabled(page == namePage && !hasFirstName)
                 .padding(.horizontal, 24)
                 .padding(.bottom, 16)
             }
         }
         .background(Color(.systemBackground))
+        .onChange(of: page) { oldPage, newPage in
+            // The name is required: swiping forward without one snaps back.
+            if oldPage <= namePage, newPage > namePage, !hasFirstName {
+                withAnimation { page = namePage }
+                focusedField = .first
+                return
+            }
+            if oldPage == namePage {
+                focusedField = nil
+                saveName()
+            } else if newPage == namePage, !hasFirstName {
+                focusedField = .first
+            }
+        }
+    }
+
+    /// Saved as soon as the user leaves the name page, so it sticks even if they quit early.
+    private func saveName() {
+        _ = try? ProfileNameService.save(firstName: firstName, lastName: lastName, in: modelContext)
     }
 
     // MARK: - Pages
@@ -69,6 +106,45 @@ struct OnboardingView: View {
             title: Constants.Strings.onboardingWelcomeTitle,
             message: Constants.Strings.onboardingWelcomeMessage
         )
+    }
+
+    private var name: some View {
+        OnboardingPage(
+            symbol: focusedField == nil ? Constants.SystemImages.personCircle : nil,
+            title: Constants.Strings.onboardingNameTitle,
+            message: Constants.Strings.onboardingNameMessage
+        ) {
+            VStack(spacing: 12) {
+                nameField(Constants.Strings.firstName, text: $firstName, field: .first, contentType: .givenName)
+                    .submitLabel(.next)
+                    .onSubmit { focusedField = .last }
+
+                nameField(Constants.Strings.lastName, text: $lastName, field: .last, contentType: .familyName)
+                    .submitLabel(.continue)
+                    .onSubmit {
+                        guard hasFirstName else { return }
+                        withAnimation { page = namePage + 1 }
+                    }
+            }
+        }
+    }
+
+    /// Names aren't dictionary words: no autocorrect, no spell check, just capitalized words.
+    private func nameField(
+        _ prompt: String,
+        text: Binding<String>,
+        field: NameField,
+        contentType: UITextContentType
+    ) -> some View {
+        TextField(prompt, text: text)
+            .textContentType(contentType)
+            .autocorrectionDisabled()
+            .textInputAutocapitalization(.words)
+            .focused($focusedField, equals: field)
+            .font(.title3)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 14))
     }
 
     private var features: some View {
@@ -94,6 +170,7 @@ struct OnboardingView: View {
         OnboardingPage(symbol: "figure.hiking", title: Constants.Strings.onboardingStartTitle, message: Constants.Strings.onboardingStartMessage) {
             VStack(spacing: 12) {
                 Button {
+                    saveName()
                     onFinish(.importPhotos)
                 } label: {
                     Label(Constants.Strings.findPlacesInPhotos, systemImage: Constants.SystemImages.photoImport)
@@ -123,6 +200,7 @@ struct OnboardingView: View {
                 }
 
                 Button(Constants.Strings.startExploring) {
+                    saveName()
                     onFinish(.explore)
                 }
                 .font(.headline)
@@ -134,7 +212,8 @@ struct OnboardingView: View {
 }
 
 private struct OnboardingPage<Content: View>: View {
-    let symbol: String
+    /// Optional so a page can drop its icon to make room for the keyboard.
+    let symbol: String?
     let title: String
     let message: String?
     @ViewBuilder var content: () -> Content
@@ -142,11 +221,13 @@ private struct OnboardingPage<Content: View>: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                Image(systemName: symbol)
-                    .font(.system(size: 72, weight: .semibold))
-                    .foregroundStyle(.green)
-                    .padding(.top, 24)
-                    .accessibilityHidden(true)
+                if let symbol {
+                    Image(systemName: symbol)
+                        .font(.system(size: 72, weight: .semibold))
+                        .foregroundStyle(.green)
+                        .padding(.top, 24)
+                        .accessibilityHidden(true)
+                }
 
                 Text(title)
                     .font(.largeTitle.bold())
@@ -170,7 +251,7 @@ private struct OnboardingPage<Content: View>: View {
 }
 
 extension OnboardingPage where Content == SwiftUI.EmptyView {
-    init(symbol: String, title: String, message: String?) {
+    init(symbol: String?, title: String, message: String?) {
         self.init(symbol: symbol, title: title, message: message) { SwiftUI.EmptyView() }
     }
 }
@@ -231,4 +312,5 @@ final class LocationPermissionRequester: NSObject, CLLocationManagerDelegate {
 
 #Preview {
     OnboardingView { _ in }
+        .modelContainer(for: AppSchema.models, inMemory: true)
 }
