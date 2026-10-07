@@ -38,7 +38,7 @@ struct BottomPlusButton<Content: View>: View {
                     }
                 )
                 .tint(.green)
-                .buttonStyle(.glassProminent)
+                .prominentButtonStyle()
                 .clipShape(Circle())
             }
         }

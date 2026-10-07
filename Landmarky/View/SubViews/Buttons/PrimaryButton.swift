@@ -36,7 +36,7 @@ struct PrimaryButton: View {
                     .padding(.vertical, 8)
             }
         )
-        .buttonStyle(.glassProminent)
+        .prominentButtonStyle()
         .tint(isError ? .red : .green)
         .padding(8)
     }
