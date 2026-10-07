@@ -71,6 +71,20 @@ public struct Constants {
         static let swipeForCoordinates = String(localized: "Swipe to enter coordinates manually")
         static let badgeUnlocked = String(localized: "Badge unlocked!")
         static let nextBadge = String(localized: "Next badge")
+        static let places = String(localized: "Places")
+        static let addPlaces = String(localized: "Add places")
+        static let editPlaces = String(localized: "Edit places")
+        static let allPlaces = String(localized: "All places")
+        static let suggestedForDates = String(localized: "Suggested for these dates")
+        static let partOfTrip = String(localized: "Part of trip")
+
+        static func addPlacesFromDates(_ count: Int) -> String {
+            String(localized: "Add \(count) places from these dates")
+        }
+
+        static func placesCount(_ count: Int) -> String {
+            String(localized: "\(count) places")
+        }
 
         static func badgePosition(_ index: Int, of total: Int) -> String {
             String(localized: "\(index) of \(total)")
@@ -96,6 +110,7 @@ public struct Constants {
         static let chooseFromGallery = String(localized: "Choose from Gallery")
         static let errorRetryButton = String(localized: "Try Again")
         static let continueButton = String(localized: "Continue")
+        static let done = String(localized: "Done")
     }
 
     struct Categories {

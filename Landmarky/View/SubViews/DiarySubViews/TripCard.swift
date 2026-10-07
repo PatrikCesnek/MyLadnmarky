@@ -18,9 +18,15 @@ struct TripCard: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(trip.title)
                     .font(.headline)
-                Text(trip.dateRangeText)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                HStack(spacing: 8) {
+                    Text(trip.dateRangeText)
+                    if let count = trip.landmarks?.count, count > 0 {
+                        Label("\(count)", systemImage: "mappin.and.ellipse")
+                            .accessibilityLabel(Text(Constants.Strings.placesCount(count)))
+                    }
+                }
+                .font(.caption)
+                .foregroundStyle(.secondary)
                 if let notes = trip.notes, !notes.isEmpty {
                     Text(notes)
                         .font(.caption2)

@@ -34,6 +34,11 @@ struct TripDetailView: View {
                     Text(notes)
                         .font(.body)
                 }
+
+                if !trip.orderedLandmarks.isEmpty {
+                    TripPlacesSection(landmarks: trip.orderedLandmarks)
+                        .padding(.top, 8)
+                }
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)

@@ -23,6 +23,8 @@ final class Landmark {
     var visitDate: Date?
     var country: String?
     var continent: String?
+    /// Trips this place belongs to. Inverse of `Trip.landmarks`; removing a trip only unlinks it.
+    var trips: [Trip]? = []
 
     init(
         id: UUID = UUID(),
@@ -52,6 +54,10 @@ final class Landmark {
         self.continent = continent
     }
     
+    var linkedTrips: [Trip] {
+        (trips ?? []).sorted { $0.startDate > $1.startDate }
+    }
+
     var landmarkImage: UIImage? {
         guard let imageData = image else { return nil }
         return UIImage(data: imageData)

@@ -132,5 +132,5 @@ private struct SelectedTripPhoto: Identifiable {
     NavigationStack {
         DiaryView()
     }
-    .modelContainer(for: [Trip.self])
+    .modelContainer(for: AppSchema.models, inMemory: true)
 }
