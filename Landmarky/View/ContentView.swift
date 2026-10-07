@@ -14,8 +14,37 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
     @State private var celebration = BadgeCelebrationViewModel()
+    @State private var isShowingOnboarding = false
+    @State private var isShowingPhotoImport = false
 
     var body: some View {
+        ZStack {
+            tabs
+
+            // A root layer rather than fullScreenCover: a cover requested during the very
+            // first onAppear can be dropped by UIKit, and onboarding must never be skipped.
+            if isShowingOnboarding {
+                OnboardingView { outcome in
+                    OnboardingPolicy().markCompleted()
+                    withAnimation(.easeInOut(duration: 0.35)) {
+                        isShowingOnboarding = false
+                    }
+                    if outcome == .importPhotos {
+                        isShowingPhotoImport = true
+                    }
+                }
+                .transition(.move(edge: .bottom))
+                .zIndex(1)
+            }
+        }
+        .sheet(isPresented: $isShowingPhotoImport) {
+            NavigationStack {
+                PhotoImportView()
+            }
+        }
+    }
+
+    private var tabs: some View {
         TabView {
             NavigationStack {
                 HomeView()
@@ -80,6 +109,7 @@ struct ContentView: View {
         }
         .onAppear {
             celebration.configure(context: modelContext)
+            isShowingOnboarding = OnboardingPolicy().shouldShow(in: modelContext)
             WishlistVisitService.autoVisitNearby(using: modelContext)
             celebration.refresh()
         }

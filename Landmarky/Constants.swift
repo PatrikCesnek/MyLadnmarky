@@ -149,6 +149,25 @@ public struct Constants {
             String(localized: "\(count) badges")
         }
 
+        static let skip = String(localized: "Skip")
+        static let onboardingWelcomeTitle = String(localized: "Welcome to Worldwanderer")
+        static let onboardingWelcomeMessage = String(localized: "Your private travel map and diary. Save the places that matter and watch your world fill up.")
+        static let onboardingFeaturesTitle = String(localized: "What you can do")
+        static let onboardingFeatureWorld = String(localized: "Every country you visit lights up on your world map.")
+        static let onboardingFeatureDiary = String(localized: "Keep trips with photos, notes and the places you saw.")
+        static let onboardingFeatureShare = String(localized: "Turn places, trips and your year into cards to share.")
+        static let onboardingPrivacyTitle = String(localized: "Private by design")
+        static let onboardingPrivacyMessage = String(localized: "No account, no ads, no tracking. Everything stays on your iPhone, and you decide what to share.")
+        static let onboardingStartTitle = String(localized: "Let's get started")
+        static let onboardingStartMessage = String(localized: "The quickest start: let Worldwanderer find the places in your photos.")
+        static let allowLocation = String(localized: "Allow location")
+        static let allowLocationReason = String(localized: "To show you on the map, save places where you stand and check off wish list places when you arrive.")
+        static let startExploring = String(localized: "Start exploring")
+
+        static func onboardingFeatureBadges(_ count: Int) -> String {
+            String(localized: "Unlock \(count) badges as you explore.")
+        }
+
         static func countriesCount(_ count: Int) -> String {
             String(localized: "\(count) countries")
         }

@@ -59,6 +59,7 @@ struct MapView: View {
             }
         }
         .onAppear {
+            viewModel.prepareLocation()
             viewModel.displayLandmarks(modelContext: modelContext)
         }
         .navigationDestination(
