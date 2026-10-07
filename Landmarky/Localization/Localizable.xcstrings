@@ -3096,6 +3096,23 @@
           }
         }
       }
+    },
+    "Share" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sdílet"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zdieľať"
+          }
+        }
+      }
     }
   },
   "version" : "1.1"

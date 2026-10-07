@@ -133,6 +133,7 @@ public struct Constants {
         static let errorRetryButton = String(localized: "Try Again")
         static let continueButton = String(localized: "Continue")
         static let done = String(localized: "Done")
+        static let share = String(localized: "Share")
     }
 
     struct Categories {
@@ -308,6 +309,7 @@ public struct Constants {
         static let visitedCheckmark = "checkmark.circle.fill"
         static let search = "magnifyingglass"
         static let globe = "globe.europe.africa.fill"
+        static let share = "square.and.arrow.up"
     }
 
     struct Wishlist {
