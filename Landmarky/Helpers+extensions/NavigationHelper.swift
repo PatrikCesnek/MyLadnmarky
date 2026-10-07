@@ -9,13 +9,7 @@ import MapKit
 
 struct NavigationHelper {
     static func startNavigation(to destination: CLLocationCoordinate2D, name: String) {
-        let destinationItem = MKMapItem(
-            location: CLLocation(
-                latitude: destination.latitude,
-                longitude: destination.longitude
-            ),
-            address: .none
-        )
+        let destinationItem = mapItem(for: destination)
         destinationItem.name = name
 
         let launchOptions = [
@@ -23,5 +17,16 @@ struct NavigationHelper {
         ]
 
         destinationItem.openInMaps(launchOptions: launchOptions)
+    }
+
+    private static func mapItem(for coordinate: CLLocationCoordinate2D) -> MKMapItem {
+        if #available(iOS 26.0, *) {
+            return MKMapItem(
+                location: CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude),
+                address: .none
+            )
+        } else {
+            return MKMapItem(placemark: MKPlacemark(coordinate: coordinate))
+        }
     }
 }

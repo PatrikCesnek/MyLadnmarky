@@ -20,7 +20,9 @@ class MapViewModel {
     var isDeleted = false
     var error: String?
     
-    init() {
+    /// Called when the map is actually shown. Asking for location here (not in `init`, which
+    /// runs as soon as the tab bar is built) means people see the map before the prompt.
+    func prepareLocation() {
         if locationManager.authorizationStatus == .authorizedWhenInUse || locationManager.authorizationStatus == .authorizedAlways {
             updateUserLocation(locationManager.location?.coordinate)
         } else {

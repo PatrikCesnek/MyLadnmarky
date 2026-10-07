@@ -1,0 +1,75 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "NSCameraUsageDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Přístup k fotoaparátu umožňuje fotit pro váš profil, místa a cestovní deník. Fotky zůstávají ve vašem zařízení, pokud se je nerozhodnete sdílet."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Camera access lets you take photos for your profile, landmarks, and travel diary. Photos stay on your device unless you choose to share them."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prístup k fotoaparátu umožňuje fotiť pre váš profil, miesta a cestovný denník. Fotky zostávajú vo vašom zariadení, pokiaľ sa ich nerozhodnete zdieľať."
+          }
+        }
+      }
+    },
+    "NSLocationWhenInUseUsageDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Přístup k poloze umožňuje aplikaci Worldwanderer zobrazit vaši polohu v Apple Maps, vytvářet místa na vaší aktuální poloze a odškrtnout místa ze seznamu přání, když na ně dorazíte."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location access lets Worldwanderer show your position on Apple Maps, create landmarks at your current location, and check off wish list places when you arrive."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prístup k polohe umožňuje aplikácii Worldwanderer zobraziť vašu polohu v Apple Maps, vytvárať miesta na vašej aktuálnej polohe a odškrtnúť miesta zo zoznamu želaní, keď na ne prídete."
+          }
+        }
+      }
+    },
+    "NSPhotoLibraryUsageDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Přístup k fotkám umožňuje vybrat fotky pro váš profil, místa a cestovní deník a najít místa podle toho, kde byly fotky pořízeny. Vaše fotky nikdy neopustí vaše zařízení."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo library access lets you choose photos for your profile, landmarks, and travel diary, and find places based on where your photos were taken. Your photos never leave your device."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prístup k fotkám umožňuje vybrať fotky pre váš profil, miesta a cestovný denník a nájsť miesta podľa toho, kde boli fotky odfotené. Vaše fotky nikdy neopustia vaše zariadenie."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.1"
+}

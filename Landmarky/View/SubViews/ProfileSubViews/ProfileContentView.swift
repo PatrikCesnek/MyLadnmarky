@@ -17,6 +17,8 @@ struct ProfileContentView: View {
     @Binding private var firstName: String
     @Binding private var lastName: String?
     @Binding private var imageData: Data?
+    @State private var isShowingPhotoImport = false
+    @State private var isShowingYearInReview = false
 
     init(
         isEditing: Bool,
@@ -70,6 +72,24 @@ struct ProfileContentView: View {
                         badgesEarned: badgeItems.filter(\.isEarned).count,
                         totalBadges: badgeItems.count
                     )
+
+                    NavigationLink {
+                        VisitedCountriesView()
+                    } label: {
+                        Label(Constants.Strings.yourWorld, systemImage: Constants.SystemImages.globe)
+                    }
+
+                    Button {
+                        isShowingYearInReview = true
+                    } label: {
+                        Label(Constants.Strings.yearInReview, systemImage: "sparkles")
+                    }
+
+                    Button {
+                        isShowingPhotoImport = true
+                    } label: {
+                        Label(Constants.Strings.findPlacesInPhotos, systemImage: Constants.SystemImages.photoImport)
+                    }
                 }
 
                 Section(Constants.Strings.achievementsTitle) {
@@ -86,6 +106,14 @@ struct ProfileContentView: View {
                         )
                     }
                 }
+            }
+        }
+        .fullScreenCover(isPresented: $isShowingYearInReview) {
+            YearInReviewView()
+        }
+        .sheet(isPresented: $isShowingPhotoImport) {
+            NavigationStack {
+                PhotoImportView()
             }
         }
     }

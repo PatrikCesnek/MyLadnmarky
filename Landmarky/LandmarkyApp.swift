@@ -13,8 +13,7 @@ struct LandmarkyApp: App {
     private var sharedModelContainer: ModelContainer?
 
     init() {
-        let schema = Schema([Landmark.self, Profile.self, Trip.self])
-        self.sharedModelContainer = try? ModelContainer(for: schema)
+        self.sharedModelContainer = try? ModelContainer(for: AppSchema.schema)
     }
 
     var body: some Scene {

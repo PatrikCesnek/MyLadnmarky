@@ -16,6 +16,16 @@ class HomeViewModel {
     var error: String?
 
     private(set) var landmarks: [Landmark] = []
+    private(set) var nextBadge: BadgeItem?
+
+    /// The closing year, during December and January, if it has visited places.
+    var featuredReviewYear: Int? {
+        guard let year = YearInReview.featuredYear(today: Date()) else { return nil }
+        let hasPlaces = landmarks.contains { landmark in
+            landmark.visitDate.map { Calendar.current.component(.year, from: $0) == year } ?? false
+        }
+        return hasPlaces ? year : nil
+    }
 
     var favoriteLandmarks: [Landmark] {
         landmarks.filter { $0.isFavorite }
@@ -35,6 +45,7 @@ class HomeViewModel {
             landmarks = Mock.MockLandmarks.data
                 .filter { !$0.isWishlisted }
                 .sorted { $0.name < $1.name }
+            nextBadge = Badge.nextUp(stats: BadgeStats(landmarks: landmarks, tripCount: Mock.MockTrips.data.count))
             isLoading = false
             return
         }
@@ -45,6 +56,8 @@ class HomeViewModel {
         )
         do {
             self.landmarks = try modelContext.fetch(descriptor)
+            let tripCount = try modelContext.fetchCount(FetchDescriptor<Trip>())
+            nextBadge = Badge.nextUp(stats: BadgeStats(landmarks: landmarks, tripCount: tripCount))
             isLoading = false
         } catch {
             self.error = error.localizedDescription

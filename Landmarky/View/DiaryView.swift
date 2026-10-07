@@ -88,7 +88,7 @@ struct DiaryView: View {
                 Image(systemName: Constants.SystemImages.plus)
                     .font(.headline)
             }
-            .buttonStyle(.glassProminent)
+            .prominentButtonStyle()
             .tint(.green)
         }
         .sheet(isPresented: $showAddTrip) {
@@ -132,5 +132,5 @@ private struct SelectedTripPhoto: Identifiable {
     NavigationStack {
         DiaryView()
     }
-    .modelContainer(for: [Trip.self])
+    .modelContainer(for: AppSchema.models, inMemory: true)
 }
